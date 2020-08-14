@@ -1,1 +1,1 @@
-# Travel Planner Web App
+# Travel Planner App
