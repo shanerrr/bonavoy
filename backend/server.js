@@ -1,30 +1,17 @@
-require('dotenv').config()
 const express = require('express');
 const app = express();
 const cors = require('cors');
-const Sequelize = require("sequelize");
 const passport = require('passport');
 
-// connect to database
-const db = new Sequelize(process.env.DB_NAME, process.env.DB_USERNAME, process.env.DB_PASSWORD, {
-    host:process.env.DB_HOST,
-    dialect:'mysql',
-    port:process.env.DB_PORT,
-    pool: {
-        max: 5,
-        min: 1,
-        idle: 60000,
-    },
-})
+const db = require('./utils/db.utils');
 
-// test db connection
-db.authenticate()
-    .then(()=>{
-        console.log('connection successful');
-    })
-    .catch((err)=>{
-        console.log(err);
-    })
+db.connect();
+
+// test conection
+db.query('SELECT 1', function (error, results, fields) {
+    if (error) throw error;
+    // connected!
+  });
 
 require('./config/passport.config')(passport);
 

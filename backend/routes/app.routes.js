@@ -3,10 +3,10 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
 const { check, validationResult } = require('express-validator');
-const { response } = require('express');
 
-const User = require('../models/User.model');
 const utils = require('../utils/jwt.utils');
+const db = require('../utils/db.utils');
+
 
 // homepage
 router.get('/', (req, res) => {
@@ -18,18 +18,22 @@ router.get('/', (req, res) => {
 // login
 router.post('/login', (req, res) => {
 
-    User.findOne({
-        where:{email:req.body.email}
-    })
-    .then((data) => {
-        
-        if(!data || data === null){
+    const userEmailQuery = 'SELECT hash FROM Users WHERE email = ?;'
+
+    db.query(userEmailQuery, [req.body.email], (err, result, field) => {
+        if(err){
+            return res.send(err);
+        }
+
+        if(result === null || result.length < 1){
             return res.status(401)
                 .json({success:false, msg:"no user with that email"});
         }
 
+        const hash = result[0].hash;
+
         // compare hashed passwords
-        bcrypt.compare(req.body.password, data.hash, (err, isMatch) => {
+        bcrypt.compare(req.body.password, hash, (err, isMatch) => {
             if(err) throw err;
 
             // good login
@@ -49,7 +53,7 @@ router.post('/login', (req, res) => {
             }
         }); 
     })
-    .catch((err) => res.send(err));
+    
 })
 
 
@@ -70,7 +74,9 @@ router.post('/register', [
             return res.status(422).json(errors.array());
         }
     
-        const userData = req.body;    
+        const userData = req.body;  
+        const firstname = userData.firstname;
+        const email = userData.email; 
 
         // hash password with salt
         bcrypt.genSalt(8, (err, salt) => { 
@@ -80,28 +86,23 @@ router.post('/register', [
                     res.send(err);
                 }
 
-                const newUser = {
-                    'firstname': userData.firstname, 
-                    'hash': hash,
-                    'email': userData.email,
-                };
+                const newUserQuery = 'INSERT INTO Users (email, hash, firstname) VALUES (?, ?, ?);';
                 
-                // write to db
-                User.create(newUser)
-                    .then((response) => {
-                        res.status(200);
-                        const jwt = utils.issueJWT(response.dataValues);
-                        res.json({
+                db.query(newUserQuery, [email, hash, firstname], 
+                    (err, results, fields) => {
+                        if(err){
+                            console.log(err);
+                            return res.send(err);
+                        }   
+
+                        const jwt = utils.issueJWT(results.insertId);
+                        return res.json({
                             success:true, 
-                            user:response.dataValues, 
                             token:jwt.token, 
                             expiresIn: jwt.expires
-                        }); // TODO: remove user:response.dataValues from response
-                    })
-                    .catch((err) => {
-                        res.status(400);
-                        res.send(err);
-                    })
+                        });
+                });
+
             });
         })
     
