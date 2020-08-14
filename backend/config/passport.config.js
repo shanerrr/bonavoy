@@ -15,23 +15,24 @@ const options = {
 
 module.exports = function(passport){
     passport.use('local-strategy', 
-        new JwtStrategy(options, (jwtpayload, done) => {
+        new JwtStrategy(options, (jwt_payload, done) => {
             // search for user
-            User.findOne({id:jwt_payload.sub}, function(err, user){
-
-                // something hit the stanky leg
-                if(err){
-                    return done(err, false);
-                }
+            User.findOne({
+                where:{id:jwt_payload.sub}
+            })
+            .then((data) => {
 
                 // found user
-                if(user){
-                    return done(null, user);
+                if(data){
+                    return done(null, data);
 
                 // no user
                 } else {
                     return done(null, false);
-                }
+                } 
+            })
+            .catch((err) => {
+                return done(err, false);
             })
         })
     )

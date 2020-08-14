@@ -31,8 +31,7 @@ const User = db.define('User', {
 
 // create table on remote db
 (async () => {
-    await db.sync({ force: true }); // TODO: turn to false for production
-
+    await db.sync({ force: false }); // TODO: turn to false for production
 })();
 
 module.exports = User;

@@ -26,6 +26,8 @@ db.authenticate()
         console.log(err);
     })
 
+require('./config/passport.config')(passport);
+
 // middleware
 app.use(passport.initialize());
 app.use(passport.session());

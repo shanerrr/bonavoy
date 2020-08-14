@@ -1,11 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
+const passport = require('passport');
 const { check, validationResult } = require('express-validator');
+const { response } = require('express');
+
 const User = require('../models/User.model');
 const utils = require('../utils/jwt.utils');
-const { response } = require('express');
-// const middleware = require('../controllers/');
 
 // homepage
 router.get('/', (req, res) => {
@@ -23,7 +24,8 @@ router.post('/login', (req, res) => {
     .then((data) => {
         
         if(!data || data === null){
-            return res.status(401).json({success:false, msg:"no user with that email"});
+            return res.status(401)
+                .json({success:false, msg:"no user with that email"});
         }
 
         // compare hashed passwords
@@ -41,7 +43,6 @@ router.post('/login', (req, res) => {
                     });
             } 
 
-            
             // bad login
             else {
                 return res.status(401).json({success:false, msg:'wrong password'});
@@ -58,7 +59,8 @@ router.post('/register', [
         check('firstname').isLength({min:2}),
         check('password').isLength({min:6}),
         check('confirmPassword', 'Passwords do not match')
-            .notEmpty().custom((value, { req }) => value === req.body.password),
+            .notEmpty()
+            .custom((value, { req }) => value === req.body.password),
         check('email').isEmail()
     ],
     (req, res, next) => {
@@ -75,6 +77,7 @@ router.post('/register', [
             bcrypt.hash(userData.password, salt, (err, hash) => {
                 if(err){
                     console.log(err);
+                    res.send(err);
                 }
 
                 const newUser = {
@@ -118,8 +121,13 @@ router.get('/trips/planner', (req, res) => {
 
 
 // view and edit account details
-router.get('/account', (req, res) => {
-    res.send("account");
+router.get('/account', 
+    passport.authenticate('local-strategy', {session:false}),
+    (req, res) => {
+        res.json({
+            firstname:req.user.firstname, 
+            email:req.user.email
+        });
 });
 
 
