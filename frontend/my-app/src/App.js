@@ -17,8 +17,10 @@ import Account from './Components/Account';
 
 function App() {
   return (
-    
     <Router>
+
+      <Header/> 
+
       <Switch>
 
         <Route path="/account">
