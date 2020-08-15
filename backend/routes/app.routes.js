@@ -20,17 +20,17 @@ router.post('/login', (req, res) => {
 
     const userEmailQuery = 'SELECT hash FROM Users WHERE email = ?;'
 
-    db.query(userEmailQuery, [req.body.email], (err, result, field) => {
+    db.query(userEmailQuery, [req.body.email], (err, results, field) => {
         if(err){
             return res.send(err);
         }
 
-        if(result === null || result.length < 1){
+        if(results === null || results.length < 1){
             return res.status(401)
                 .json({success:false, msg:"no user with that email"});
         }
 
-        const hash = result[0].hash;
+        const hash = results[0].hash;
 
         // compare hashed passwords
         bcrypt.compare(req.body.password, hash, (err, isMatch) => {

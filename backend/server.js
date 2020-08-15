@@ -8,7 +8,7 @@ const db = require('./utils/db.utils');
 db.connect();
 
 // test conection
-db.query('SELECT 1', function (error, results, fields) {
+db.query('SELECT 1;', function (error, results, fields) {
     if (error) throw error;
     // connected!
   });
@@ -28,4 +28,3 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log("Server is running on Port: " + PORT);
 });
-
