@@ -1,7 +1,9 @@
 import React from 'react';
 import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
 
-
+const path = require('path');
+require('dotenv').config({ path: path.resolve(__dirname, '../../../../.env') });
+console.log(process.env.MAPS_API_KEY);
 
 const mapStyles = {
     width: '100%',
@@ -25,5 +27,5 @@ render() {
 }
 
 export default GoogleApiWrapper({
-apiKey: 'YOUR_GOOGLE_API_KEY_GOES_HERE'
+    apiKey: process.env.REACT_APP_MAPS_API_KEY
 })(Planner);
