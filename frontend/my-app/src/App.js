@@ -13,30 +13,34 @@ import Header from './Components/Header'
 import Planner from './Components/Planner';
 import TripList from './Components/TripList';
 import Account from './Components/Account';
+import Homepage from './Components/Homepage'
+import MiddleMain from './Components/MiddleMain'
+import Autocomplete from './Components/Autocomplete'
+
 
 
 function App() {
   return (
     <Router>
-
-      <Header/> 
+      {/* <Header/> */}
 
       <Switch>
-
-        <Route path="/account">
+        <Route exact path="/account">
           <Account/>
         </Route>
-        <Route path="/planner">
+        <Route exact path="/planner">
           <Planner/>
         </Route>
-        <Route path="/trips">
+        <Route exact path="/trips">
           <TripList/>
         </Route>
-        <Route path="/">
-          <h1>landing page</h1>
+        <Route exact path="/">
+          <Homepage/>
+          <MiddleMain/>
+          <Autocomplete/>
         </Route>
-
       </Switch>
+
     </Router>
 
   );
