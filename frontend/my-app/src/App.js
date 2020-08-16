@@ -13,31 +13,35 @@ import Header from './Components/Header'
 import Planner from './Components/Planner';
 import TripList from './Components/TripList';
 import Account from './Components/Account';
+import './styling/style.css';
 
 
 function App() {
   return (
-    <Router>
+    <div className='content'>
+      <Router>
+        <Header/> 
+        <body className='body'>
+        <Switch> 
+          <Route path="/account">
+            <Account className='body'/>
+          </Route>
+          <Route path="/planner">
+            <Planner classname='body'/>
+          </Route>
+          <Route path="/trips">
+            <TripList/>
+          </Route>
+          <Route path="/">
+            <div>
+              <h1>landing page</h1>
+            </div>
+          </Route>
+        </Switch>
+        </body>
+      </Router>
+    </div>
 
-      <Header/> 
-
-      <Switch>
-
-        <Route path="/account">
-          <Account/>
-        </Route>
-        <Route path="/planner">
-          <Planner/>
-        </Route>
-        <Route path="/trips">
-          <TripList/>
-        </Route>
-        <Route path="/">
-          <h1>landing page</h1>
-        </Route>
-
-      </Switch>
-    </Router>
 
   );
 }
