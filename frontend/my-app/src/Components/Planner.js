@@ -25,6 +25,7 @@ function Planner (){
     zoom: 2
   })
 
+
   const _onViewportChange = viewport => setViewPort({...viewport, transitionDuration: 0 });
   
   return (
