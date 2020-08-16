@@ -1,5 +1,6 @@
 import React from 'react'
 import Typical from 'react-typical'
+import Autocomplete from './Autocomplete/Autocomplete'
 
 function MiddleMain(){
     return(
@@ -12,6 +13,8 @@ function MiddleMain(){
                     'Maybe Australlia?', 5000
                 ]}/>  
             </p>
+            <Autocomplete/>
+
         </div>
     )
 }

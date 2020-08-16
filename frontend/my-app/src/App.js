@@ -15,9 +15,6 @@ import TripList from './Components/TripList';
 import Account from './Components/Account';
 import Homepage from './Components/Homepage'
 import MiddleMain from './Components/MiddleMain'
-import Autocomplete from './Components/Autocomplete'
-
-
 
 function App() {
   return (
@@ -37,7 +34,6 @@ function App() {
         <Route exact path="/">
           <Homepage/>
           <MiddleMain/>
-          <Autocomplete/>
         </Route>
       </Switch>
 
