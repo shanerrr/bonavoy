@@ -15,5 +15,6 @@
   "bugs": {
     "url": "https://github.com/neilZon/travel-planner-app/issues"
   },
-  "homepage": "https://github.com/neilZon/travel-planner-app#readme"
+  "homepage": "https://github.com/neilZon/travel-planner-app#readme",
+  "dependencies": {}
 }

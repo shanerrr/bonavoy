@@ -10,7 +10,7 @@ import logo from './logo.svg';
 // import Main from './Components/Main'
 import Header from './Components/Header'
 // import CounterExample from './Components/CounterExample'
-import Planner from './Components/Planner';
+import Map from './Components/Map';
 import TripList from './Components/TripList';
 import Account from './Components/Account';
 import './styling/style.css';
@@ -27,7 +27,7 @@ function App() {
             <Account className='body'/>
           </Route>
           <Route path="/planner">
-            <Planner classname='body'/>
+            <Map/>
           </Route>
           <Route path="/trips">
             <TripList/>
