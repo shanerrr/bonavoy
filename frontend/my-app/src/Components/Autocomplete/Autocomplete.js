@@ -3,7 +3,7 @@ import Geocoder from 'react-mapbox-gl-geocoder'
 import './index.css'
  
 const mapAccess = {
-    mapboxApiAccessToken: "pk.eyJ1IjoibmVpbHpvbiIsImEiOiJja2R2NGRleGYyZnoyMnpxcWhzbHA1bXo4In0.bYlefpiV4C7Ir183j8OG3g"
+    mapboxApiAccessToken: "pk.eyJ1IjoibmVpbHpvbiIsImEiOiJja2R5MjNkc3cyNDd5MnVudWVvaXptY3IyIn0.t7H18YFnJnci9cvjd3Q-Tg"
 }
  
 class AutoComplete extends React.Component {

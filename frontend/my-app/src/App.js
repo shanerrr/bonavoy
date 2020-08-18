@@ -32,6 +32,7 @@ function App() {
           <TripList/>
         </Route>
         <Route exact path="/">
+          {/* <Navbar/> */}
           <Homepage/>
           <MiddleMain/>
         </Route>
