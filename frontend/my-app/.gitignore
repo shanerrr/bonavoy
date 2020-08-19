@@ -23,5 +23,4 @@ yarn-debug.log*
 yarn-error.log*
 
 #files not to include
-/src/Components/Main.js
 /src/Components/CounterExample.js

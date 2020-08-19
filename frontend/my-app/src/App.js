@@ -13,35 +13,33 @@ import Header from './Components/Header'
 import Map from './Components/Map';
 import TripList from './Components/TripList';
 import Account from './Components/Account';
-import './styling/style.css';
-
+import Homepage from './Components/Homepage'
+import MiddleMain from './Components/MiddleMain'
+import Navbar from './Components/Navbar/Navbar'
+import Home from './Components/pages/HomePage/Home';
 
 function App() {
   return (
-    <div className='content'>
-      <Router>
-        <Header/> 
-        <body className='body'>
-        <Switch> 
-          <Route path="/account">
-            <Account className='body'/>
-          </Route>
-          <Route path="/planner">
-            <Map/>
-          </Route>
-          <Route path="/trips">
-            <TripList/>
-          </Route>
-          <Route path="/">
-            <div>
-              <h1>landing page</h1>
-            </div>
-          </Route>
-        </Switch>
-        </body>
-      </Router>
-    </div>
+    <Router>
+      <Navbar/>
+      <Switch>
+        <Route exact path="/account">
+          <Account/>
+        </Route>
+        <Route exact path="/planner">
+          <Map/>
+        </Route>
+        <Route exact path="/trips">
+          <TripList/>
+        </Route>
+        <Route path="/" exact component={Home}>
+          {/* <Homepage/>
+          <MiddleMain/> */}
+        </Route>
+      </Switch>
 
+
+    </Router>
 
   );
 }
