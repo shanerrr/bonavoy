@@ -1,11 +1,9 @@
 import React from 'react'
 import landingMP4 from "../landingMP4.mp4"
-import Navbar from './Navbar/Navbar'
 
 function Homepage(){
     return(
         <div>
-            <Navbar/>
             <video autoPlay loop muted
             style={{
                 position: "absolute",

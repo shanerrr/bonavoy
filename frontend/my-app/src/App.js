@@ -15,6 +15,7 @@ import TripList from './Components/TripList';
 import Account from './Components/Account';
 import Homepage from './Components/Homepage'
 import MiddleMain from './Components/MiddleMain'
+import Navbar from './Components/Navbar/Navbar'
 
 function App() {
   return (
@@ -32,9 +33,9 @@ function App() {
           <TripList/>
         </Route>
         <Route exact path="/">
-          {/* <Navbar/> */}
-          <Homepage/>
-          <MiddleMain/>
+          <Navbar/>
+          {/* <Homepage/>
+          <MiddleMain/> */}
         </Route>
       </Switch>
 
