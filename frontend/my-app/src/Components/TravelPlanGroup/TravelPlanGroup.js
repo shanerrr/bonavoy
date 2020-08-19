@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-import Plan from './Plan';
-import '../styling/style.css';
+import Plan from '../Plan/Plan';
+import './style.css';
 
 class TravelPlanGroup extends React.Component {
     

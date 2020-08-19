@@ -1,5 +1,7 @@
 import React from 'react';
-import ActivitiesList from './ActivitiesList';
+
+import './style.css';
+import ActivitiesList from '../ActivitiesList/ActivitiesList';
 
 class StopInfo extends React.Component {
     constructor(props){

@@ -1,6 +1,7 @@
 import React from 'react';
 
-import StopInfo from './StopInfo';
+import './style.css';
+import StopInfo from '../StopInfo/StopInfo';
 
 
 class StopListItem extends React.Component {

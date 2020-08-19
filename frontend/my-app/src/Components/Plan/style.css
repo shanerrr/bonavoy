@@ -1,0 +1,12 @@
+.plan {
+    background:white;
+    float:right;
+    display: flex;
+    width: 400px;
+    height: 800px;
+    margin: 10px;
+    border: 1px solid darkgray;
+    box-shadow: 0px 0px 10px grey;
+    flex-direction: column;
+    z-index: 10;
+}

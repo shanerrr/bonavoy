@@ -1,9 +1,9 @@
 import React from 'react';
 
-import '../styling/style.css';
-import StopList from './StopList';
-import PlanOverview from './PlanOverview';
-import AddStop from './AddStop';
+import './style.css';
+import StopList from '../StopList/StopList';
+import PlanOverview from '../PlanOverview/PlanOverview';
+import AddStop from '../AddStop/AddStop';
 
 class Plan extends React.Component {
 

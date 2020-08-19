@@ -1,6 +1,7 @@
 import React from 'react'
 import Typical from 'react-typical'
-import Autocomplete from './Autocomplete/Autocomplete'
+import Autocomplete from '../Autocomplete/Autocomplete'
+import './style.css';
 
 function MiddleMain(){
     return(
@@ -13,7 +14,7 @@ function MiddleMain(){
                     'Maybe Australlia?', 5000
                 ]}/>  
             </p>
-            <Autocomplete/>
+            <Autocomplete id='middle-main'/>
 
         </div>
     )

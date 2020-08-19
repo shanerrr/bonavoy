@@ -1,5 +1,5 @@
 import React from 'react'
-import landingMP4 from "../landingMP4.mp4"
+import landingMP4 from "../../landingMP4.mp4"
 
 function Homepage(){
     return(

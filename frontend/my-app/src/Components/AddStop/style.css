@@ -1,0 +1,28 @@
+#add-stop {
+    display: flex;
+    flex-direction: row;
+}
+
+.add-stop.search-locations {
+    width:100%;    
+    flex:8 0 ; 
+}
+
+.add-stop.react-geocoder > input {
+    width: inherit;
+}
+
+.react-geocoder {
+    width:100%;
+}
+
+.react-geocoder-results	{
+    background:red;
+    position:absolute;
+    cursor: pointer;
+    z-index: 234;
+}
+
+.react-geocoder-item {
+
+}

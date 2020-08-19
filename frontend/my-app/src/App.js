@@ -8,13 +8,13 @@ import {
 import logo from './logo.svg';
 //import './App.css';
 // import Main from './Components/Main'
-import Header from './Components/Header'
+
 // import CounterExample from './Components/CounterExample'
-import Map from './Components/Map';
-import TripList from './Components/TripList';
-import Account from './Components/Account';
-import Homepage from './Components/Homepage'
-import MiddleMain from './Components/MiddleMain'
+import Map from './Components/Map/Map';
+import TripList from './Components/TripList/TripList';
+import Account from './Components/Account/Account';
+import Homepage from './Components/Homepage/Homepage'
+import MiddleMain from './Components/MiddleMain/MiddleMain'
 import Navbar from './Components/Navbar/Navbar'
 import Home from './Components/pages/HomePage/Home';
 

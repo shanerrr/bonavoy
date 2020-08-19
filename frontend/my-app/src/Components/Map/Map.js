@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import mapboxgl, { Marker } from 'mapbox-gl';
 
-import '../styling/style.css';
-import TravelPlanGroup from './TravelPlanGroup';
+import './style.css';
+import TravelPlanGroup from '../TravelPlanGroup/TravelPlanGroup';
 const path = require('path');
 require('dotenv').config({ path: path.resolve(__dirname, './../../.env.local') });
 

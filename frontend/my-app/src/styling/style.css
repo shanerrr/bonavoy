@@ -5,11 +5,7 @@
     overflow: hidden; 
 }
 
-.body-content {
-    flex:1;
-    width:100%;
-    height:900px;
-} 
+
 
 .header {
     position:fixed;
@@ -18,63 +14,13 @@
     flex:1;
 }
 
-.travel-group {
-    position:relative;
-    z-index: 10;
-}
 
-.map {
-    height:900px;
-}
 
-.plan {
-    background:white;
-    float:right;
-    display: flex;
-    width: 400px;
-    height: 800px;
-    margin: 10px;
-    border: 1px solid darkgray;
-    box-shadow: 0px 0px 10px grey;
-    flex-direction: column;
-    z-index: 10;
-}
 
-.plan > .stop-list {
-    overflow-x:scroll;
-    flex: 0 0 700px;
-    overflow-y:scroll;
-    overflow-x:hidden;
-    display: block;
-    background:#d6d6d6;
 
-}
 
-.collapsed{
-    cursor: pointer;
-    border: solid 1px #d6d6d6;
-    padding:40px;
-    background-color:white;
-    color: rgb(158, 158, 158);
-    font-family: verdana;
-}
 
-.expanded{
-    cursor: pointer;
-    border-left: solid 1px #f2f2f2;
-    border-right: solid 1px #f2f2f2;
-    border-bottom: solid 1px #f2f2f2;
-    color:grey;
-    background:rgb(238, 238, 238);
-    padding: 15px;
-    font-family: verdana;
-    font-size: 14px;
-}
 
-.plan-overview {
-    width: inherit;
-    height: 0 0 100px;
-}
 
 .activity-list{
     counter-reset: list;
@@ -109,34 +55,6 @@
     margin: 50px 50px 50px 50px;
 }
 
-#add-stop {
-    display: flex;
-    flex-direction: row;
-}
 
-.search-locations {
-    width:100%;    
-    flex:8 0 ; 
-}
-
-.react-geocoder > input {
-    width: inherit;
-}
-
-.react-geocoder {
-    width:100%;
-    align-content: center;
-}
-
-.react-geocoder-results	{
-    background:red;
-    position:absolute;
-    cursor: pointer;
-    z-index: 234;
-}
-
-.react-geocoder-item {
-
-}
 
 

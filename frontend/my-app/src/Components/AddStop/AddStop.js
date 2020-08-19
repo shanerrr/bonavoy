@@ -1,9 +1,7 @@
 import React from 'react';
 
-
 import MapboxGeocoder from 'react-mapbox-gl-geocoder'
-
-
+import './style.css';
 
 const TOKEN = process.env.REACT_APP_MAPS_API_KEY;
 
