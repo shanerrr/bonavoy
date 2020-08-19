@@ -69732,4 +69732,7 @@ video {
   .xl\:animate-bounce {
     animation: bounce 1s infinite;
   }
+  .mainfont{
+    font-family: 'Montserrat', sans-serif;
+  }
 }
