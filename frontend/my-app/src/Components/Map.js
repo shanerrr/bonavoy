@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import mapboxgl, { Marker } from 'mapbox-gl';
-import MapGL, {GeolocateControl } from 'react-map-gl'
 
 import '../styling/style.css';
 import TravelPlanGroup from './TravelPlanGroup';
 const path = require('path');
 require('dotenv').config({ path: path.resolve(__dirname, './../../.env.local') });
+
 
 
 const TOKEN = process.env.REACT_APP_MAPS_API_KEY;

@@ -23,6 +23,7 @@ app.use(express.json());
 
 // move routes from this file for cleanliness
 app.use('/', require('./routes/app.routes'));
+app.use('/api', require('./routes/api-endpoints.routes'));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

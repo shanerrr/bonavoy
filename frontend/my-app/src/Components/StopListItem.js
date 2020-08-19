@@ -1,15 +1,15 @@
 import React from 'react';
-import { 
-    CollapsibleComponent,
-    CollapsibleHead,
-    CollapsibleContent
-} from "react-collapsible-component";
+
+import StopInfo from './StopInfo';
+
 
 class StopListItem extends React.Component {
+    
     constructor(props){
         super(props);
         this.state = {
-            open:false
+            open:false,
+            activitiesList:['activity 1', ],
         }
         this.toggleItem = this.toggleItem.bind(this);
     }
@@ -19,14 +19,20 @@ class StopListItem extends React.Component {
     }
 
     render() {
-        return (<div>
-        <div onClick={(e)=>this.toggleItem(e)} className='collapsed'>
-            idiot
-        </div>
-            {this.state.open ? (<div className='expanded'> {this.props.stops}</div>) : null}
-        </div>);
-    }
-}
+        return (
+            <div>
+                <div onClick={(e)=>this.toggleItem(e)} className='collapsed'>
+                    Item
+                </div>
+                    {this.state.open ? 
+                        (<StopInfo/>) 
+                        : null
+                    }
 
+            </div>
+        );
+    }
+
+}
 
 export default StopListItem;
