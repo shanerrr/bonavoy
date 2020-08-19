@@ -10,7 +10,7 @@ import logo from './logo.svg';
 // import Main from './Components/Main'
 import Header from './Components/Header'
 // import CounterExample from './Components/CounterExample'
-import Planner from './Components/Planner';
+import Map from './Components/Map';
 import TripList from './Components/TripList';
 import Account from './Components/Account';
 import Homepage from './Components/Homepage'
@@ -27,7 +27,7 @@ function App() {
           <Account/>
         </Route>
         <Route exact path="/planner">
-          <Planner/>
+          <Map/>
         </Route>
         <Route exact path="/trips">
           <TripList/>
@@ -37,6 +37,7 @@ function App() {
           <MiddleMain/> */}
         </Route>
       </Switch>
+
 
     </Router>
 
