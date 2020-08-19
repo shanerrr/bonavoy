@@ -16,12 +16,12 @@ import Account from './Components/Account';
 import Homepage from './Components/Homepage'
 import MiddleMain from './Components/MiddleMain'
 import Navbar from './Components/Navbar/Navbar'
+import Home from './Components/pages/HomePage/Home';
 
 function App() {
   return (
     <Router>
-      {/* <Header/> */}
-
+      <Navbar/>
       <Switch>
         <Route exact path="/account">
           <Account/>
@@ -32,8 +32,7 @@ function App() {
         <Route exact path="/trips">
           <TripList/>
         </Route>
-        <Route exact path="/">
-          <Navbar/>
+        <Route path="/" exact component={Home}>
           {/* <Homepage/>
           <MiddleMain/> */}
         </Route>
