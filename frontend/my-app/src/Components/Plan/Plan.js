@@ -9,16 +9,13 @@ class Plan extends React.Component {
 
     constructor(props){
         super(props);
-        this.state = {
-            stops:[]
-        }
     }
 
     render(){
         return (
             <div className='plan'>
                 <h1 style={{'text-align':'center', 'color':'darkgrey', 'font-size':'20px'}}>Plan name</h1>
-                <AddStop></AddStop>
+                <AddStop addStop={this.props.addStop}></AddStop>
                 <StopList stops={this.props.stops}/>
                 <PlanOverview></PlanOverview>
             </div>

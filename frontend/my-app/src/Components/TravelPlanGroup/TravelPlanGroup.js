@@ -12,7 +12,10 @@ class TravelPlanGroup extends React.Component {
     render(){
         return (
             <div className='travel-group'>
-                <Plan stops={this.props.stops}/>
+                <Plan 
+                    stops={this.props.stops}
+                    addStop={this.props.addStop}     
+                />
             </div>
         )
     }

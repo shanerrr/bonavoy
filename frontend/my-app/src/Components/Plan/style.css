@@ -3,7 +3,7 @@
     float:right;
     display: flex;
     width: 400px;
-    height: 800px;
+    height: 100%;
     margin: 10px;
     border: 1px solid darkgray;
     box-shadow: 0px 0px 10px grey;

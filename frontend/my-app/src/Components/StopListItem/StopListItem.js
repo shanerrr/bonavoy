@@ -10,7 +10,6 @@ class StopListItem extends React.Component {
         super(props);
         this.state = {
             open:false,
-            activitiesList:['activity 1', ],
         }
         this.toggleItem = this.toggleItem.bind(this);
     }
@@ -23,7 +22,7 @@ class StopListItem extends React.Component {
         return (
             <div>
                 <div onClick={(e)=>this.toggleItem(e)} className='collapsed'>
-                    Item
+                    {this.props.stopName}
                 </div>
                     {this.state.open ? 
                         (<StopInfo/>) 

@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import mapboxgl, { Marker } from 'mapbox-gl';
+import React from 'react'
+import mapboxgl from 'mapbox-gl';
 
 import './style.css';
 import TravelPlanGroup from '../TravelPlanGroup/TravelPlanGroup';
@@ -21,6 +21,7 @@ class Map extends React.Component{
       zoom: 10,
       stops:[],
     };
+    this.addStopHandler = this.addStopHandler.bind(this);
   }
 
   componentDidMount() {
@@ -32,27 +33,34 @@ class Map extends React.Component{
     });
     this.map = map;
 
-    // add marker
-    map.on('click', (e) => {
-
-      const coords = [e.lngLat.lng, e.lngLat.lat];
-      const stops = [...this.state.stops];
-      this.setState({stops:[...stops, coords]});
-      var marker = new mapboxgl.Marker()
-        .setLngLat(coords)
-        .addTo(this.map);
-    });
-
     // disable map rotation using right click + drag
     map.dragRotate.disable();
 
   }
 
+  addStopHandler(stop){
+
+    // add to stop list 
+    const coords = [stop.center[0], stop.center[1]];
+    this.setState({stops:[...this.state.stops, stop]});
+    
+    // draw stop on map
+    var marker = new mapboxgl.Marker()
+      .setLngLat(coords)
+      .addTo(this.map);
+  }
+
   render() {
     return (
       <div className='body-content'>
-        <div ref={el => this.mapContainer = el} className='map'>
-          <TravelPlanGroup stops={this.state.stops}/>
+        <div 
+          ref={el => this.mapContainer = el} 
+          className='map'
+        >
+          <TravelPlanGroup 
+            stops={this.state.stops}
+            addStop={this.addStopHandler} 
+            />
         </div>
       </div>
     )
