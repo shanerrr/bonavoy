@@ -44,7 +44,7 @@ function JumboSection({
                     {description}
                   </p>
                   <Link to='/sign-up'>
-                    <Button buttonSize='btn-wide' buttonColor='blue'>
+                    <Button buttonSize='btn--wide' buttonColor='blue'>
                       {buttonLabel}
                     </Button>
                   </Link>
