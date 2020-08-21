@@ -12,7 +12,7 @@ class StopInfo extends React.Component {
         return (
             <div className='expanded'>
                 <div>
-                    Hotel
+                    Accomodation
                 </div>
                 <ActivitiesList/>
             </div>

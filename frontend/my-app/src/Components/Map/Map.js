@@ -7,7 +7,6 @@ const path = require('path');
 require('dotenv').config({ path: path.resolve(__dirname, './../../.env.local') });
 
 
-
 const TOKEN = process.env.REACT_APP_MAPS_API_KEY;
 mapboxgl.accessToken = TOKEN;
 
@@ -26,7 +25,7 @@ class Map extends React.Component{
 
   componentDidMount() {
     const map = new mapboxgl.Map({
-      container: this.mapContainer,
+      container: 'map',
       style: 'mapbox://styles/mapbox/streets-v11',
       center: [this.state.lng, this.state.lat],
       zoom: this.state.zoom
@@ -48,21 +47,18 @@ class Map extends React.Component{
     var marker = new mapboxgl.Marker()
       .setLngLat(coords)
       .addTo(this.map);
+
+    // compute shortest path 
   }
 
   render() {
     return (
-      <div className='body-content'>
-        <div 
-          ref={el => this.mapContainer = el} 
-          className='map'
-        >
+        <div id='map'>
           <TravelPlanGroup 
             stops={this.state.stops}
             addStop={this.addStopHandler} 
-            />
+          />
         </div>
-      </div>
     )
   }
 

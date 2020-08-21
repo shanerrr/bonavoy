@@ -1,6 +1,7 @@
 import React from 'react';
 
-import ReactModal from 'react-modal';
+import BrowseActivities from '../BrowseActivities/BrowseActivities';
+
 
 
 class ActivitiesList extends React.Component{
@@ -9,19 +10,9 @@ class ActivitiesList extends React.Component{
         this.state = {
             showModal:false
         }
-        this.activityList = ['item 1', 'item 2', 'item 3'];
+        this.activityList = ['activity 1', 'activity 2', 'activity 3'];
+    }
 
-    this.handleOpenModal = this.handleOpenModal.bind(this);
-    this.handleCloseModal = this.handleCloseModal.bind(this);
-    }
-    
-    handleOpenModal () {
-        this.setState({ showModal: true });
-    }
-    
-    handleCloseModal () {
-        this.setState({ showModal: false });
-    }
 
     render(){
         return (
@@ -29,16 +20,8 @@ class ActivitiesList extends React.Component{
                 <ul className='stop-list'>
                     {this.activityList.map((item) => {return <li className='stop-list-item'>{item}</li>})}
                 </ul>
-                <button onClick={this.handleOpenModal}>Trigger Modal</button>
-                <ReactModal 
-                    isOpen={this.state.showModal}
-                    contentLabel="onRequestClose Example"
-                    onRequestClose={this.handleCloseModal}
-                    className='modal'
-                >
-                    <p>Modal text!</p>
-                    <button onClick={this.handleCloseModal}>Close Modal</button>
-                </ReactModal>
+
+                <BrowseActivities/>
             </div>
         )
     }
