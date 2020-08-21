@@ -3,6 +3,7 @@ import '../../App.css';
 import { Button } from '../Button/Button';
 import './FrontPage.css';
 import Typical from 'react-typical'
+import ModalLogin from '../ModalLogin/ModalLogin';
 
 function FrontPage() {
   return (
@@ -27,7 +28,7 @@ function FrontPage() {
           className='btns'
           buttonStyle='btn--primary'
           buttonSize='btn--large'
-          onClick={console.log('hey')}
+          onClick={ModalLogin}
         >
           EXPLORE <i className='far fa-compass' />
         </Button>
