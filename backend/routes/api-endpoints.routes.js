@@ -17,7 +17,7 @@ router.get('/hotels', (req,res) => {
     const lon = req.query.lon;
     const radius = req.query.lon; 
 
-    //todo: ask for all accomodation in area with set max radius and return 5 best places or return by category
+    //todo: ask for all accomodation in area with a set max radius and return 5 best places or return by category
     axios.get(`https://api.opentripmap.com/0.1/en/places/radius?apikey=${OPENTRIPMAPS_API_KEY}&radius=4000&lon=${lon}&lat=${lat}&radius=${radius}&kinds=accomodations&limit=5`)
         .then((response) => {
             const accomodations = response.data.features;
@@ -42,6 +42,11 @@ router.get('/hotels', (req,res) => {
             return res.send(error);
         });
 
+})
+
+// bars and restaurants
+router.get('/food', (req, res) => {
+    res.send('bars, restaurants and food stuff');
 })
 
 // places of interest
