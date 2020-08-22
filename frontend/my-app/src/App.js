@@ -21,7 +21,7 @@ import Home from './Components/pages/HomePage/Home';
 function App() {
   return (
     <Router>
-      <div className='page'>
+      <div className='page-container'>
         <Navbar/>
         <Switch>
           <Route exact path="/account">

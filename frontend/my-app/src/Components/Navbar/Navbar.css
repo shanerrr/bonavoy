@@ -1,14 +1,14 @@
-.navbar {
+.page-container .navbar {
     background: #0049B7;
     height: 80px;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 1.2rem;
-    position: relative;
     width: 100%;
+    flex: 0 1 auto;
     top: 0;
-    z-index: 999;
+    z-index: 2;
     font-family: 'Montserrat', sans-serif;
   }
   

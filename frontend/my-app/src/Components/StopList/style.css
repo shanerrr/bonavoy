@@ -1,9 +1,7 @@
 .plan > .stop-list {
-    overflow-x:scroll;
-    flex: 0 0 700px;
+    flex: 0 1 100%;
     overflow-y:scroll;
     overflow-x:hidden;
     display: block;
     background:#d6d6d6;
-
 }

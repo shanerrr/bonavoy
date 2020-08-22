@@ -12,7 +12,7 @@ class BrowseActivities extends React.Component {
                 trigger={<button>Add Activities</button>}
                 modal
                 closeOnDocumentClick
-                contentStyle={{'width':'90%', 'height':'90%', 'cursor':'default'}}
+                contentStyle={{'width':'90%', 'height':'90%', 'cursor':'default', 'zIndex':32424}}
             >
                glgjsdfklsdjaklfjaskl;fjl;askjfkl;ajdfkl; 
             </Popup>

@@ -2,4 +2,5 @@
 .travel-group {
     position:relative;
     z-index: 10;
+    height:inherit;
 }

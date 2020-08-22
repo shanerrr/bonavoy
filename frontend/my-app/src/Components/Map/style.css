@@ -1,3 +1,6 @@
-#map {
-    height:100vh;
+.page-container .mapboxgl-map {
+    flex: 1 1 100%;
+
 }
+
+
