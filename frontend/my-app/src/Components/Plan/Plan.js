@@ -17,7 +17,7 @@ class Plan extends React.Component {
                 <h1 style={{'textAlign':'center', 'color':'darkgrey', 'fontSize':'20px'}}>Jerome's Trip</h1>
                 <AddStop addStop={this.props.addStop}></AddStop>
                 <StopList stops={this.props.stops}/>
-                <PlanOverview></PlanOverview>
+                <PlanOverview/>
             </div>
         )
     }

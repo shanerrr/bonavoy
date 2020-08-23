@@ -1,14 +1,17 @@
 import React from 'react'
 import mapboxgl from 'mapbox-gl';
 
+
 import './style.css';
+import Plan from '../Plan/Plan';
 import TravelPlanGroup from '../TravelPlanGroup/TravelPlanGroup';
+
 const path = require('path');
 require('dotenv').config({ path: path.resolve(__dirname, './../../.env.local') });
 
-
 const TOKEN = process.env.REACT_APP_MAPS_API_KEY;
 mapboxgl.accessToken = TOKEN;
+
 
 class Map extends React.Component{
   
@@ -54,9 +57,9 @@ class Map extends React.Component{
   render() {
     return (
         <div id='map'>
-          <TravelPlanGroup 
+          <Plan 
             stops={this.state.stops}
-            addStop={this.addStopHandler} 
+            addStop={this.addStopHandler}     
           />
         </div>
     )

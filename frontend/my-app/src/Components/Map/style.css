@@ -1,6 +1,6 @@
 .page-container .mapboxgl-map {
     flex: 1 1 100%;
-
+    height:100%;
 }
 
 

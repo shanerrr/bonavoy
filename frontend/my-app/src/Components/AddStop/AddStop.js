@@ -30,6 +30,7 @@ class AddStop extends React.Component {
         const geocoder = new MapboxGeocoder({
             accessToken:TOKEN,
             types: 'country,region,place',
+            placeholder:'Where would you like to visit?',
             getItemValue: e => {
                 this.props.addStop(e);
 
@@ -37,18 +38,11 @@ class AddStop extends React.Component {
                 return '';
             }
         });
-
         geocoder.addTo('#geocoder');
-    
     }
 
     render(){
-
-        return (
-            <div 
-                id='geocoder'>
-            </div>
-        )
+        return (<div id='geocoder'/>)
     }
 }
 

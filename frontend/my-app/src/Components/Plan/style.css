@@ -2,11 +2,12 @@
     background:white;
     float:right;
     display: flex;
+    flex-direction: column;
     width: 400px;
-    height: inherit;
-    margin: 10px;
+    height: calc(100% - 34px);
+    margin:17px 10px;
     border: 1px solid darkgray;
     box-shadow: 0px 0px 10px grey;
-    flex-direction: column;
     z-index: 10;
+    position:relative;
 }
