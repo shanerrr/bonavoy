@@ -5,24 +5,23 @@ import {
   Route
 } from "react-router-dom";
 
-import logo from './logo.svg';
-//import './App.css';
+// import logo from './logo.svg';
+import './App.css';
 // import Main from './Components/Main'
-import Header from './Components/Header'
 // import CounterExample from './Components/CounterExample'
 import Map from './Components/Map';
 import TripList from './Components/TripList';
 import Account from './Components/Account';
-import Homepage from './Components/Homepage'
-import MiddleMain from './Components/MiddleMain'
+// import MiddleMain from './Components/MiddleMain'
 import Navbar from './Components/Navbar/Navbar'
-import Home from './Components/pages/HomePage/Home';
+import Home from './Components/pages/Home';
 
 function App() {
   return (
     <Router>
       <Navbar/>
       <Switch>
+        <Route path="/" exact component={Home}/>
         <Route exact path="/account">
           <Account/>
         </Route>
@@ -31,10 +30,6 @@ function App() {
         </Route>
         <Route exact path="/trips">
           <TripList/>
-        </Route>
-        <Route path="/" exact component={Home}>
-          {/* <Homepage/>
-          <MiddleMain/> */}
         </Route>
       </Switch>
 
