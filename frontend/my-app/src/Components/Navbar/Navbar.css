@@ -1,15 +1,5 @@
-.navbar {
-  background: transparent;
-  /* background: linear-gradient(90deg, rgb(28, 27, 27) 0%, rgb(26, 23, 23) 100%); */
-  height: 80px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.2rem;
-  position: sticky;
-  top: 0;
-  z-index: 999;
-}
+
+
 
 .navbar.active{
   background: linear-gradient(90deg, rgb(28, 27, 27) 0%, rgb(21,26,35) 100%);
@@ -86,7 +76,33 @@
 @media screen and (max-width: 960px) {
   .NavbarItems {
     position: relative;
+
+.page-container .navbar {
+    background: #0049B7;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    width: 100%;
+    flex: 0 1 auto;
+    top: 0;
+    z-index: 2;
+    font-family: 'Montserrat', sans-serif;
+
   }
+.navbar {
+  background: transparent;
+  /* background: linear-gradient(90deg, rgb(28, 27, 27) 0%, rgb(26, 23, 23) 100%); */
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
 
   .nav-menu {
     display: flex;

@@ -1,0 +1,13 @@
+.page-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+body, html { 
+    height:100%;
+}
+
+#root {
+    height:inherit;
+}

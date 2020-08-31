@@ -1,12 +1,8 @@
-  
-* {
-    box-sizing: border-box;
-}
-
-.react-geocoder {
+/* .react-geocoder {
     position: relative;
     width: 500px;
     height: 100%;
+    box-sizing: border-box;
 }
 
 .react-geocoder input {
@@ -28,4 +24,4 @@
 
 .react-geocoder-item {
     border-bottom: 1px solid black;
-}
+} */

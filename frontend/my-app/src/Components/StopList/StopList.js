@@ -1,5 +1,7 @@
 import React from 'react';
-import StopListItem from './StopListItem';
+
+import './style.css';
+import StopListItem from '../StopListItem/StopListItem';
 
 
 class StopList extends React.Component {
@@ -9,7 +11,7 @@ class StopList extends React.Component {
     }
 
     render(){
-        const items = this.props.stops.map((item) => {return <StopListItem stops={item}></StopListItem>});
+    const items = this.props.stops.map((stop, key) => {return <StopListItem stopName={stop.place_name} key={key}/>});
         return(
             <div className='stop-list'>
                 {items}
