@@ -1,0 +1,11 @@
+
+
+.collapsed{
+    cursor: pointer;
+    border: solid 1px #d6d6d6;
+    padding:40px;
+    background-color:white;
+    color: rgb(158, 158, 158);
+    font-family: verdana;
+}
+

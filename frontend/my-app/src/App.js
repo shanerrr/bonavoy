@@ -9,7 +9,7 @@ import {
 import './App.css';
 // import Main from './Components/Main'
 // import CounterExample from './Components/CounterExample'
-import Map from './Components/Map';
+import Map from './Components/Map/Map';
 import TripList from './Components/TripList';
 import Account from './Components/Account';
 // import MiddleMain from './Components/MiddleMain'

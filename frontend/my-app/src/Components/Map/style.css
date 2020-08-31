@@ -1,0 +1,5 @@
+#map {
+    position: absolute;
+    height:calc(100% - 80px);
+    width:100%;
+}
