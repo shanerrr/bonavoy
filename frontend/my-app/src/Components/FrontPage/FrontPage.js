@@ -21,6 +21,7 @@ function FrontPage() {
           className='btns'
           buttonStyle='btn--outline'
           buttonSize='btn--large'
+          toGo='planner'
         >
           GET STARTED
         </Button>
