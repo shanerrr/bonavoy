@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '../Button/Button';
 import { Link } from 'react-router-dom';
-import './Navbar.css';
+import './MNavbar.css';
 
-function Navbar() {
+function MNavbar() {
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
   const [navbar, setNavbar] = useState(false);
@@ -95,4 +95,4 @@ function Navbar() {
   );
 }
 
-export default Navbar;
+export default MNavbar;

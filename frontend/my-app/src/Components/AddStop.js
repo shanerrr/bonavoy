@@ -1,9 +1,6 @@
 import React from 'react';
-
-
 import MapboxGeocoder from 'react-mapbox-gl-geocoder'
-
-
+require('dotenv').config()
 
 const TOKEN = process.env.REACT_APP_MAPS_API_KEY;
 
@@ -15,8 +12,6 @@ const mapStyle = {
     width: '100%',
     height: 600
 }
-
-
 
 class AddStop extends React.Component {
     constructor(props){
