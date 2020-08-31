@@ -5,9 +5,10 @@ import {
   Route
 } from "react-router-dom";
 
-import logo from './logo.svg';
-//import './App.css';
+// import logo from './logo.svg';
+import './App.css';
 // import Main from './Components/Main'
+
 
 import './style.css'
 
@@ -15,15 +16,18 @@ import './style.css'
 import Map from './Components/Map/Map';
 import TripList from './Components/TripList/TripList';
 import Account from './Components/Account/Account';
+
 import Navbar from './Components/Navbar/Navbar'
-import Home from './Components/pages/HomePage/Home';
+import Home from './Components/pages/Home';
 
 function App() {
   return (
     <Router>
+
       <div className='page-container'>
         <Navbar/>
         <Switch>
+    <Route path="/" exact component={Home}/>
           <Route exact path="/account">
             <Account/>
           </Route>
@@ -33,12 +37,9 @@ function App() {
           <Route exact path="/trips">
             <TripList/>
           </Route>
-          <Route path="/" exact component={Home}>
-            {/* <Homepage/>
-            <MiddleMain/> */}
-          </Route>
         </Switch>
       </div>
+
     </Router>
   );
 }
