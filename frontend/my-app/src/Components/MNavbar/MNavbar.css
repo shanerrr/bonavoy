@@ -91,7 +91,7 @@
   font-size: 2rem;
 }
 
-@media screen and (max-width: 960px) {
+@media screen and (max-width: 1200px) {
   .NavbarItems {
     position: relative;
   }
@@ -131,15 +131,15 @@
 
   .navbar-logo {
     position: absolute;
-    top: -8px;
-    left: -40px;
+    top: 0;
+    left: -41px;
     transform: translate(25%, 50%);
   }
 
   .menu-icon {
     display: block;
     position: absolute;
-    top: -5px;
+    top: 0;
     right: 0;
     transform: translate(-100%, 60%);
     font-size: 1.8rem;
@@ -149,6 +149,13 @@
   .fa-times {
     color: #fff;
     font-size: 2rem;
+  }
+  .flexbox{
+    display: flex;
+    justify-content: space-between;
+  }
+  .flexbox > li {
+    width: 580px;
   }
 
   .nav-links-mobile {

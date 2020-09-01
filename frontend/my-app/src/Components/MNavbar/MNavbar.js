@@ -19,7 +19,7 @@ function MNavbar() {
   const closeMobileMenu = () => setClick(false);
 
   const showButton = () => {
-    if (window.innerWidth <= 960) {
+    if (window.innerWidth <= 1200) {
       setButton(false);
     } else {
       setButton(true);
@@ -68,25 +68,27 @@ function MNavbar() {
                 Trip Planner
               </Link>
             </li>
-            {/* <li className='nav-item'>
-              <Link
-                to='/products'
-                className='nav-links'
-                onClick={closeMobileMenu}
-              >
-                Products
-              </Link>
-            </li> */}
+            <div className="flexbox">
+              <li className='nav-item'>
+                <Link
+                  to='/login'
+                  className='nav-links-mobile'
+                  onClick={closeMobileMenu}
+                >
+                  LOG IN
+                </Link>
+              </li>
 
-            <li>
-              <Link
-                to='/signup'
-                className='nav-links-mobile'
-                onClick={closeMobileMenu}
-              >
-                LOG IN
-              </Link>
-            </li>
+              <li>
+                <Link
+                  to='/signup'
+                  className='nav-links-mobile'
+                  onClick={closeMobileMenu}
+                >
+                  SIGN UP
+                </Link>
+              </li>
+            </div>
           </ul>
           <div className="btns">
             <span className="btn-span">
