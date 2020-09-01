@@ -88,7 +88,14 @@ function MNavbar() {
               </Link>
             </li>
           </ul>
-          {button && <Button buttonStyle='btn--outline'>LOG IN</Button>}
+          <div className="btns">
+            <span className="btn-span">
+            {button && <Button buttonStyle='btn--outline'>LOG IN</Button>}
+            </span>
+            <span className="btn-span">
+            {button && <Button buttonStyle='btn--primary'>SIGN UP</Button>}
+            </span>
+          </div>
         </div>
       </nav>
     </>
