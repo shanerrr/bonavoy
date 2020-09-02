@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '../Button/Button';
 import { Link } from 'react-router-dom';
-import './Navbar.css';
+import './MNavbar.css';
 
-function Navbar() {
+function MNavbar() {
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
   const [navbar, setNavbar] = useState(false);
@@ -19,7 +19,7 @@ function Navbar() {
   const closeMobileMenu = () => setClick(false);
 
   const showButton = () => {
-    if (window.innerWidth <= 960) {
+    if (window.innerWidth <= 1200) {
       setButton(false);
     } else {
       setButton(true);
@@ -68,31 +68,40 @@ function Navbar() {
                 Trip Planner
               </Link>
             </li>
-            {/* <li className='nav-item'>
-              <Link
-                to='/products'
-                className='nav-links'
-                onClick={closeMobileMenu}
-              >
-                Products
-              </Link>
-            </li> */}
+            <div className="flexbox">
+              <li className='nav-item'>
+                <Link
+                  to='/login'
+                  className='nav-links-mobile'
+                  onClick={closeMobileMenu}
+                >
+                  LOG IN
+                </Link>
+              </li>
 
-            <li>
-              <Link
-                to='/signup'
-                className='nav-links-mobile'
-                onClick={closeMobileMenu}
-              >
-                LOG IN
-              </Link>
-            </li>
+              <li>
+                <Link
+                  to='/signup'
+                  className='nav-links-mobile'
+                  onClick={closeMobileMenu}
+                >
+                  SIGN UP
+                </Link>
+              </li>
+            </div>
           </ul>
-          {button && <Button buttonStyle='btn--outline'>LOG IN</Button>}
+          <div className="btns">
+            <span className="btn-span">
+            {button && <Button buttonStyle='btn--outline'>LOG IN</Button>}
+            </span>
+            <span className="btn-span">
+            {button && <Button buttonStyle='btn--primary'>SIGN UP</Button>}
+            </span>
+          </div>
         </div>
       </nav>
     </>
   );
 }
 
-export default Navbar;
+export default MNavbar;
