@@ -10,6 +10,7 @@ import Map from './Components/Map';
 import TripList from './Components/TripList';
 import Account from './Components/Account';
 import Navbar from './Components/MNavbar/MNavbar'
+import PlannerNav from './Components/PlannerNav/PlannerNav'
 import Home from './Components/pages/Home';
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
         </Route>
 
         <Route exact path="/planner">
+          <PlannerNav/>
           <Map/>
         </Route>
 
