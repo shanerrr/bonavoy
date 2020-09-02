@@ -1,94 +1,57 @@
 import React from 'react';
+import { DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd';
 
-import './style.css';
 import StopListItem from '../StopListItem/StopListItem';
+import './style.css';
 
 
 class StopList extends React.Component {
-    
+	
 	constructor(props){
 		super(props);
-		this.state = {
-			stops:[],
-			beforeDragState:{
-				dragging: false,
-				draggedTo: null,
-				draggedFrom: null,
-			},
-			duringDragState:{
-				dragging: false,
-				draggedTo: null,
-				draggedFrom: null,
-			}
+		this.state = {};
+		this.onDragEnd = this.onDragEnd.bind(this);
+	}
+
+	
+
+	onDragEnd(result) {
+		// dropped outside the list
+		if(!result.destination){
+			return;
 		}
-		this.onDragStartHandler = this.onDragStartHandler.bind(this);
-		this.onDragOverHandler = this.onDragOverHandler.bind(this);
-		this.onDropHandler = this.onDropHandler.bind(this);
+		this.props.reorderStops(result.source.index, result.destination.index);
 	}
 
-	onDragStartHandler(event){
-		const draggedFrom = event.currentTarget.dataset.position;
-		this.state.duringDragState.draggedFrom = draggedFrom;
-		console.log(this.state.stops);
-	}
-
-	onDragOverHandler(event){
-		// stop default browser behavior
-		event.preventDefault();
-
-		const duringDraggedFrom = this.state.duringDragState.draggedFrom;
-		const duringDraggedTo = this.state.duringDragState.draggedTo;
-
-		const draggedTo = event.currentTarget.dataset.position;
-		if(duringDraggedFrom !== draggedTo && duringDraggedTo !== draggedTo)
-		{
-			// temporary exchange for style
-			this.props.exchangeStops(duringDraggedFrom, draggedTo);
-			this.setState({
-				...this.state, 
-				duringDragState:{
-					...this.duringDragState,
-					draggedFrom:draggedTo
-				}
-			})
-		}
-
-	}
-
-	onDropHandler(event){
-		const beforeDragState = this.state.beforeDragState;
-		const state = {
-			...this.state,
-			duringDragState:beforeDragState
-		}
-	}
-
-	render(){
-		const stops = this.props.stops.map((stop, key) => {
-			return ( 
-				<li 
-					key={key}        
-					id='draggable'            
-					draggable='true'
-					onDragStart={this.onDragStartHandler}
-					data-position={key}
-					onDrop={this.onDropHandler}
-					onDragOver={this.onDragOverHandler}
-					onDragEnd={this.onDragEndHandler}
-				>
-					<StopListItem 
-						stopName={stop.place_name} 
-						id={key}
-						removeStop={this.props.removeStop}
-					/>
-				</li>
-			)
-		});
-		
+	render(){		
 		return(
-			<ul className='stop-list'>
-				{stops}
-			</ul>
+			<DragDropContext onDragEnd={this.onDragEnd}>
+				<Droppable droppableId="droppable">
+					{(provided, snapshot) => (
+						<div 
+							{...provided.droppableProps}
+							ref={provided.innerRef}
+							className="stop-list"
+						>
+							{this.props.stops.map((stop, key) => (
+								<Draggable key={stop.id} draggableId={stop.id} index={key}>
+									{(provided, snapshot) => (
+										<div
+											ref={provided.innerRef}
+												{...provided.draggableProps}
+												{...provided.dragHandleProps}>
+											<StopListItem
+												stop={stop}	
+											/>
+										</div>
+									)}
+								</Draggable>
+							))}	
+							{provided.placeholder}
+						</div>
+					)}					
+				</Droppable>
+			</DragDropContext>
 		)
 	}
 

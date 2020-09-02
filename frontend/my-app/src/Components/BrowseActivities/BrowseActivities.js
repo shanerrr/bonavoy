@@ -12,7 +12,7 @@ class BrowseActivities extends React.Component {
                 trigger={<button>Add Activities</button>}
                 modal
                 closeOnDocumentClick
-                contentStyle={{'width':'90%', 'height':'90%', 'cursor':'default', 'zIndex':1000}}
+                contentStyle={{'width':'90%', 'height':'90%', 'cursor':'default', 'zIndex':999989}}
             >
                 browse and add accomodation, tourist attractions, activities, and eats here!
                 <div><button>add accomodation</button></div>

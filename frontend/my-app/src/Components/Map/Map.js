@@ -25,7 +25,7 @@ class Map extends React.Component{
     };
     this.map = null;
     this.addMarkerHandler = this.addMarkerHandler.bind(this);
-    this.exchangeMarkersHandler = this.exchangeMarkersHandler.bind(this);
+    this.reorderMarkersHandler = this.reorderMarkersHandler.bind(this);
     this.updateBBox = this.updateBBox.bind(this);
   }
 
@@ -33,7 +33,7 @@ class Map extends React.Component{
     const map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/mapbox/streets-v11',
-      center: [this.state.lng, this.state.lat],
+      center: [this.state.lng, this.state.lat], // TODO: get location of person
       zoom: this.state.zoom,
     });
     this.map = map;
@@ -71,6 +71,7 @@ class Map extends React.Component{
       if(y > bbox.max.y){
         bbox.max.y = y;
       }
+      
       this.setState({
         ...this.state,
         bbox:bbox
@@ -109,13 +110,13 @@ class Map extends React.Component{
 
   }
 
-  removeMarkerHandler(key){
-
-  }
-
-  // TODO: change to exchange markers
-  exchangeMarkersHandler(from, to){
-    console.log(from,to);
+  reorderMarkersHandler(from, to){
+    let result = this.state.markers;
+    const temp = result[to];
+    result[to] = result[from];
+    result[from] = temp;
+    this.setState({...this.state, markers:result});
+    console.log(result);
   }
 
   render() {
@@ -124,7 +125,7 @@ class Map extends React.Component{
           <Plan 
             stops={this.state.stops}
             addMarker={this.addMarkerHandler}
-            exchangeMarkers={this.exchangeMarkersHandler}     
+            reorderMarkers={this.reorderMarkersHandler}
           />
         </div>
     )
