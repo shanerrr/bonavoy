@@ -14,6 +14,7 @@ class StopInfo extends React.Component {
                 <div>
                     Accomodation
                 </div>
+                {this.props.stop.id}
                 <ActivitiesList/>
             </div>
 
