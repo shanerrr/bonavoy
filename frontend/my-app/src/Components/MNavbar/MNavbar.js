@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '../Button/Button';
 import { Link } from 'react-router-dom';
+import UserModal from '../UserModal/UserModal'
 import './MNavbar.css';
 
 function MNavbar() {
@@ -23,6 +24,7 @@ function MNavbar() {
       setButton(false);
     } else {
       setButton(true);
+      document.body.style.overflow = 'unset';
     }
   };
 
@@ -45,7 +47,7 @@ function MNavbar() {
     <>
       <nav className={click ? navbar ? 'navbar active' : 'navbar active': navbar ? 'navbar active' : 'navbar' }>
         <div className='navbar-container'>
-          <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
+          <Link to='/' className='navbar-logo' onClick={closeMobileMenu && handleClick}>
           <i className = 'fas fa-route'/>
             traveller
           </Link>
@@ -55,7 +57,7 @@ function MNavbar() {
           <ul className={click ? 'nav-menu active' : 'nav-menu'}>
           {/* <ul className={navbar ? click ? 'nav-menu active' : 'nav-menu': click ? 'nav-menu active past' : 'nav-menu'}> */}
             <li className='nav-item'>
-              <Link to='/' className='nav-links' onClick={closeMobileMenu}>
+              <Link to='/' className='nav-links' onClick={closeMobileMenu && handleClick}>
                 Explore
               </Link>
             </li>
@@ -63,7 +65,7 @@ function MNavbar() {
               <Link
                 to='/planner'
                 className='nav-links'
-                onClick={closeMobileMenu}
+                onClick={closeMobileMenu && handleClick}
               >
                 Trip Planner
               </Link>
@@ -73,7 +75,7 @@ function MNavbar() {
                 <Link
                   to='/login'
                   className='nav-links-mobile'
-                  onClick={closeMobileMenu}
+                  onClick={closeMobileMenu && handleClick}
                 >
                   LOG IN
                 </Link>
@@ -82,8 +84,8 @@ function MNavbar() {
               <li>
                 <Link
                   to='/signup'
-                  className='nav-links-mobile'
-                  onClick={closeMobileMenu}
+                  className='nav-links-mobile nooutline'
+                  onClick={closeMobileMenu && handleClick}
                 >
                   SIGN UP
                 </Link>
@@ -92,14 +94,17 @@ function MNavbar() {
           </ul>
           <div className="btns">
             <span className="btn-span">
-            {button && <Button buttonStyle='btn--outline'>LOG IN</Button>}
+              {button && <Button buttonStyle='btn--outline'>LOG IN</Button>}
             </span>
             <span className="btn-span">
-            {button && <Button buttonStyle='btn--primary'>SIGN UP</Button>}
+              {button && <Button buttonStyle='btn--primary'>SIGN UP</Button>}
             </span>
           </div>
         </div>
       </nav>
+      <UserModal>
+
+      </UserModal>
     </>
   );
 }

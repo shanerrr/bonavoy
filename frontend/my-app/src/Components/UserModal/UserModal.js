@@ -1,9 +1,9 @@
 import React from 'react'
 
-function ModalLogin() {
+function ModalLogin({children}) {
     return (
         <div className="main-container">
-            
+            {children}
         </div>
     )
 }

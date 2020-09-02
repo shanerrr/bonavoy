@@ -1,0 +1,20 @@
+.secondpage-container {
+    padding: 4rem;
+    background: #fff;
+    height: 100vh;
+  }
+.explore-nav{
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+}
+.explore-menu {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    grid-gap: 20px;
+    list-style: none;
+    text-align: center;
+    width: 100%;
+  }
