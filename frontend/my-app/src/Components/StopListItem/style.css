@@ -12,3 +12,8 @@
 .move-stop {
     display: inline-block;
 }
+
+.delete {
+    float:right;
+    margin-right: 40px;
+}

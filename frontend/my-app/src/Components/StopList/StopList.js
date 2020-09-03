@@ -13,8 +13,6 @@ class StopList extends React.Component {
 		this.onDragEnd = this.onDragEnd.bind(this);
 	}
 
-	
-
 	onDragEnd(result) {
 		// dropped outside the list
 		if(!result.destination){
@@ -42,6 +40,8 @@ class StopList extends React.Component {
 												{...provided.dragHandleProps}>
 											<StopListItem
 												stop={stop}	
+												index={key}
+												removeStop={this.props.removeStop}
 											/>
 										</div>
 									)}

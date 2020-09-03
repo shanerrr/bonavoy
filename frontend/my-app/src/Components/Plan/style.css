@@ -27,6 +27,11 @@
 .toggle-plan {
     position: relative;
     z-index: 10;
+    padding:5px;
+    background-color: black;
+    color:white;
+    border-radius:2px;
+    border:2px solid;
 }
 
 .plan-group {
@@ -34,8 +39,21 @@
     width: fit-content;
     position:absolute;
     z-index: 10;
-    right:0;
     display:inline-block;
+}
+
+.hidden {
+    transition: all 0.2s ease-in-out;
+    right: -420px;
+}
+
+.show {
+    transition: all 0.2s ease-in-out;
+    right:0;
+}
+
+.mobile-toggle-plan {
+    display: none;
 }
 
 @media screen and (max-width: 1080px){
@@ -55,5 +73,20 @@
 
     .toggle-plan {
         display: none;
+    }
+
+    .mobile-toggle-plan {
+        display: block;
+        position: absolute;
+        float: left;
+    }
+
+    .hidden {
+        transition: all 0.2s ease-in-out;
+        right: -100%;
+    }
+    
+    .show {
+        transition: all 0.2s ease-in-out;
     }
 }
