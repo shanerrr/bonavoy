@@ -1,20 +1,60 @@
 .secondpage-container {
     padding: 4rem;
-    background: #fff;
-    height: 100vh;
+    /* background: #fff; */
+    background: #151a23;
+    height: 27vh;
+    transition: all 0.5s ease;
+  }
+  .secondpage-container.diff {
+    background: white;
+    transition: all 0.5s ease;
   }
 .explore-nav{
-    height: 80px;
+    height: 100%;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    /* justify-content: center;
+    align-items: center; */
     font-size: 1.2rem;
 }
 .explore-menu {
-    display: grid;
-    grid-template-columns: repeat(2, auto);
-    grid-gap: 20px;
     list-style: none;
     text-align: center;
     width: 100%;
+    justify-items: left;
+    align-items: center;
+  }
+
+  .explore-plan-navlink {
+    background: #151a23;
+    justify-content: left;
+    display: block;
+    color: white;
+    /* margin-top: 1rem; */
+    /* margin: 3rem; */
+    border-radius: 4px;
+    width: 20%;
+    text-decoration: none;
+    font-size: 1.5rem;
+    padding: 14px 20px;
+    border: 1px solid #fff;
+    transition: all 0.3s ease-out;
+    cursor: pointer;
+  }
+  .padderfornav{
+    margin-top: 1rem;
+  }
+  /* .explore-plan-navlink:hover {
+    background: #fff;
+    color: #242424;
+    transition: 250ms;
+  } */
+
+  .explorebtn{
+    background: white;
+    color: #242424;
+    border: 1px solid #151a23;
+  }
+
+  .explore-menu::after {
+    border-left: thick solid #ff0000;
   }
