@@ -30,6 +30,7 @@ class StopListItem extends React.Component {
 				<div 
 					onClick={(e)=>this.toggleItem(e)} 
 					className='collapsed'
+					style={this.props.style}
 				>
 					<div>
 						<p className="place-name">{this.props.stop.place_name}</p>
