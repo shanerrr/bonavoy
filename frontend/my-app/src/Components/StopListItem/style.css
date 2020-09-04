@@ -25,4 +25,5 @@
 
 .delete:hover {
     background-color:#F8655E;
+    transition: 0.2s;
 }
