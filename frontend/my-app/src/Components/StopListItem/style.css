@@ -9,11 +9,20 @@
     font-family: verdana;
 }
 
+.place-name {
+    font-size: medium !important;
+}
+
 .move-stop {
     display: inline-block;
 }
 
 .delete {
-    float:right;
-    margin-right: 40px;
+    float: right;
+    margin:8px !important;
+    padding:3px !important;
+}
+
+.delete:hover {
+    background-color:#F8655E;
 }

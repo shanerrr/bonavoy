@@ -4,8 +4,6 @@ import mapboxgl from 'mapbox-gl';
 import './style.css';
 import Plan from '../Plan/Plan';
 
-import * as turf from '@turf/turf';
-
 const path = require('path');
 require('dotenv').config({ 
    path: path.resolve(__dirname, './../../.env.local') 
@@ -14,7 +12,6 @@ require('dotenv').config({
 const TOKEN = process.env.REACT_APP_MAPS_API_KEY;
 mapboxgl.accessToken = TOKEN;
 
-var nothing = turf.featureCollection([]);
 class Map extends React.Component{
   
   constructor(props) {
@@ -25,6 +22,8 @@ class Map extends React.Component{
       zoom: 10,
       markers:[],
       bbox:[],
+      duration:0,
+      distance:0
     };
     this.map = null;
     this.addMarkerHandler = this.addMarkerHandler.bind(this);
@@ -44,6 +43,33 @@ class Map extends React.Component{
 
     // disable map rotation using right click + drag
     map.dragRotate.disable();
+
+    map.on('load', () => {
+      map.addLayer({
+        id: 'route',
+        type: 'line',
+        source: {
+          type: 'geojson',
+          data: {
+            type: 'Feature',
+            properties: {},
+            geometry: {
+              type: 'LineString',
+              coordinates: [[0,0]]
+            }
+          }
+        },
+        layout: {
+          'line-join': 'round',
+          'line-cap': 'round'
+        },
+        paint: {
+          'line-color': '#3887be',
+          'line-width': 5,
+          'line-opacity': 0.75
+        }
+      });
+    })
 
     this.map = map;
   }
@@ -135,12 +161,22 @@ class Map extends React.Component{
     });
     const coordString = coords.join(';');
 
-    // make request 
-    if(this.state.markers.length >= 1 && this.state.markers.length <= 25){
+    // make request
+    if(this.state.markers.length <= 1){
+      const geojson = {
+        type: 'Feature',
+        properties: {},
+        geometry: {
+          type: 'LineString',
+          coordinates: [[0,0]]
+        }
+      };
+      this.map.getSource('route').setData(geojson); 
+    }
+    if(this.state.markers.length > 1 && this.state.markers.length <= 25){
       fetch(`https://api.mapbox.com/directions/v5/mapbox/driving/${coordString}?annotations=distance,speed&geometries=geojson&access_token=${TOKEN}`)
         .then((response) => response.json())
         .then((response) => {
-          console.log(response);
           if(response.code === 'NoRoute'){
             console.log('no route');
           }
@@ -152,6 +188,8 @@ class Map extends React.Component{
             const duration = data.duration;
             const distance = data.distance;
             const route = data.geometry.coordinates;
+          
+            this.setState({...this.state, duration:duration, distance:distance});
 
             const geojson = {
               type: 'Feature',
@@ -161,34 +199,6 @@ class Map extends React.Component{
                 coordinates: route
               }
             };
-            
-            // add source and layer if not exists
-            if (!this.map.getSource('route')) {
-              this.map.addLayer({
-                id: 'route',
-                type: 'line',
-                source: {
-                  type: 'geojson',
-                  data: {
-                    type: 'Feature',
-                    properties: {},
-                    geometry: {
-                      type: 'LineString',
-                      coordinates: geojson
-                    }
-                  }
-                },
-                layout: {
-                  'line-join': 'round',
-                  'line-cap': 'round'
-                },
-                paint: {
-                  'line-color': '#3887be',
-                  'line-width': 5,
-                  'line-opacity': 0.75
-                }
-              });
-            }
 
             // add layer to map
             this.map.getSource('route').setData(geojson);
@@ -215,6 +225,8 @@ class Map extends React.Component{
             addMarker={this.addMarkerHandler}
             reorderMarkers={this.reorderMarkersHandler}
             removeMarker={this.removeMarkerHandler}
+            duration={this.state.duration}
+            distance={this.state.distance}
           />
         </div>
     )

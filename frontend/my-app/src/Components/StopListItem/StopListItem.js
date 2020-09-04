@@ -32,8 +32,8 @@ class StopListItem extends React.Component {
 					className='collapsed'
 				>
 					<div>
-						{this.props.stop.place_name}
-						<button className="delete" onClick={this.removeStop}>remove</button>
+						<p className="place-name">{this.props.stop.place_name}</p>
+						<button className='btn delete' onClick={this.removeStop}>remove</button>
 					</div>
 				</div>
 				{this.state.open ? (<StopInfo stop={this.props.stop}/>) : null}
