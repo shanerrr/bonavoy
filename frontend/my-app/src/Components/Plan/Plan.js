@@ -71,7 +71,11 @@ class Plan extends React.Component {
 							reorderStops={this.reorderStopsHandler}
 							removeStop={this.removeStopHandler}
 						/>
-						<PlanOverview/>
+						<PlanOverview
+							duration={this.props.duration}
+							distance={this.props.distance}
+							stopCount={this.state.stops.length}	
+						/>
 					</div>
 				</div>
 			</div>
