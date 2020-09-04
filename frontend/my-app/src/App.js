@@ -10,7 +10,7 @@ import Map from './Components/Map/Map';
 import TripList from './Components/TripList/TripList';
 import Account from './Components/Account/Account';
 import Navbar from './Components/MNavbar/MNavbar'
-import PlannerNav from './Components/PlannerNav/PlannerNav'
+// import PlannerNav from './Components/PlannerNav/PlannerNav'
 import Home from './Components/pages/Home';
 
 function App() {
@@ -29,7 +29,7 @@ function App() {
         </Route>
 
         <Route exact path="/planner">
-          <PlannerNav/>
+          {/* <PlannerNav/> */}
           <Map/>
         </Route>
 

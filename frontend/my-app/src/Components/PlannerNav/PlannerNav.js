@@ -43,7 +43,7 @@ function PlannerNav() {
 
   return (
     <>
-      <nav className={click ? navbar ? 'navbar active' : 'navbar active': navbar ? 'navbar active' : 'navbar' }>
+      <nav className={click ? navbar ? 'navbarP active' : 'navbarP active': navbar ? 'navbarP active' : 'navbarP' }>
         <div className='navbar-container'>
           <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
           <i className = 'fas fa-route'/>

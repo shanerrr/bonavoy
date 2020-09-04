@@ -6,12 +6,6 @@ video {
   z-index: -1;
   top: 0;
 }
-.showExplore{
-  display: none;
-}
-.showExplore.active{
-  display: block;
-}
 
 .hero-container {
   /* height:  calc(100vh - 160px); */
