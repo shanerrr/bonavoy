@@ -2,7 +2,6 @@ import React from 'react';
 
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
-// import MapboxGeocoder from 'react-mapbox-gl-geocoder'
 import './style.css';
 
 

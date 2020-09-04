@@ -55,17 +55,15 @@ class Plan extends React.Component {
 			<div>
 				{this.state.showPlan ? "" :
 					<button onClick={this.togglePlan} className="toggle-plan" >
-						Toggle
+						Show Plan
 					</button>
 				}
 				<div className={this.state.showPlan ? "plan-group show" : "plan-group hidden" }>
 					<div className="plan-container">
 						<div id="plan">
 							<div className='plan-header'>
-								<div>
-									<button onClick={this.togglePlan} className="toggle-plan header-toggle-plan">toggle</button>
-								</div>
-								Jerome's Trip
+								<button onClick={this.togglePlan} className="toggle-plan header-toggle-plan">Hide</button>
+								<h3 className="trip-title">Jerome's Trip</h3>
 							</div>
 							<AddStop addStopHandler={this.addStopHandler}/>
 							<StopList 
