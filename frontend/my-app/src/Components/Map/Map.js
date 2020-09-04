@@ -45,6 +45,7 @@ class Map extends React.Component{
     map.dragRotate.disable();
 
     map.on('load', () => {
+      // layer and source for map
       map.addLayer({
         id: 'route',
         type: 'line',
@@ -88,7 +89,7 @@ class Map extends React.Component{
       bbox = [[...coordsList[0]], [...coordsList[0]]];
 
       for(let coords of coordsList){
-        // bottom left
+        // bottom left bound
         if(coords[0] < bbox[0][0]){
 
           bbox[0][0] = coords[0];
@@ -97,7 +98,7 @@ class Map extends React.Component{
           bbox[0][1] = coords[1];
         }
 
-        // top right
+        // top right bound
         if(coords[0] > bbox[1][0]){
           bbox[1][0] = coords[0];
         }
@@ -111,9 +112,7 @@ class Map extends React.Component{
   }
 
   addMarkerHandler(coords){
-    // new stop
-
-    // update stops
+    // update markers
     const marker = new mapboxgl.Marker()
       .setLngLat(coords)
       .addTo(this.map);
@@ -134,9 +133,8 @@ class Map extends React.Component{
     // fly to fit bounds
     this.map.fitBounds(bbox,{padding:padding, maxZoom:8});
 
-    // make get new route
+    // update route
     this.updateRoute()
-
   }
 
   removeMarkerHandler(index){
