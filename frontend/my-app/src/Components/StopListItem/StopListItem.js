@@ -2,7 +2,6 @@ import React from 'react';
 
 import './style.css';
 import StopInfo from '../StopInfo/StopInfo';
-import { Draggable } from 'react-beautiful-dnd';
 
 
 class StopListItem extends React.Component {
@@ -13,10 +12,16 @@ class StopListItem extends React.Component {
 			open:false,
 		}
 		this.toggleItem = this.toggleItem.bind(this);
+		this.removeStop = this.removeStop.bind(this);
 	}
 	
 	toggleItem(e){
 		this.setState({open: !this.state.open})
+	}
+
+	removeStop(){
+		console.log('key', this.props.index);
+		this.props.removeStop(this.props.index);
 	}
 	
 	render() {
@@ -28,6 +33,7 @@ class StopListItem extends React.Component {
 				>
 					<div>
 						{this.props.stop.place_name}
+						<button className="delete" onClick={this.removeStop}>remove</button>
 					</div>
 				</div>
 				{this.state.open ? (<StopInfo stop={this.props.stop}/>) : null}

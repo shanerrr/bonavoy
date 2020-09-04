@@ -7,8 +7,8 @@ import {
 
 import './App.css';
 import Map from './Components/Map/Map';
-import TripList from './Components/TripList';
-import Account from './Components/Account';
+import TripList from './Components/TripList/TripList';
+import Account from './Components/Account/Account';
 import Navbar from './Components/MNavbar/MNavbar'
 import PlannerNav from './Components/PlannerNav/PlannerNav'
 import Home from './Components/pages/Home';
