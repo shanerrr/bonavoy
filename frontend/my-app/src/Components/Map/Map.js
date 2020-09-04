@@ -151,7 +151,7 @@ class Map extends React.Component{
   }
 
   updateRoute(){
-    // generate geoJSON data array from markers
+    // generate coordinate data array from markers
     const coords = this.state.markers.map((item) => {
       const lng = item._lngLat.lng.toString();
       const lat = item._lngLat.lat.toString();
@@ -170,8 +170,9 @@ class Map extends React.Component{
         }
       };
       this.map.getSource('route').setData(geojson); 
+      this.setState({...this.state, duration:0, distance:0});
     }
-    if(this.state.markers.length > 1 && this.state.markers.length <= 25){
+    else if(this.state.markers.length > 1 && this.state.markers.length <= 25){
       fetch(`https://api.mapbox.com/directions/v5/mapbox/driving/${coordString}?annotations=distance,speed&geometries=geojson&access_token=${TOKEN}`)
         .then((response) => response.json())
         .then((response) => {
