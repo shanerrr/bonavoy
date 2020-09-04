@@ -51,7 +51,6 @@ class StopList extends React.Component {
 											ref={provided.innerRef}
 												{...provided.draggableProps}
 												{...provided.dragHandleProps}
-
 										>
 											<StopListItem
 												stop={stop}	

@@ -65,7 +65,7 @@ class Map extends React.Component{
           'line-cap': 'round'
         },
         paint: {
-          'line-color': '#3887be',
+          'line-color': '#7D14FF',
           'line-width': 5,
           'line-opacity': 0.75
         }

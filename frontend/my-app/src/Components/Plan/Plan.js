@@ -52,35 +52,38 @@ class Plan extends React.Component {
 	
 	render(){
 		return (
-			<div className={this.state.showPlan ? "plan-group show" : "plan-group hidden" }>
-				<button 
-					onClick={this.togglePlan} 
-					className="toggle-plan"
-				>
-					Toggle
-				</button>
-				<div className="plan-container">
-					<div id="plan">
-						<div className='plan-header'>
-							<button onClick={this.togglePlan} className="mobile-toggle-plan">toggle</button>
-							Jerome's Trip
+			<div>
+				{this.state.showPlan ? "" :
+					<button onClick={this.togglePlan} className="toggle-plan" >
+						Toggle
+					</button>
+				}
+				<div className={this.state.showPlan ? "plan-group show" : "plan-group hidden" }>
+					<div className="plan-container">
+						<div id="plan">
+							<div className='plan-header'>
+								<div>
+									<button onClick={this.togglePlan} className="toggle-plan header-toggle-plan">toggle</button>
+								</div>
+								Jerome's Trip
+							</div>
+							<AddStop addStopHandler={this.addStopHandler}/>
+							<StopList 
+								stops={this.state.stops}
+								reorderStops={this.reorderStopsHandler}
+								removeStop={this.removeStopHandler}
+							/>
+							<PlanOverview
+								duration={this.props.duration}
+								distance={this.props.distance}
+								stopCount={this.state.stops.length}	
+							/>
 						</div>
-						<AddStop addStopHandler={this.addStopHandler}/>
-						<StopList 
-							stops={this.state.stops}
-							reorderStops={this.reorderStopsHandler}
-							removeStop={this.removeStopHandler}
-						/>
-						<PlanOverview
-							duration={this.props.duration}
-							distance={this.props.distance}
-							stopCount={this.state.stops.length}	
-						/>
 					</div>
 				</div>
 			</div>
-			)
-		}
+		)
 	}
+}
 	
 	export default Plan;
