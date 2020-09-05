@@ -27,9 +27,11 @@ class PlanOverview extends React.Component{
 	render(){
 		return(
 			<div className='plan-overview'>
-				<p className="overview-stat">Duration: {this.secondsToDhms(this.props.duration)}</p>
-				<p className="overview-stat">Distance: {(this.props.distance/1000).toFixed(1)} km</p>
-				<p className="overview-stat">Stops: {this.props.stopCount}</p>
+				<ul className="overview-list">
+					<li className="overview-stat duration"><i class="fas fa-stopwatch"></i> {this.secondsToDhms(this.props.duration)}</li>
+					<li className="overview-stat distance"> <i class="fas fa-road"></i> {(this.props.distance/1000).toFixed(1)} km</li>
+					<li className="overview-stat stops"> <i class="fas fa-map-marker-alt"></i> {this.props.stopCount}</li>	
+				</ul>
 			</div>
 			)
 		}

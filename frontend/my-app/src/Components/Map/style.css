@@ -3,3 +3,18 @@
     height:calc(100% - 80px);
     width:100%;
 }
+
+.marker {
+    display: block;
+    position: absolute;
+    border-radius:50%;
+    width: 25px;
+    height: 25px;
+    border: 1px solid white;
+    text-align:center;
+    padding-top: 2px;
+    cursor: pointer;
+    font-size:15px;
+    background-color:#394651;
+    color:white;
+}

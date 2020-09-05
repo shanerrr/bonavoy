@@ -9,7 +9,7 @@ const TOKEN = process.env.REACT_APP_MAPS_API_KEY;
 
 class AddStop extends React.Component {
 	constructor(props){
-			super(props);
+		super(props);
 	}
 
 	componentDidMount(){
