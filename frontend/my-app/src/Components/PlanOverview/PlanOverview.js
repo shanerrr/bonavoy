@@ -20,16 +20,18 @@ class PlanOverview extends React.Component{
 		
 		const dDisplay = d > 0 ? d + (d === 1 ? " day, " : " days, ") : "";
 		const hDisplay = h > 0 ? h + (h === 1 ? " hour, " : " hours, ") : "";
-		const mDisplay = m > 0 ? m + (m === 1 ? " minute, " : " minutes, ") : "";
+		const mDisplay = m > 0 ? m + (m === 1 ? " minute" : " minutes") : "";
 		return dDisplay + hDisplay + mDisplay;
 	}
 
 	render(){
 		return(
 			<div className='plan-overview'>
-				<p className="overview-stat">duration: {this.secondsToDhms(this.props.duration)}</p>
-				<p className="overview-stat">distance: {(this.props.distance/1000).toFixed(1)} km</p>
-				<p className="overview-stat">stops: {this.props.stopCount}</p>
+				<ul className="overview-list">
+					<li className="overview-stat duration"><i class="fas fa-stopwatch"></i> {this.secondsToDhms(this.props.duration)}</li>
+					<li className="overview-stat distance"> <i class="fas fa-road"></i> {(this.props.distance/1000).toFixed(1)} km</li>
+					<li className="overview-stat stops"> <i class="fas fa-map-marker-alt"></i> {this.props.stopCount}</li>	
+				</ul>
 			</div>
 			)
 		}
