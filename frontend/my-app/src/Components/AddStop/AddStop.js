@@ -18,6 +18,7 @@ class AddStop extends React.Component {
 			types: 'region,place',
 			placeholder:'Where would you like to visit?',
 			getItemValue: e => {
+				console.log(e);
 				this.props.addStopHandler(e);
 				return ''; // fill input with empty string
 			}
