@@ -1,0 +1,12 @@
+ul.trip-list {
+    /* background-color:grey; */
+    width: 60%;
+    height: 100%;
+    margin:auto;
+    list-style: none;
+
+}
+
+ul.trip-list li:first-child{
+    margin-top: 10px;
+}

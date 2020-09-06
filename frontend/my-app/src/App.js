@@ -34,6 +34,7 @@ function App() {
         </Route>
 
         <Route exact path="/trips">
+          <PlannerNav/>
           <TripList/>
         </Route>
 
