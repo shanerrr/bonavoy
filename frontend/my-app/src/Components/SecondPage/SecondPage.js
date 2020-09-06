@@ -22,8 +22,8 @@ function SecondPage() {
           </div>
           <div className="planitems-container">
             <div className="planitems">
-              <AutoComplete className="planstyling starting" id="planAuto" msg="STARTING FROM"/>
-              <AutoComplete className="planstyling destination" id="exploreAuto" msg="DESTINATION"/>
+              <AutoComplete className="planstyling starting" id="planAutoS" msg="STARTING FROM"/>
+              <AutoComplete className="planstyling destination" id="planAutoD" msg="DESTINATION"/>
             </div>
           </div>
       </div>

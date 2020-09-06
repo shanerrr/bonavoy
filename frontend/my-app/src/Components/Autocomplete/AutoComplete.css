@@ -1,16 +1,14 @@
 /* .planstyling{
     min-width: 100%;
 } */
-.mapboxgl-ctrl-geocoder, #planAuto {
-    height: 45px;
-    padding: 6px 38px;
+#planAutoS > .mapboxgl-ctrl-geocoder  {
+    margin-left: 1rem;
+    padding: 0px 0px 0px 0px;
+    height: 100%;
     
 }
-.mapboxgl-ctrl-geocoder, #exploreAuto {
-    height: 45px;
-    padding: 6px 38px;
+#planAutoD > .mapboxgl-ctrl-geocoder {
+    margin-left: -1rem;
+    padding: 0px 0px 0px 0px;
     
-}
-.planstyling{
-    padding-top: 50rem;
 }
