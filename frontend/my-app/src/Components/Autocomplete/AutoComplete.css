@@ -1,0 +1,16 @@
+/* .planstyling{
+    min-width: 100%;
+} */
+.mapboxgl-ctrl-geocoder, #planAuto {
+    height: 45px;
+    padding: 6px 38px;
+    
+}
+.mapboxgl-ctrl-geocoder, #exploreAuto {
+    height: 45px;
+    padding: 6px 38px;
+    
+}
+.planstyling{
+    padding-top: 50rem;
+}

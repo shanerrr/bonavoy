@@ -1,9 +1,12 @@
 .secondpage-container {
     padding: 4rem;
+    display: flex;
     /* background: #fff; */
     background: #151a23;
     height: 27vh;
     transition: all 0.5s ease;
+    align-items: center;
+    justify-content: center;
   }
   .secondpage-container.diff {
     background: white;
@@ -32,7 +35,6 @@
     /* margin-top: 1rem; */
     /* margin: 3rem; */
     border-radius: 4px;
-    width: 20%;
     text-decoration: none;
     font-size: 1.5rem;
     padding: 14px 20px;
@@ -41,7 +43,7 @@
     cursor: pointer;
   }
   .padderfornav{
-    margin-top: 1rem;
+    margin-top: 0.5rem;
   }
   /* .explore-plan-navlink:hover {
     background: #fff;
@@ -57,4 +59,11 @@
 
   .explore-menu::after {
     border-left: thick solid #ff0000;
+  }
+
+  .planitems{
+    display: flex;
+  }
+  .planitems-container{
+    
   }

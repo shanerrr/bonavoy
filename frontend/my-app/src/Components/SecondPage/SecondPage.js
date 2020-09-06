@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import '../../App.css';
 import './SecondPage.css';
-import MapboxGeocoder from 'react-mapbox-gl-geocoder'
-require('dotenv').config()
-
+import AutoComplete from '../AutoComplete/AutoComplete'
 function SecondPage() {
+
   const [click, setClick] = useState(true);
   const handleClick1 = () => {
     if (!click) setClick(true)
@@ -13,15 +12,22 @@ function SecondPage() {
     if (click) setClick(false)
   }
     return (
-      <div className={click ? 'secondpage-container' :'secondpage-container diff'} id="secondpage">
-        {/* <h1>Where are we going?</h1> */}
-        <div className="explore-nav">
-            <ul className="explore-menu">
-                <li className='explore-plan-navlink' onClick={handleClick1}>Plan your Trip</li>
-                <li className='explore-plan-navlink explorebtn padderfornav' onClick={handleClick}>Explore Places</li>
-            </ul>
-        </div>
+      <>
+        <div className={click ? 'secondpage-container' :'secondpage-container diff'} id="secondpage">
+          <div className="explore-nav">
+              <ul className="explore-menu">
+                  <li className='explore-plan-navlink' onClick={handleClick1}>Plan your Trip</li>
+                  <li className='explore-plan-navlink explorebtn padderfornav' onClick={handleClick}>Explore Places</li>
+              </ul>
+          </div>
+          <div className="planitems-container">
+            <div className="planitems">
+              <AutoComplete className="planstyling starting" id="planAuto" msg="STARTING FROM"/>
+              <AutoComplete className="planstyling destination" id="exploreAuto" msg="DESTINATION"/>
+            </div>
+          </div>
       </div>
+      </>
     );
   }
   
