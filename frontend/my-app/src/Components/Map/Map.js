@@ -71,7 +71,7 @@ class Map extends React.Component{
           'line-opacity': 0.75
         }
       });
-    })
+    });
 
     this.map = map;
   }
