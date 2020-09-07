@@ -20,8 +20,6 @@
     float: right;
     margin:8px !important;
     padding:3px !important;
-    width: min-content;
-    height: min-content;
 }
 
 .delete:hover {

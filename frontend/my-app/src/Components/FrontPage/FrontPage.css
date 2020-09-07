@@ -67,7 +67,8 @@ video {
     text-decoration: none;
   }
 
-  .btn {
+/*  TODO: interfering with buttons in other views */
+  .btn {     
     width: 100%;
   }
 }

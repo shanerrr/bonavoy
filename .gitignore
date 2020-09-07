@@ -44,3 +44,4 @@ backend/dotenv.env
 backend/id_rsa_priv.pem
 backend/id_rsa_pub.pem
 .env
+.vscode/settings.json

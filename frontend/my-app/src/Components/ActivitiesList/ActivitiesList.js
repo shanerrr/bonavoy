@@ -19,9 +19,9 @@ class ActivitiesList extends React.Component{
                 <ul className='activity-list'>
                     {this.activityList.map((item, key) => {
                         return <li 
-                                className='activity-list-item' 
-                                key={key}
-                              >{item}</li>
+                                    className='activity-list-item' 
+                                    key={key}
+                               >{item}</li>
                     })}
                 </ul>
                 <BrowseActivities/>

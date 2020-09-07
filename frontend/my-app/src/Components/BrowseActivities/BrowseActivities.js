@@ -9,10 +9,10 @@ class BrowseActivities extends React.Component {
 	render(){
 		return (
 			<Popup 
-			trigger={<button>Add Activities</button>}
-			modal
-			closeOnDocumentClick
-			contentStyle={{'width':'90%', 'height':'90%', 'cursor':'default', 'zIndex':999989}}
+				trigger={<button>Add Activities</button>}
+				modal
+				closeOnDocumentClick
+				contentStyle={{'width':'90%', 'height':'90%', 'cursor':'default', 'zIndex':999989}}
 			>
 				<div>
 					<div>browse and add accomodation, tourist attractions, activities, and eats here!</div>
@@ -20,8 +20,8 @@ class BrowseActivities extends React.Component {
 					<div><button>add activity</button></div>
 				</div>
 			</Popup>
-			)
-		}
+		)
 	}
+}
 	
 	export default BrowseActivities;

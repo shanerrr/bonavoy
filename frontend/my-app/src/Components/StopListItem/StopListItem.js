@@ -33,16 +33,17 @@ class StopListItem extends React.Component {
 					style={this.props.style}
 				>
 					<div>
-						<p className="place-name">{this.props.stop.place_name}</p>
 						<button className='btn delete' onClick={this.removeStop}>remove</button>
+						<p className="place-name">{this.props.stop.place_name}</p>
 					</div>
 				</div>
+				{/* TODO: implement to change height to allow for animation */}
 				{this.state.open ? (<StopInfo stop={this.props.stop}/>) : null}
 			</div>
-			);
-		}
-		
+		);
 	}
+	
+}
 	
 	export default StopListItem;
 	
