@@ -8,6 +8,10 @@
     font-family: verdana;
 }
 
+.collapsed:hover {
+    background-color:rgb(241, 241, 241) !important;
+}
+
 .place-name {
     font-size: medium !important;
 }
