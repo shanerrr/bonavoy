@@ -14,7 +14,7 @@ const itemStyle = {
 }
 
 const getListStyle = isDraggingOver => ({
-	background: isDraggingOver ? '#afafaf' : '#d6d6d6',
+	background: isDraggingOver ? '#afafaf' : '#939393',
 })
 class StopList extends React.Component {
 	
