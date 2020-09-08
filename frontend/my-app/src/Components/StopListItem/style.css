@@ -10,6 +10,7 @@
 
 .collapsed:hover {
     background-color:rgb(241, 241, 241) !important;
+    transition: 0.15s ease;
 }
 
 .place-name {
@@ -24,6 +25,7 @@
     float: right;
     margin:8px !important;
     padding:3px !important;
+    background-color:rgb(226, 226, 226);
 }
 
 .delete:hover {
