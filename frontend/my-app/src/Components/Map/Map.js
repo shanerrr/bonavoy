@@ -12,25 +12,23 @@ require('dotenv').config({
 const TOKEN = process.env.REACT_APP_MAPS_API_KEY;
 mapboxgl.accessToken = TOKEN;
 
+
 class Map extends React.Component{
   
   constructor(props) {
     super(props);
     this.state = { // TODO: change lng and lat to be current position
-      lng: -113.41777, 
-      lat: 53.48538,
-      zoom: 10,
       markers:[],
-      bbox:[],
+      stops:[],
       duration:0,
       distance:0
     };
     this.map = null;
-    this.addMarkerHandler = this.addMarkerHandler.bind(this);
-    this.reorderMarkersHandler = this.reorderMarkersHandler.bind(this);
-    this.removeMarkerHandler = this.removeMarkerHandler.bind(this);
+    this.addStopHandler = this.addStopHandler.bind(this);
+    this.reorderStopsHandler = this.reorderStopsHandler.bind(this);
+    this.removeStopHandler = this.removeStopHandler.bind(this);
     this.updateRoute = this.updateRoute.bind(this);
-    this.updateBBox = this.updateBBox.bind(this);
+    this.getUpdatedBBox = this.getUpdatedBBox.bind(this);
     this.redrawMarkers = this.redrawMarkers.bind(this);
   }
 
@@ -38,8 +36,8 @@ class Map extends React.Component{
     const map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/mapbox/streets-v11',
-      center: [this.state.lng, this.state.lat], // TODO: implement ask and get location of person
-      zoom: this.state.zoom,
+      center: [ -113.41777, 53.48538], // TODO: implement ask and get location of person
+      zoom: 10,
     });
 
     // disable map rotation using right click + drag
@@ -73,11 +71,23 @@ class Map extends React.Component{
       });
     });
 
+    map.on('click', (e) => {
+      const coords = e.lngLat;
+      fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${coords.lng},${coords.lat}.json?access_token=${TOKEN}&types=address`)
+        .then((response) => response.json())
+        .then((data) => {
+          if(data.features.length > 0){
+            const stop = data.features[0];
+            this.addStopHandler(stop);
+          }
+        });
+    })
+
     this.map = map;
   }
 
-  updateBBox() {
-    let coordsList = this.state.markers.map((marker) => {
+  getUpdatedBBox(markers) {
+    let coordsList = markers.map((marker) => {
       return [marker._lngLat.lng, marker._lngLat.lat];
     });
 
@@ -109,49 +119,68 @@ class Map extends React.Component{
       }
     }
     // update bbox state
-    this.setState({...this.state, bbox:bbox});
+    return bbox;
   }
 
-  addMarkerHandler(coords){
+  addStopHandler(stop){
     // update markers
-    const marker = new mapboxgl.Marker().setLngLat(coords)
+    const marker = new mapboxgl.Marker().setLngLat(stop.center);
+
+    const markers = [...this.state.markers, marker];
+    const stops = [...this.state.stops, stop];
 
     // append to current markers
-    this.setState({
-      ...this.state,
-      markers:[...this.state.markers, marker]
-    });
+    this.setState(prevState => ({
+      ...prevState,
+      markers:markers,
+      stops:stops,
+    }));
 
-    this.updateBBox(); 
+    const bbox = this.getUpdatedBBox(markers); 
 
     // determine if should offset by point or bbox
     let padding = {left:50, right:450, top:50, bottom:50};
-    if(this.state.markers.length <= 1){
+    if(markers.length <= 1){
       padding = {left:50, right:400};
     }
 
     // fly to fit bounds
-    this.map.fitBounds(this.state.bbox,{padding:padding, maxZoom:8});
+    this.map.fitBounds(bbox,{padding:padding, maxZoom:8});
 
-    this.redrawMarkers();
-    this.updateRoute();
+    this.redrawMarkers(markers);
+    this.updateRoute(stops);
   }
 
-  removeMarkerHandler(index){
-    // remove from array
-    let result = this.state.markers;
-    const marker = result.splice(index, 1)[0];
+  removeStopHandler(index){
+    // remove marker
+    let markers = [...this.state.markers];
+    const marker = markers.splice(index, 1)[0];
+    marker.remove(); // remove from map
 
-    // remove from map
-    marker.remove();
-    this.setState({...this.state, markers:result});
+    // remove stop
+    let stops = [...this.state.stops];
+    stops.splice(index, 1);
 
-    this.redrawMarkers();
-    this.updateRoute();
+    this.redrawMarkers(markers);
+    this.updateRoute(stops);
+    this.setState(prevState => ({...prevState, markers: markers, stops:stops}));
   }
 
-  redrawMarkers(){
+  reorderStopsHandler(from, to){
     let markers = this.state.markers;
+    const [removedMarker] = markers.splice(from, 1);
+    markers.splice(to, 0, removedMarker);
+
+    let stops = [...this.state.stops];
+		const [removedStop] = stops.splice(from, 1);
+		stops.splice(to, 0, removedStop);
+		
+    this.redrawMarkers(markers);
+    this.updateRoute(stops);
+    this.setState(prevState => ({...prevState, stops:stops, markers:markers}));	
+  }
+
+  redrawMarkers(markers){
     // redrawing after reorder or deletion
     for(let i in markers){
       // clear current marker
@@ -170,20 +199,20 @@ class Map extends React.Component{
 
       markers[i] = newMarker;
     }
-    this.setState({...this.state, markers:markers});
+    this.setState(prevState => ({...prevState, markers:markers}));
   }
 
-  updateRoute(){
+  updateRoute(stops){
     // generate coordinate data array from markers
-    const coords = this.state.markers.map((item) => {
-      const lng = item._lngLat.lng.toString();
-      const lat = item._lngLat.lat.toString();
+    const coords = stops.map((item) => {
+      const lng = item.center[0].toString();
+      const lat = item.center[1].toString();
       return lng.concat(",",lat);
     });
     const coordString = coords.join(';');
 
     // reset route and route data if <= 1
-    if(this.state.markers.length <= 1){
+    if(stops.length <= 1){
       const geojson = {
         type: 'Feature',
         properties: {},
@@ -193,7 +222,9 @@ class Map extends React.Component{
         }
       };
       this.map.getSource('route').setData(geojson); 
-      this.setState({...this.state, duration:0, distance:0});
+      this.setState(prevState => (
+        {...prevState, duration:0, distance:0}
+      ));
     }
     // make request for route
     else if(this.state.markers.length > 1 && this.state.markers.length <= 25){
@@ -212,7 +243,9 @@ class Map extends React.Component{
             const distance = data.distance;
             const route = data.geometry.coordinates;
           
-            this.setState({...this.state, duration:duration, distance:distance});
+            this.setState(prevState => (
+              {...prevState, duration:duration, distance:distance}
+            ));
 
             const geojson = {
               type: 'Feature',
@@ -231,26 +264,18 @@ class Map extends React.Component{
     }
   }
 
-  reorderMarkersHandler(from, to){
-    let result = this.state.markers;
-    const [removed] = result.splice(from, 1);
-    result.splice(to, 0, removed);
-    this.setState({...this.state, markers:result});
 
-    this.redrawMarkers();
-    this.updateRoute();
-  }
 
   render() {
     return (
         <div id="map">
           <Plan 
             stops={this.state.stops}
-            addMarker={this.addMarkerHandler}
-            reorderMarkers={this.reorderMarkersHandler}
-            removeMarker={this.removeMarkerHandler}
             duration={this.state.duration}
             distance={this.state.distance}
+            addStop={this.addStopHandler}
+            removeStop={this.removeStopHandler}
+            reorderStops={this.reorderStopsHandler}
           />
         </div>
     )
