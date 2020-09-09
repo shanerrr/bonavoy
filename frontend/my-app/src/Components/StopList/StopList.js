@@ -57,6 +57,7 @@ class StopList extends React.Component {
 												style={snapshot.isDragging ? itemDraggingStyle : itemStyle}
 												removeStop={this.props.removeStop}
 												className="stop-list-item"
+												showModal={this.props.showModal}
 											/>
 										</div>
 									)}

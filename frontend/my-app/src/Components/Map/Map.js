@@ -1,8 +1,11 @@
 import React from 'react'
 import mapboxgl from 'mapbox-gl';
 
+
 import './style.css';
 import Plan from '../Plan/Plan';
+import Modal from '../Modal/Modal';
+import BrowseActivities from '../BrowseActivities/BrowseActivities';
 
 const path = require('path');
 require('dotenv').config({ 
@@ -21,7 +24,8 @@ class Map extends React.Component{
       markers:[],
       stops:[],
       duration:0,
-      distance:0
+      distance:0,
+      showModal:false,
     };
     this.map = null;
     this.addStopHandler = this.addStopHandler.bind(this);
@@ -30,6 +34,8 @@ class Map extends React.Component{
     this.updateRoute = this.updateRoute.bind(this);
     this.getUpdatedBBox = this.getUpdatedBBox.bind(this);
     this.redrawMarkers = this.redrawMarkers.bind(this);
+    this.hideModal = this.hideModal.bind(this);
+    this.showModal = this.showModal.bind(this);
   }
 
   componentDidMount() {
@@ -265,7 +271,19 @@ class Map extends React.Component{
     }
   }
 
+  showModal(){
+    this.setState(prevState => ({
+      ...prevState,
+      showModal:true
+    }));
+  }
 
+  hideModal(){
+    this.setState(prevState => ({
+      ...prevState,
+      showModal:false
+    }));
+  }
 
   render() {
     return (
@@ -277,7 +295,14 @@ class Map extends React.Component{
             addStop={this.addStopHandler}
             removeStop={this.removeStopHandler}
             reorderStops={this.reorderStopsHandler}
+            showModal={this.showModal}
           />
+          <Modal            
+            show={this.state.showModal}
+            handleClose={this.hideModal}
+          >
+            <BrowseActivities hideModal={this.hideModal}></BrowseActivities>
+          </Modal>
         </div>
     )
   }

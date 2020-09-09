@@ -38,7 +38,12 @@ class StopListItem extends React.Component {
 					</div>
 				</div>
 				{/* TODO: implement to change height to allow for animation */}
-				{this.state.open ? (<StopInfo stop={this.props.stop}/>) : null}
+				{/* <StopInfo
+					stop={this.props.stop}
+					showModal={this.props.showModal}
+					// style={{height:	this.state.open ? 'min-content': '0px !important'}}
+				/> */}
+				{this.state.open ? (<StopInfo stop={this.props.stop} showModal={this.props.showModal}/>) : null}
 			</div>
 		);
 	}

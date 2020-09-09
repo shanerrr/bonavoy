@@ -4,7 +4,6 @@ ul.trip-list {
     height: 100%;
     margin:auto;
     list-style: none;
-
 }
 
 ul.trip-list li:first-child{

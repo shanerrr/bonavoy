@@ -41,6 +41,7 @@ class Plan extends React.Component {
 								stops={this.props.stops}
 								reorderStops={this.props.reorderStops}
 								removeStop={this.props.removeStop}
+								showModal={this.props.showModal}
 							/>
 							<PlanOverview
 								duration={this.props.duration}
