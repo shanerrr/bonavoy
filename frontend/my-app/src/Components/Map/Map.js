@@ -300,6 +300,7 @@ class Map extends React.Component{
           <Modal            
             show={this.state.showModal}
             handleClose={this.hideModal}
+            className='browse-modal'
           >
             <BrowseActivities hideModal={this.hideModal}></BrowseActivities>
           </Modal>

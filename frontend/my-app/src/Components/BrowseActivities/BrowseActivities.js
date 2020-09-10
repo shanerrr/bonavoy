@@ -7,7 +7,7 @@ class BrowseActivities extends React.Component {
 	}
 
 	hideModal(){
-		this.props.hideModal()
+		this.props.hideModal();
 	}
 	
 	render(){
