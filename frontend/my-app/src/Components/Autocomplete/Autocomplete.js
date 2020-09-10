@@ -1,32 +1,29 @@
-import React from 'react'
-import Geocoder from 'react-mapbox-gl-geocoder'
-import './index.css'
- 
-const mapAccess = {
-    mapboxApiAccessToken: "pk.eyJ1IjoibmVpbHpvbiIsImEiOiJja2R5MjNkc3cyNDd5MnVudWVvaXptY3IyIn0.t7H18YFnJnci9cvjd3Q-Tg"
-}
- 
+import React from 'react';
+
+import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
+import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
+import './AutoComplete.css'
+
+const TOKEN = process.env.REACT_APP_MAPS_API_KEY;
+
 class AutoComplete extends React.Component {
-    state = {
-        viewport: {}
-    }
- 
-    onSelected = (viewport, item) => {
-        this.setState({viewport});
-        console.log('Selected: ', item)
-    }
- 
-    render() {
-        const {viewport} = this.state
- 
-        return (
-            <div>
-                <Geocoder class
-                    {...viewport}{...mapAccess} onSelected={this.onSelected} hideOnSelect={true} updateInputOnSelect={true}
-                    
-                />
-            </div>
-        )
-    }
+	constructor(props){
+			super(props);
+	}
+
+	componentDidMount(){
+		const geocoder = new MapboxGeocoder({
+			accessToken:TOKEN,
+			types: 'country, region, place',
+			placeholder:this.props.msg,
+		});
+		console.log(this.props.id)
+		geocoder.addTo('#'+this.props.id);
+	}
+
+	render(){
+		return (<div className={this.props.className} id={this.props.id}/>)
+	}
 }
-export default AutoComplete
+
+export default AutoComplete;

@@ -1,4 +1,4 @@
-.mapboxgl-ctrl-geocoder, #geocoder {
+#geocoder> .mapboxgl-ctrl-geocoder {
     min-width: 100%;
     font:inherit !important;
     font-size: medium !important;

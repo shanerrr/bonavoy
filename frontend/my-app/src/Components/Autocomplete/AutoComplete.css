@@ -1,0 +1,14 @@
+/* .planstyling{
+    min-width: 100%;
+} */
+#planAutoS > .mapboxgl-ctrl-geocoder  {
+    margin-left: 1rem;
+    padding: 0px 0px 0px 0px;
+    height: 100%;
+    
+}
+#planAutoD > .mapboxgl-ctrl-geocoder {
+    margin-left: -1rem;
+    padding: 0px 0px 0px 0px;
+    
+}
