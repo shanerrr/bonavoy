@@ -11,11 +11,10 @@ const itemDraggingStyle = {
 
 const itemStyle = {
 	backgroundColor:'white',
-
 }
 
 const getListStyle = isDraggingOver => ({
-	background: isDraggingOver ? '#afafaf' : '#d6d6d6',
+	background: isDraggingOver ? '#afafaf' : '#939393',
 })
 class StopList extends React.Component {
 	
@@ -50,13 +49,15 @@ class StopList extends React.Component {
 										<div
 											ref={provided.innerRef}
 												{...provided.draggableProps}
-												{...provided.dragHandleProps}
+												{...provided.dragHandleProps}	
 										>
 											<StopListItem
 												stop={stop}	
 												index={key}
-												style={snapshot.isDragging ? itemDraggingStyle: itemStyle}
+												style={snapshot.isDragging ? itemDraggingStyle : itemStyle}
 												removeStop={this.props.removeStop}
+												className="stop-list-item"
+												showModal={this.props.showModal}
 											/>
 										</div>
 									)}

@@ -6,7 +6,7 @@
     width: 400px;
     height: calc(100% - 20px);
     margin:10px;
-    box-shadow: 0px 0px 10px grey;
+    box-shadow: 0px 0px 8px rgb(65, 65, 65);
     z-index: 10;
     user-select: none;
 }
@@ -35,8 +35,9 @@
     border:none;
     border-radius: 2px;
     border: 1px solid white;
-    box-shadow: 0px 0px 10px grey;
+    box-shadow: 0px 0px 10px  rgb(65, 65, 65);
     margin:10px;
+    cursor: pointer;
 }
 
 .trip-title {
@@ -44,10 +45,10 @@
 }
 
 .header-toggle-plan {
-    float:left;
-    box-shadow: none !important;
-    position: relative;
-    margin: 0 !important;
+    left:0;
+    box-shadow:none !important;
+    position:absolute;
+    margin: 16px;
 }
 
 .plan-group {

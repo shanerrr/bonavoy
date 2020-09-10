@@ -22,8 +22,9 @@ app.use(cors());
 app.use(express.json());
 
 // move routes from this file for cleanliness
-app.use('/', require('./routes/app.routes'));
-app.use('/api', require('./routes/api-endpoints.routes'));
+app.use('/api', require('./routes/app.routes')); 
+// for making external calls to pass to client
+app.use('/api/external', require('./routes/external.routes')); 
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

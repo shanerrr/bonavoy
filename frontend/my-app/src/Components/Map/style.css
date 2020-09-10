@@ -18,3 +18,18 @@
     background-color:#394651;
     color:white;
 }
+
+.browse-modal {
+    margin:20px;
+    width: calc(100% - 40px) !important;
+    height: calc(100% - 40px) !important;
+
+}
+
+@media screen and (max-width: 1080px){
+    .browse-modal{
+        margin:0px;
+        width:100% !important;
+        height: 100% !important;
+    }
+}

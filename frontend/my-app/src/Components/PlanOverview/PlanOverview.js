@@ -6,10 +6,10 @@ class PlanOverview extends React.Component{
 
 	constructor(props){
 		super(props);
-		this.secondsToDhms = this.secondsToDhms.bind(this);
+		this.secondsToDhm = this.secondsToDhm.bind(this);
 	}
 
-	secondsToDhms(seconds) {
+	secondsToDhm(seconds) {
 		if(seconds === 0){
 			return "0 minutes";
 		}
@@ -28,7 +28,7 @@ class PlanOverview extends React.Component{
 		return(
 			<div className='plan-overview'>
 				<ul className="overview-list">
-					<li className="overview-stat duration"><i class="fas fa-stopwatch"></i> {this.secondsToDhms(this.props.duration)}</li>
+					<li className="overview-stat duration"><i class="fas fa-stopwatch"></i> {this.secondsToDhm(this.props.duration)}</li>
 					<li className="overview-stat distance"> <i class="fas fa-road"></i> {(this.props.distance/1000).toFixed(1)} km</li>
 					<li className="overview-stat stops"> <i class="fas fa-map-marker-alt"></i> {this.props.stopCount}</li>	
 				</ul>
