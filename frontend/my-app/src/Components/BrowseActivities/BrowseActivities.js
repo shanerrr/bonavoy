@@ -1,27 +1,23 @@
 import React from 'react';
-import Popup from "reactjs-popup";
 
 class BrowseActivities extends React.Component {
 	constructor(props){
 		super(props);
+		this.hideModal = this.hideModal.bind(this);
+	}
+
+	hideModal(){
+		this.props.hideModal();
 	}
 	
 	render(){
 		return (
-			<Popup 
-			trigger={<button>Add Activities</button>}
-			modal
-			closeOnDocumentClick
-			contentStyle={{'width':'90%', 'height':'90%', 'cursor':'default', 'zIndex':999989}}
-			>
-				<div>
-					<div>browse and add accomodation, tourist attractions, activities, and eats here!</div>
-					<div><button>add accomodation</button></div>
-					<div><button>add activity</button></div>
-				</div>
-			</Popup>
-			)
-		}
+			<div>
+				<button onClick={this.hideModal}>close</button>
+				i dont really know but we broswing and shit
+			</div>
+		)
 	}
+}
 	
 	export default BrowseActivities;

@@ -3,3 +3,33 @@
     height:calc(100% - 80px);
     width:100%;
 }
+
+.marker {
+    display: block;
+    position: absolute;
+    border-radius:50%;
+    width: 25px;
+    height: 25px;
+    border: 1px solid white;
+    text-align:center;
+    padding-top: 2px;
+    cursor: pointer;
+    font-size:15px;
+    background-color:#394651;
+    color:white;
+}
+
+.browse-modal {
+    margin:20px;
+    width: calc(100% - 40px) !important;
+    height: calc(100% - 40px) !important;
+
+}
+
+@media screen and (max-width: 1080px){
+    .browse-modal{
+        margin:0px;
+        width:100% !important;
+        height: 100% !important;
+    }
+}
