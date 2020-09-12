@@ -6,6 +6,7 @@
     background-color:white;
     color: rgb(70, 70, 70);
     font-family: verdana;
+    
 }
 
 .collapsed:hover {
@@ -20,15 +21,29 @@
 .move-stop {
     display: inline-block;
 }
+/* .stoplist-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-.delete {
+} */
+.stoplist-deletebtn {
     float: right;
     margin:8px !important;
     padding:3px !important;
     background-color:rgb(226, 226, 226);
-}
 
-.delete:hover {
+    background: rgb(226, 226, 226);
+    color: white;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 1rem;
+    padding: 14px 20px;
+    border: 1px solid #fff;
+    transition: all 0.3s ease-out;
+    cursor: pointer;
+  }
+  .stoplist-deletebtn:hover {
     background-color:#F8655E;
     transition: 0.2s;
 }

@@ -32,9 +32,9 @@ class StopListItem extends React.Component {
 					className='collapsed'
 					style={this.props.style}
 				>
-					<div>
-						<button className='btn delete' onClick={this.removeStop}>remove</button>
+					<div className="stoplist-container">
 						<p className="place-name">{this.props.stop.place_name}</p>
+						<button className='stoplist-deletebtn' onClick={this.removeStop}>remove</button>
 					</div>
 				</div>
 				{/* TODO: implement to change height to allow for animation */}
