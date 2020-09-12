@@ -12,10 +12,10 @@ const Modal = ({
   return ReactDom.createPortal(
     <>
       <div className={showHideClassName}>
-        <section className={`modal-menu ${className}`}>
+        <div className={`modal-menu ${className}`}>
           {children}
           <button onClick={handleClose}>close in the top right</button>
-        </section>
+        </div>
       </div>
     </>, document.getElementById('portal')
   )
