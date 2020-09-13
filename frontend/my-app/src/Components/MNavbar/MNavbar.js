@@ -1,14 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '../Button/Button';
 import { Link } from 'react-router-dom';
-import UserModal from '../UserModal/UserModal'
+//import UserModal from '../UserModal/UserModal'
+import Modal from '../Modal/Modal';
+import SignupRegister from '../SignupRegister/SignupRegister';
 import './MNavbar.css';
 
 function MNavbar() {
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
   const [navbar, setNavbar] = useState(false);
+  const [modal, setModal] = useState(false);
 
+  const modalClick = () => {
+    setModal(!modal);
+  }
   const handleClick = () => {
     setClick(!click);
     if (!click){
@@ -94,17 +100,15 @@ function MNavbar() {
           </ul>
           <div className="btns">
             <span className="btn-span">
-              {button && <Button buttonStyle='btn--outline'>LOG IN</Button>}
+              {button && <Button buttonStyle='btn--outline' onClick={setModal}>LOG IN</Button>}
             </span>
             <span className="btn-span">
-              {button && <Button buttonStyle='btn--primary'>SIGN UP</Button>}
+              {button && <Button buttonStyle='btn--primary' onClick={setModal}>SIGN UP</Button>}
             </span>
           </div>
         </div>
       </nav>
-      <UserModal>
-
-      </UserModal>
+      <Modal show={modal} handleClose={modalClick} className="user-modal"><SignupRegister/></Modal>
     </>
   );
 }

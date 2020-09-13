@@ -23,6 +23,11 @@
 .display-none {
   display: none;
 }
+.fas.fa-times{
+  cursor: pointer;
+  color: white;
+  float: right;
+}
 
 @media screen and (max-width: 1080px){
   .modal-main {

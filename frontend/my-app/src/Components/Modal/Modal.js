@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import './style.css';
+import './Modal.css';
+
+// instead of setting the class name as a div, just make a new component. Will make this more feasible
 
 const Modal = ({
   handleClose, 
@@ -8,14 +10,20 @@ const Modal = ({
   children,
   className
 }) => {
+  if (show) document.body.style.overflow = 'hidden';
+  else{
+    document.body.style.overflow = 'unset';
+  }
+
   const showHideClassName = show ? "modal-background display-block" : "modal-background display-none";
   return ReactDom.createPortal(
     <>
       <div className={showHideClassName}>
-        <div className={`modal-menu ${className}`}>
+        <div className={`${className}`}>
           {children}
-          <button onClick={handleClose}>close in the top right</button>
         </div>
+        <i className='fas fa-times' onClick={handleClose}/>
+
       </div>
     </>, document.getElementById('portal')
   )
