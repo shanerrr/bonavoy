@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../../App.css';
 import './SecondPage.css';
-import AutoComplete from '../AutoComplete/AutoComplete'
+import AutoComplete from '../Autocomplete/Autocomplete';
 function SecondPage() {
 
   const [click, setClick] = useState(true);
