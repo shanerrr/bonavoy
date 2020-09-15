@@ -3,19 +3,27 @@
 	top: 25%;
 	left: 0;
 	font-size: 2.5rem;
-	margin: 2rem;
+	margin-left: 2rem;
+	margin-top: .5rem;
 	z-index: 10;
 	cursor: pointer;
 }
+.user-modal-account-checker{
+	display: flex;
+	/* background-color: white; */
+	margin: -30px;
+	justify-content: center;
+}
 .user-modal-main-container{
 	position: fixed; /* or absolute */
-  	top: 25%;
-
+	  top: 25%;
+	  left: 1%;
     background-color: transparent;
     /* font-family: 'Poppins', sans-serif; */
 }
 .user-modal-container{
-    width: 100vw;
+	width: 98vw;
+	border-radius: 8px;
 	height: 50vh;
     display: grid;
     background-color: white;
@@ -206,11 +214,15 @@
 
 @media screen and (max-width: 900px){
 	.user-modal-main-container{
-		top:0
+		top:0;
+		left: 0;
+		
 	}
 	.user-modal-container{
 		grid-template-columns: 1fr;
 		height: 100vh;
+		width: 100vw;
+		border-radius: 0px;
 	}
 
 	.user-modal-img{

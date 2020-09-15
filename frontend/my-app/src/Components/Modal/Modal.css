@@ -31,12 +31,12 @@
 .user-modal{
   height: 100vh;
   width: 100vw;
-  opacity: 0;
+  /* transition: opacity  0.5s ease-in; */
 }
-.user-modal.active{
+/* .user-modal.active{
   opacity: 1;
   transition: opacity 0.5s ease-in;
-}
+} */
 
 @media screen and (max-width: 1080px){
   .modal-main {

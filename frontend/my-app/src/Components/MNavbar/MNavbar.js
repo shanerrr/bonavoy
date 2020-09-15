@@ -11,8 +11,14 @@ function MNavbar() {
   const [button, setButton] = useState(true);
   const [navbar, setNavbar] = useState(false);
   const [modal, setModal] = useState(false);
+  const [login, setLogin] = useState(false);
 
   const modalClick = () => {
+    setLogin(true);
+    setModal(!modal);
+  }
+  const modalClickS = () => {
+    setLogin(false);
     setModal(!modal);
   }
   const handleClick = () => {
@@ -37,6 +43,7 @@ function MNavbar() {
   useEffect(() => {
     showButton();
   }, []);
+  
   window.addEventListener('resize', showButton);
 
   const transNav = () => {
@@ -48,7 +55,6 @@ function MNavbar() {
     }
   }
   window.addEventListener('scroll', transNav)
-
   return (
     <>
       <nav className={click ? navbar ? 'navbar active' : 'navbar active': navbar ? 'navbar active' : 'navbar' }>
@@ -100,15 +106,15 @@ function MNavbar() {
           </ul>
           <div className="btns">
             <span className="btn-span">
-              {button && <Button buttonStyle='btn--outline' onClick={setModal}>LOG IN</Button>}
+              {button && <Button buttonStyle='btn--outline' onClick={modalClick}>LOG IN</Button>}
             </span>
             <span className="btn-span">
-              {button && <Button buttonStyle='btn--primary' onClick={setModal}>SIGN UP</Button>}
+              {button && <Button buttonStyle='btn--primary' onClick={modalClickS}>SIGN UP</Button>}
             </span>
           </div>
         </div>
       </nav>
-      <Modal show={modal} className="user-modal"><SignupRegister handleClose={modalClick}/></Modal>
+      <Modal show={modal} className="user-modal"><SignupRegister ifLogin={login} handleClose={modalClick}/></Modal>
     </>
   );
 }
