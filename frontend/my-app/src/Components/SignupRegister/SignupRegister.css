@@ -1,0 +1,270 @@
+.user-modal-splash-image{
+	position: absolute;
+	top: 25%;
+	left: 0;
+	font-size: 2.5rem;
+	margin-left: 2rem;
+	margin-top: .5rem;
+	z-index: 10;
+	cursor: pointer;
+}
+.user.modal-show{
+	display: none;
+}
+.user-modal-account-checker{
+	display: flex;
+	/* background-color: white; */
+	margin: -30px;
+	justify-content: center;
+}
+.user-modal-main-container{
+	position: fixed; /* or absolute */
+	  top: 25%;
+	  left: 1%;
+    background-color: transparent;
+    /* font-family: 'Poppins', sans-serif; */
+}
+.user-modal-container{
+	width: 98vw;
+	border-radius: 8px;
+	height: 50vh;
+    display: grid;
+    background-color: white;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap :7rem;
+    padding: 0 2rem;
+    /* font-family: 'Poppins', sans-serif; */
+}
+
+
+.user-modal-img{
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
+
+.user-modal-login{
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	text-align: center;
+}
+
+.user-modal-img img{
+	width: 500px;
+}
+
+.user-modal-form{
+	width: 360px;
+}
+
+.user-modal-login img{
+    height: 100px;
+}
+
+.user-modal-login h2{
+	margin: 15px 0;
+	color: #333;
+	text-transform: uppercase;
+	font-size: 2.9rem;
+}
+
+.user-modal-login .user-modal-inputdiv{
+	position: relative;
+    display: grid;
+    grid-template-columns: 7% 93%;
+    margin: 25px 0;
+    padding: 5px 0;
+    border-bottom: 2px solid #d9d9d9;
+}
+
+.user-modal-login .user-modal-inputdiv.one{
+	margin-top: 0;
+}
+
+.user-modal-i{
+	color: #d9d9d9;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.user-modal-i i{
+	transition: .3s;
+}
+
+.user-modal-inputdiv > div{
+    position: relative;
+	height: 45px;
+}
+
+.user-modal-inputdiv > div > h5{
+	position: absolute;
+	left: 10px;
+	top: 50%;
+	transform: translateY(-50%);
+	color: #999;
+	font-size: 18px;
+	transition: .3s;
+}
+
+.user-modal-inputdiv:before, .user-modal-inputdiv:after{
+	content: '';
+	position: absolute;
+	bottom: -2px;
+	width: 0%;
+	height: 2px;
+	background-color:#151a23;
+	transition: .4s;
+}
+
+.user-modal-inputdiv:before{
+	right: 50%;
+}
+
+.user-modal-inputdiv:after{
+	left: 50%;
+}
+
+.user-modal-inputdiv.focus:before, .user-modal-inputdiv.focus:after{
+	width: 50%;
+}
+
+.user-modal-inputdiv.focus > div > h5{
+	top: -5px;
+    font-size: 15px;
+}
+
+.user-modal-inputdiv.focus > .user-modal-i > i{
+	color: #151a23;
+}
+
+.user-modal-inputdiv > div > input{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	border: none;
+	outline: none;
+	background: none;
+	padding: 0.5rem 0.7rem;
+	font-size: 1.2rem;
+	color: #555;
+	/* font-family: 'poppins', sans-serif; */
+}
+
+.user-modal-inputdiv.pass{
+	margin-bottom: 4px;
+}
+
+.user-modal-a{
+	display: block;
+	text-align: right;
+	text-decoration: none;
+	color: #242424;
+	font-size: 0.9rem;
+	transition: .3s;
+}
+
+.user-modal-a:hover{
+	color: #3f3d56
+}
+
+.user-modal-btn{
+	display: block;
+    border-radius: 4px;
+    width: 100%;
+    text-decoration: none;
+    font-size: 1.5rem;
+    outline: none;
+    font-size: 1.2rem;
+    padding: 14px 20px;
+    border: 1px solid #fff;
+    color: #fff;
+    background-color: #242424;;
+	/* font-family: 'Poppins', sans-serif; */
+	text-transform: uppercase;
+	margin: 1rem 0;
+	cursor: pointer;
+	transition: .5s;
+}
+.user-modal-btn:hover{
+	background-position: right;
+}
+
+
+@media screen and (max-width: 1050px){
+	.user-modal-container{
+		grid-gap: 5rem;
+	}
+}
+
+@media screen and (max-width: 1000px){
+	.user-modal-form{
+		width: 290px;
+	}
+
+	.user-modal-login h2{
+        font-size: 2.4rem;
+        margin: 8px 0;
+	}
+
+	.user-modal-img img{
+		width: 400px;
+	}
+}
+@media screen and (max-height: 872px){
+	.user-modal-main-container{
+		top:0;
+		left: 0;
+		
+	}
+	.user-modal-container{
+		grid-template-columns: 1fr;
+		height: 100vh;
+		width: 100vw;
+		border-radius: 0px;
+	}
+
+	.user-modal-img{
+		display: none;
+	}
+
+	.user-modal-splash-image{
+		top: 0;
+		margin: 2rem;
+	}
+
+	.user-modal-login{
+		justify-content: center;
+	}
+	
+}
+
+@media screen and (max-width: 900px){
+	.user-modal-main-container{
+		top:0;
+		left: 0;
+		
+	}
+	.user-modal-container{
+		grid-template-columns: 1fr;
+		height: 100vh;
+		width: 100vw;
+		border-radius: 0px;
+	}
+
+	.user-modal-img{
+		display: none;
+	}
+
+	.user-modal-splash-image{
+		top: 0;
+		margin: 2rem;
+	}
+
+	.user-modal-login{
+		justify-content: center;
+	}
+}
