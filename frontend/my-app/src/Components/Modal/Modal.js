@@ -16,6 +16,7 @@ const Modal = ({
   }
 
   const showHideClassName = show ? "modal-background display-block" : "modal-background display-none";
+
   return ReactDom.createPortal(
     <>
       <div className={`${showHideClassName}`}>
