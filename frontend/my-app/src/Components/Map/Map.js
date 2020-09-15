@@ -1,8 +1,11 @@
 import React from 'react'
 import mapboxgl from 'mapbox-gl';
 
+
 import './style.css';
 import Plan from '../Plan/Plan';
+import Modal from '../Modal/Modal';
+import BrowseActivities from '../BrowseActivities/BrowseActivities';
 
 const path = require('path');
 require('dotenv').config({ 
@@ -12,40 +15,42 @@ require('dotenv').config({
 const TOKEN = process.env.REACT_APP_MAPS_API_KEY;
 mapboxgl.accessToken = TOKEN;
 
+
 class Map extends React.Component{
   
   constructor(props) {
     super(props);
     this.state = { // TODO: change lng and lat to be current position
-      lng: -113.41777, 
-      lat: 53.48538,
-      zoom: 10,
       markers:[],
-      bbox:[],
+      stops:[],
       duration:0,
-      distance:0
+      distance:0,
+      showModal:false,
     };
     this.map = null;
-    this.addMarkerHandler = this.addMarkerHandler.bind(this);
-    this.reorderMarkersHandler = this.reorderMarkersHandler.bind(this);
-    this.removeMarkerHandler = this.removeMarkerHandler.bind(this);
+    this.addStopHandler = this.addStopHandler.bind(this);
+    this.reorderStopsHandler = this.reorderStopsHandler.bind(this);
+    this.removeStopHandler = this.removeStopHandler.bind(this);
     this.updateRoute = this.updateRoute.bind(this);
-    this.updateBBox = this.updateBBox.bind(this);
+    this.getUpdatedBBox = this.getUpdatedBBox.bind(this);
+    this.redrawMarkers = this.redrawMarkers.bind(this);
+    this.hideModal = this.hideModal.bind(this);
+    this.showModal = this.showModal.bind(this);
   }
 
   componentDidMount() {
     const map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/mapbox/streets-v11',
-      center: [this.state.lng, this.state.lat], // TODO: implement ask and get location of person
-      zoom: this.state.zoom,
+      center: [ -113.41777, 53.48538], // TODO: implement ask and get location of person
+      zoom: 10,
     });
 
     // disable map rotation using right click + drag
     map.dragRotate.disable();
 
     map.on('load', () => {
-      // layer and source for map
+      // route layer and data source for map
       map.addLayer({
         id: 'route',
         type: 'line',
@@ -65,18 +70,31 @@ class Map extends React.Component{
           'line-cap': 'round'
         },
         paint: {
-          'line-color': '#3887be',
+          'line-color': '#7D14FF',
           'line-width': 5,
           'line-opacity': 0.75
         }
       });
+    });
+
+    // add stop by clicking on map
+    map.on('click', (e) => {
+      const coords = e.lngLat;
+      fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${coords.lng},${coords.lat}.json?access_token=${TOKEN}&types=place`)
+        .then((response) => response.json())
+        .then((data) => {
+          if(data.features.length > 0){
+            const stop = data.features[0];
+            this.addStopHandler(stop);
+          }
+        });
     })
 
     this.map = map;
   }
 
-  updateBBox() {
-    let coordsList = this.state.markers.map((marker) => {
+  getUpdatedBBox(markers) {
+    let coordsList = markers.map((marker) => {
       return [marker._lngLat.lng, marker._lngLat.lat];
     });
 
@@ -108,59 +126,100 @@ class Map extends React.Component{
       }
     }
     // update bbox state
-    this.setState({...this.state, bbox:bbox});
+    return bbox;
   }
 
-  addMarkerHandler(coords){
+  addStopHandler(stop){
     // update markers
-    const marker = new mapboxgl.Marker()
-      .setLngLat(coords)
-      .addTo(this.map);
-    this.setState({
-      ...this.state,
-      markers:[...this.state.markers, marker]
-    })
+    const marker = new mapboxgl.Marker().setLngLat(stop.center);
 
-    this.updateBBox(); 
-    const bbox = this.state.bbox;
+    const markers = [...this.state.markers, marker];
+    const stops = [...this.state.stops, stop];
 
-    // determine if should offset
+    // append to current markers
+    this.setState(prevState => ({
+      ...prevState,
+      markers:markers,
+      stops:stops,
+    }));
+
+    const bbox = this.getUpdatedBBox(markers); 
+
+    // determine if should offset by point or bbox
     let padding = {left:50, right:450, top:50, bottom:50};
-    if(this.state.markers.length <= 1){
+    if(markers.length <= 1){
       padding = {left:50, right:400};
     }
 
     // fly to fit bounds
     this.map.fitBounds(bbox,{padding:padding, maxZoom:8});
 
-    // update route
-    this.updateRoute()
+    this.redrawMarkers(markers);
+    this.updateRoute(stops);
   }
 
-  removeMarkerHandler(index){
-    // remove from array
-    let result = this.state.markers;
-    const marker = result.splice(index, 1)[0];
-    this.setState({...this.state, markers:result});
+  removeStopHandler(index){
+    // remove marker
+    let markers = [...this.state.markers];
+    const marker = markers.splice(index, 1)[0];
+    marker.remove(); // remove from map
 
-    // remove from map
-    marker.remove();
+    // remove stop
+    let stops = [...this.state.stops];
+    stops.splice(index, 1);
 
-    // get updated route
-    this.updateRoute();
+    this.redrawMarkers(markers);
+    this.updateRoute(stops);
+    this.setState(prevState => ({...prevState, markers: markers, stops:stops}));
   }
 
-  updateRoute(){
+  reorderStopsHandler(from, to){
+    let markers = this.state.markers;
+    const [removedMarker] = markers.splice(from, 1);
+    markers.splice(to, 0, removedMarker);
+
+    let stops = [...this.state.stops];
+		const [removedStop] = stops.splice(from, 1);
+		stops.splice(to, 0, removedStop);
+		
+    this.redrawMarkers(markers);
+    this.updateRoute(stops);
+    this.setState(prevState => ({...prevState, stops:stops, markers:markers}));	
+  }
+
+  redrawMarkers(markers){
+    // redrawing after reorder or deletion
+    for(let i in markers){
+      // clear current marker
+      const oldMarker = markers[i];
+      oldMarker.remove();
+      const coords = [oldMarker._lngLat.lng, oldMarker._lngLat.lat];
+
+      // create DOM element for new marker with updated label
+      let markerElement = document.createElement('div');
+      markerElement.className = 'marker';
+      let waypointNumber = document.createTextNode((parseInt(i) + 1).toString());
+      markerElement.appendChild(waypointNumber);
+
+      // add new marker to top
+      const newMarker = new mapboxgl.Marker(markerElement).setLngLat(coords).addTo(this.map);
+
+      markers[i] = newMarker;
+    }
+    this.setState(prevState => ({...prevState, markers:markers}));
+  }
+
+  updateRoute(stops){
     // generate coordinate data array from markers
-    const coords = this.state.markers.map((item) => {
-      const lng = item._lngLat.lng.toString();
-      const lat = item._lngLat.lat.toString();
+    const coords = stops.map((item) => {
+      const lng = item.center[0].toString();
+      const lat = item.center[1].toString();
       return lng.concat(",",lat);
     });
     const coordString = coords.join(';');
 
-    // make request
-    if(this.state.markers.length <= 1){
+    // reset route and route data if <= 1
+    if(stops.length <= 1){
       const geojson = {
         type: 'Feature',
         properties: {},
@@ -170,17 +229,20 @@ class Map extends React.Component{
         }
       };
       this.map.getSource('route').setData(geojson); 
-      this.setState({...this.state, duration:0, distance:0});
+      this.setState(prevState => (
+        {...prevState, duration:0, distance:0}
+      ));
     }
+    // make request for route
     else if(this.state.markers.length > 1 && this.state.markers.length <= 25){
       fetch(`https://api.mapbox.com/directions/v5/mapbox/driving/${coordString}?annotations=distance,speed&geometries=geojson&access_token=${TOKEN}`)
         .then((response) => response.json())
         .then((response) => {
           if(response.code === 'NoRoute'){
-            console.log('no route');
+            console.log('no route'); // TODO: warn user no route
           }
           else if(response.code === 'InvalidInput'){
-            console.log('invalid route')
+            console.log('invalid route') // TODO: warn user invalid route
           } 
           else if(response.code === 'Ok') {
             const data = response.routes[0];
@@ -188,7 +250,9 @@ class Map extends React.Component{
             const distance = data.distance;
             const route = data.geometry.coordinates;
           
-            this.setState({...this.state, duration:duration, distance:distance});
+            this.setState(prevState => (
+              {...prevState, duration:duration, distance:distance}
+            ));
 
             const geojson = {
               type: 'Feature',
@@ -200,20 +264,25 @@ class Map extends React.Component{
             };
 
             // add layer to map
-            this.map.getSource('route').setData(geojson);
+            // cannot factor out of if statement since in promise
+            this.map.getSource('route').setData(geojson);           
           }
         });
     }
   }
 
-  reorderMarkersHandler(from, to){
-    let result = this.state.markers;
-    const [removed] = result.splice(from, 1);
-    result.splice(to, 0, removed);
-    this.setState({...this.state, markers:result});
+  showModal(){
+    this.setState(prevState => ({
+      ...prevState,
+      showModal:true
+    }));
+  }
 
-    // update route
-    this.updateRoute();
+  hideModal(){
+    this.setState(prevState => ({
+      ...prevState,
+      showModal:false
+    }));
   }
 
   render() {
@@ -221,12 +290,20 @@ class Map extends React.Component{
         <div id="map">
           <Plan 
             stops={this.state.stops}
-            addMarker={this.addMarkerHandler}
-            reorderMarkers={this.reorderMarkersHandler}
-            removeMarker={this.removeMarkerHandler}
             duration={this.state.duration}
             distance={this.state.distance}
+            addStop={this.addStopHandler}
+            removeStop={this.removeStopHandler}
+            reorderStops={this.reorderStopsHandler}
+            showModal={this.showModal}
           />
+          <Modal            
+            show={this.state.showModal}
+            handleClose={this.hideModal}
+            className='browse-modal'
+          >
+            <BrowseActivities hideModal={this.hideModal}></BrowseActivities>
+          </Modal>
         </div>
     )
   }

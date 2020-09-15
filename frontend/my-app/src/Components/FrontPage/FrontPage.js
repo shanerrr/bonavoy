@@ -13,7 +13,7 @@ function FrontPage() {
       <video src='/videos/video-1.mp4' autoPlay loop muted />
       <h1>
           <Typical loop={1} wrapper="p" steps={[
-                    'Plan your next adventure.✈️', 20000,
+                    'Plan your next adventure.', 20000,
                     'Now, where to?', 20000,
                 ]}/> 
         </h1>

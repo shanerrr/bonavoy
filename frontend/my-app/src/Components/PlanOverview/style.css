@@ -10,3 +10,18 @@
 .overview-stat {
     font-size: 17px;
 }
+
+.overview-list{
+    list-style-type: none; 
+}
+
+.overview-list .duration {
+    margin-left:2px;
+}
+.overview-list .distance {
+
+}
+
+.overview-list .stops {
+    margin-left:3px;
+}

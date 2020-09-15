@@ -30,18 +30,25 @@ class StopListItem extends React.Component {
 				<div 
 					onClick={(e)=>this.toggleItem(e)} 
 					className='collapsed'
+					style={this.props.style}
 				>
 					<div>
 						<p className="place-name">{this.props.stop.place_name}</p>
-						<button className='btn delete' onClick={this.removeStop}>remove</button>
+						<button className='stoplist-deletebtn' onClick={this.removeStop}>remove</button>
 					</div>
 				</div>
-				{this.state.open ? (<StopInfo stop={this.props.stop}/>) : null}
+				{/* TODO: implement to change height to allow for animation */}
+				{/* <StopInfo
+					stop={this.props.stop}
+					showModal={this.props.showModal}
+					// style={{height:	this.state.open ? 'min-content': '0px !important'}}
+				/> */}
+				{this.state.open ? (<StopInfo stop={this.props.stop} showModal={this.props.showModal}/>) : null}
 			</div>
-			);
-		}
-		
+		);
 	}
+	
+}
 	
 	export default StopListItem;
 	

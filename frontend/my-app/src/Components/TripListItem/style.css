@@ -1,0 +1,15 @@
+.trip-list-item {
+    background-color:white;
+    margin-bottom:10px;
+    color:black;
+    padding-top:50px;
+    padding-bottom:50px;
+    border:1px solid black;
+    border-radius:5px;
+    cursor: pointer;
+}
+
+.trip-name {
+    text-align: left;
+    margin-left:50px;
+}

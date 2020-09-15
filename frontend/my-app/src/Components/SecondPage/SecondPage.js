@@ -14,10 +14,11 @@ function SecondPage() {
     return (
       <>
         <div className={click ? 'secondpage-container' :'secondpage-container diff'} id="secondpage">
+          <div className="sortitems">
           <div className="explore-nav">
               <ul className="explore-menu">
                   <li className='explore-plan-navlink' onClick={handleClick1}>Plan your Trip</li>
-                  <li className='explore-plan-navlink explorebtn padderfornav' onClick={handleClick}>Explore Places</li>
+                  <li className='explore-plan-navlink explorebtn' onClick={handleClick}>Explore Places</li>
               </ul>
           </div>
           <div className="planitems-container">
@@ -25,6 +26,7 @@ function SecondPage() {
               <AutoComplete className="planstyling starting" id="planAutoS" msg="STARTING FROM"/>
               <AutoComplete className="planstyling destination" id="planAutoD" msg="DESTINATION"/>
             </div>
+          </div>
           </div>
       </div>
       </>
