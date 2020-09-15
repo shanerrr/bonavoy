@@ -11,26 +11,31 @@ class BrowseActivities extends React.Component {
 		{
 			label:'Accomodation',
 			type:'accomodations',
+			className:'accomodation',
 			subTypes:[], //TODO: implement sub types
 		},
 		{
 			label:'Food and Drinks',
 			type:'foods',
+			className:'foods',
 			subTypes:[],
 		},
 		{
 			label:'Interesting Places',
 			type:'interesting_places',
+			className:'interesting-places',
 			subTypes:[],
 		},
 		{
 			label:'Shops',
 			type:'shops',
+			className:'shops',
 			subTypes:[],
 		},
 		{
 			label:'Services',
 			type:'fuel,charging_station,atm,bank,bureau_de_change,bicycle_rental',
+			className:'services',
 			subTypes:[],
 		}
 	];
@@ -50,7 +55,7 @@ class BrowseActivities extends React.Component {
 				<Tabs> 
 					{BrowseActivities.activityTypes.map((activityType) => {
 						return (
-							<div label={activityType.label}> 
+							<div label={activityType.label} className={activityType.className}> 
 								<div className="browse-activity-container">
 									<ActivityList/>
 									<ActivityView/>
