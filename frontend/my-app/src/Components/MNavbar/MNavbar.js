@@ -58,7 +58,7 @@ function MNavbar() {
             traveller
           </Link>
           <div className='menu-icon' onClick={handleClick}>
-            <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
+            <i className={click ? 'navbar-x fas fa-times' : 'navbar-bars fas fa-bars'} />
           </div>
           <ul className={click ? 'nav-menu active' : 'nav-menu'}>
           {/* <ul className={navbar ? click ? 'nav-menu active' : 'nav-menu': click ? 'nav-menu active past' : 'nav-menu'}> */}
@@ -108,7 +108,7 @@ function MNavbar() {
           </div>
         </div>
       </nav>
-      <Modal show={modal} handleClose={modalClick} className="user-modal"><SignupRegister/></Modal>
+      <Modal show={modal} className="user-modal"><SignupRegister handleClose={modalClick}/></Modal>
     </>
   );
 }

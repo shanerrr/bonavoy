@@ -18,11 +18,12 @@ const Modal = ({
   const showHideClassName = show ? "modal-background display-block" : "modal-background display-none";
   return ReactDom.createPortal(
     <>
-      <div className={showHideClassName}>
-        <div className={`${className}`}>
+      <div className={`${showHideClassName}`}>
+        <div className={`${className} active`}>
           {children}
         </div>
-        <i className='fas fa-times' onClick={handleClose}/>
+        {/* <i className='modal-main-x fas fa-times' onClick={handleClose}/> */}
+        {/* might use this later for like a global close for modal, maybe... */}
 
       </div>
     </>, document.getElementById('portal')
