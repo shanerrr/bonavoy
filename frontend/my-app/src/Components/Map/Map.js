@@ -80,7 +80,7 @@ class Map extends React.Component{
     // add stop by clicking on map
     map.on('click', (e) => {
       const coords = e.lngLat;
-      fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${coords.lng},${coords.lat}.json?access_token=${TOKEN}&types=place`)
+      fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${coords.lng},${coords.lat}.json?access_token=${TOKEN}&types=address`)
         .then((response) => response.json())
         .then((data) => {
           if(data.features.length > 0){
