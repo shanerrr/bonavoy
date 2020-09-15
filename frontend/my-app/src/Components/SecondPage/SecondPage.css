@@ -1,4 +1,4 @@
-.secondpage-container {
+  .secondpage-container {
     display: flex;
     /* background: #fff; */
     background: #151a23;
@@ -11,20 +11,12 @@
     background: white;
     transition: all 0.5s ease;
   }
-.explore-nav{
-    display: flex;
+  .explore-nav{
+    /* display: flex; */
     /* justify-content: center;
     align-items: center; */
     font-size: 1.2rem;
 }
-.explore-menu {
-    list-style: none;
-    text-align: center;
-    width: 100%;
-    justify-items: left;
-    align-items: center;
-  }
-
   .explore-plan-navlink {
     background: #151a23;
     justify-content: left;
@@ -40,8 +32,14 @@
     transition: all 0.3s ease-out;
     cursor: pointer;
   }
-  .padderfornav{
-    margin-top: 0.5rem;
+  .explore-menu {
+    list-style: none;
+    text-align: center;
+    width: 100%;
+    align-items: center;
+    display: inline-grid;
+    grid-template-columns: repeat(2, auto);
+    grid-gap: 10px;
   }
   /* .explore-plan-navlink:hover {
     background: #fff;
@@ -63,5 +61,8 @@
     display: flex;
   }
   .planitems-container{
-    
+    display: block;
+  }
+  .sortitems{
+    display: block;
   }
