@@ -1,16 +1,25 @@
 .tab {
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
   cursor: pointer;
+  border-bottom: 1px solid rgb(180, 180, 180);
+  margin-left:2px;
+}
+
+.tab:hover{
+  background-color: rgb(226, 226, 226);
+  transition: ease 0.2s;
 }
 
 .tab-list-item {
   display: inline-block;
   list-style: none;
-  margin-bottom: -1px;
   padding: 0.5rem 0.75rem;
+  background-color:white;
 }
 
 .tab-list-active {
-  background-color: white;
-  border: solid #ccc;
+  background-color: rgb(204, 204, 204);
+  border: solid rgb(255, 0, 0);
   border-width: 1px 1px 0 1px;
 }

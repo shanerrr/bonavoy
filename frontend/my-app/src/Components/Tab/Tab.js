@@ -37,6 +37,7 @@ class Tab extends React.Component {
         onClick={onClick}
       >
         {label}
+        {/* TODO: change above to icon that is passed in  */}
       </li>
     );
   }

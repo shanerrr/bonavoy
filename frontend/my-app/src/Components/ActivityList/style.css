@@ -1,3 +1,22 @@
-.activity-list {
-  flex:1 1 500px;
+.browse-activity-list {
+  flex:1 1 100%;
+  overflow-y:scroll;
+}
+
+.browse-activity-list-item {
+  background-color: rgb(255, 255, 255);
+  margin:7px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  padding-left:20px;
+  list-style: none;
+  border: 1px solid rgb(0, 0, 0);
+  border-radius:5px;
+  box-shadow:0 0 15px -1px rgb(134, 134, 134);
+  cursor: pointer;
+}
+
+.browse-activity-list-item:hover {
+  background-color: rgb(235, 235, 235);
+  transition:ease 0.2s;
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 
-
+import './style.css';
 class ActivityView extends React.Component {
 
   constructor(props){
