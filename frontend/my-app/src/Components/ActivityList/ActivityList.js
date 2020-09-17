@@ -3,12 +3,10 @@ import React from 'react';
 import './style.css';
 class ActivityList extends React.Component {
 
-  
-
   constructor(props){
     super(props);
     this.state = {
-      activities:['activity 1', 'activity 2', 'activity 3', 'activity 4', 'activity 5', 'activity 6'],
+      activities:['activity 1', 'activity 2', 'activity 3', 'activity 4', 'activity 5', 'activity 6', 'activity 7', 'activity 8'],
     }
   }
 

@@ -35,8 +35,7 @@ class Tabs extends React.Component {
       <div className="tabs">
         <ol className="tab-list">
           {children.map((child) => {
-            const { label } = child.props;
-        
+            const { label } = child.props; 
             return (
               <Tab
                 activeTab={activeTab}
@@ -45,7 +44,6 @@ class Tabs extends React.Component {
                 onClick={onClickTabItem}
               />
             );
-
           })}
         </ol>
         <div className="tab-content">

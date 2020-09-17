@@ -12,7 +12,7 @@
   list-style: none;
   border: 1px solid rgb(0, 0, 0);
   border-radius:5px;
-  box-shadow:0 0 15px -1px rgb(134, 134, 134);
+  box-shadow:0 0 5px 1px rgb(87, 87, 87);
   cursor: pointer;
 }
 
