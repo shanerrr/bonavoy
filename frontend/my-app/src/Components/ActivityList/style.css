@@ -1,0 +1,13 @@
+.browse-activity-list {
+  flex:1 1 100%;
+  overflow-y:scroll;
+}
+
+.browse-activity-list-item:hover {
+  background-color: rgb(235, 235, 235);
+  transition:ease 0.2s;
+}
+
+.selected-activity {
+  background-color:grey;
+}

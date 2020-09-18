@@ -20,7 +20,6 @@ class StopListItem extends React.Component {
 	}
 
 	removeStop(){
-		console.log('key', this.props.index);
 		this.props.removeStop(this.props.index);
 	}
 	
@@ -43,7 +42,7 @@ class StopListItem extends React.Component {
 					showModal={this.props.showModal}
 					// style={{height:	this.state.open ? 'min-content': '0px !important'}}
 				/> */}
-				{this.state.open ? (<StopInfo stop={this.props.stop} showModal={this.props.showModal}/>) : null}
+				{this.state.open ? (<StopInfo stop={this.props.stop} showModal={this.props.showModal} index={this.props.index}/>) : null}
 			</div>
 		);
 	}
