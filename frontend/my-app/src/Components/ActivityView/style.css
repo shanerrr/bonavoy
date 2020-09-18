@@ -17,6 +17,7 @@
 
 .activity-view-photo {
   margin-right:5px;
+  box-shadow:0 0 5px 1px rgb(87, 87, 87);
 }
 
 .activity-view-info {

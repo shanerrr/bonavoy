@@ -7,7 +7,7 @@
 }
 
 .accomodation:hover {
-  background-color: black; 
+
 }
 
 .foods {
@@ -20,4 +20,16 @@
 
 .services {
 
+}
+
+.close {
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  cursor: pointer;
+  border-bottom: 1px solid rgb(180, 180, 180);
+  margin-left:2px;
+  display: inline-block;
+  list-style: none;
+  padding: 0.5rem 0.75rem;
+  background-color:white
 }

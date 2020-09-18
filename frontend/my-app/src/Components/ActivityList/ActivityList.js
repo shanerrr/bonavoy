@@ -1,5 +1,6 @@
 import React from 'react';
 
+import ActivityListItem from '../ActivityListItem/ActivityListItem';
 import './style.css';
 class ActivityList extends React.Component {
 
@@ -15,7 +16,7 @@ class ActivityList extends React.Component {
       <div className='browse-activity-list'>
         <ul>
           {this.state.activities.map((activity) => {
-            return <li className="browse-activity-list-item">{activity}</li>
+            return <ActivityListItem activity={activity}/>
           })}
         </ul>
       </div>

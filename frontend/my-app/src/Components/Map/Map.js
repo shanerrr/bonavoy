@@ -25,6 +25,7 @@ class Map extends React.Component{
       stops:[],
       duration:0,
       distance:0,
+      selectedCoords:[],
       showModal:false,
     };
     this.map = null;
@@ -296,10 +297,16 @@ class Map extends React.Component{
     }
   }
 
-  showModal(){
+  showModal(index){
+    const selectedStop = this.state.stops[index]; 
+    const lat = selectedStop.center[1]; 
+    const lng = selectedStop.center[0];
+    const selectedCoords = [lat, lng];
+
     this.setState(prevState => ({
       ...prevState,
-      showModal:true
+      selectedCoords:selectedCoords,
+      showModal:true,
     }));
   }
 
@@ -327,7 +334,7 @@ class Map extends React.Component{
             handleClose={this.hideModal}
             className='browse-modal'
           >
-            <BrowseActivities hideModal={this.hideModal}></BrowseActivities>
+            <BrowseActivities hideModal={this.hideModal} selectedCoords={this.state.selectedCoords}></BrowseActivities>
           </Modal>
         </div>
     )

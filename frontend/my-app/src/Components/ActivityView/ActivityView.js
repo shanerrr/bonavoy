@@ -12,7 +12,6 @@ class ActivityView extends React.Component {
       <div className="activity-view">
         <div className="activity-overview-container">
           <div className="activity-info-container activity-view-photo">
-            Activity Photo
           </div>
           <div className="activity-info-container activity-view-info">
             <div className="text-containter">
