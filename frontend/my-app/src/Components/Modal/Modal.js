@@ -1,20 +1,16 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import './Modal.css';
 
+import './Modal.css';
 // instead of setting the class name as a div, just make a new component. Will make this more feasible
 
 const Modal = ({
-  handleClose, 
   show, 
   children,
   className
 }) => {
-  if (show) document.body.style.overflow = 'hidden';
-  else{
-    document.body.style.overflow = 'unset';
-  }
 
+  className = show ? className : className + "display-none";
   const showHideClassName = show ? "modal-background display-block" : "modal-background display-none";
 
   return ReactDom.createPortal(
@@ -28,6 +24,7 @@ const Modal = ({
       </div>
     </>, document.getElementById('portal')
   )
+
 }
 
 export default Modal;

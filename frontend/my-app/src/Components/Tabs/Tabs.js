@@ -14,10 +14,15 @@ class Tabs extends React.Component {
     this.state = {
       activeTab: this.props.children[0].props.label,
     };
+    this.hideModal = this.hideModal.bind(this);
   }
 
   onClickTabItem = (tab) => {
     this.setState({ activeTab: tab });
+  }
+
+  hideModal(){
+    this.props.hideModal();
   }
 
   render() {
@@ -45,6 +50,7 @@ class Tabs extends React.Component {
               />
             );
           })}
+          <div className="close" onClick={this.hideModal}><i className="fas fa-times" aria-hidden="true"></i></div>
         </ol>
         <div className="tab-content">
           {children.map((child) => {

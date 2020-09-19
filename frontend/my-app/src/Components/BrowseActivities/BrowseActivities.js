@@ -54,7 +54,6 @@ class BrowseActivities extends React.Component {
 				}
 			]
 		};
-		this.hideModal = this.hideModal.bind(this);
 	}
 
 	componentDidMount(){
@@ -63,15 +62,11 @@ class BrowseActivities extends React.Component {
 			.then((data) => console.log(data))
 			.catch((err) => console.log(err));
 	}
-
-	hideModal(){
-		this.props.hideModal();
-	}
 	
 	render(){
 		return (
 			<div>
-				<Tabs> 
+				<Tabs hideModal={this.props.hideModal}> 
 					{this.state.activityTypes.map((activityType) => {
 						return (
 							<div label={activityType.label} className={activityType.className}> 
@@ -82,8 +77,6 @@ class BrowseActivities extends React.Component {
 							</div>
 						)
 					})}
-
-				{/* <div className="close"><i className="fas fa-times" aria-hidden="true"></i></div> */}
      		</Tabs> 
 			</div>
 		)
