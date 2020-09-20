@@ -12,18 +12,21 @@ const Modal = ({
 
   className = show ? className : className + "display-none";
   const showHideClassName = show ? "modal-background display-block" : "modal-background display-none";
-
-  return ReactDom.createPortal(
-    <>
-      <div className={`${showHideClassName}`}>
-        <div className={`${className}`}>
-          {children}
+  if(show){
+    return ReactDom.createPortal(
+      <>
+        <div className={`${showHideClassName}`}>
+          <div className={`${className}`}>
+            {children}
+          </div>
+          {/* <i className='modal-main-x fas fa-times' onClick={handleClose}/> */}
+          {/* might use this later for like a global close for modal, maybe... */}
         </div>
-        {/* <i className='modal-main-x fas fa-times' onClick={handleClose}/> */}
-        {/* might use this later for like a global close for modal, maybe... */}
-      </div>
-    </>, document.getElementById('portal')
-  )
+      </>, document.getElementById('portal')
+    )
+  } else {
+    return null;
+  }
 
 }
 

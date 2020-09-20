@@ -13,7 +13,7 @@ class ActivityListItem extends React.Component {
       <div className="browse-activity-list-item">
         <img className="activity-list-photo"/>
         <h2 className="activity-list-name">
-          {this.props.activity}
+          {this.props.activity.name}
         </h2>
       </div>
     )

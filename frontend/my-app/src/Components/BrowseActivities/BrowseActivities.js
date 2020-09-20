@@ -17,7 +17,7 @@ class BrowseActivities extends React.Component {
 					type:'accomodations',
 					className:'accomodation',
 					color:'red',
-					subTypes:[], //TODO: implement sub types
+					subTypes:[], //TODO: specify sub types for filtering
 					activities:[],
 				},
 				{
@@ -54,24 +54,32 @@ class BrowseActivities extends React.Component {
 				}
 			]
 		};
+		this.setActivityHandler = this.setActivityHandler.bind(this);
 	}
 
-	componentDidMount(){
-		fetch(`http://localhost:4000/api/external/places?lat=${this.props[0]}&lng=${this.props[1]}&radius=${4000}&kind=${this.state.activityTypes[0].type}`)
-			.then((response) => response.json())
-			.then((data) => console.log(data))
-			.catch((err) => console.log(err));
+	setActivityHandler(key, data){
+		this.setState(prevState => {
+			prevState.activityTypes[key].activities = data;
+			return {
+				...prevState
+			}
+		})
 	}
 	
 	render(){
 		return (
 			<div>
 				<Tabs hideModal={this.props.hideModal}> 
-					{this.state.activityTypes.map((activityType) => {
+					{this.state.activityTypes.map((activityType, key) => {
 						return (
 							<div label={activityType.label} className={activityType.className}> 
 								<div className="browse-activity-container">
-									<ActivityList activity={activityType.activities}/>
+									<ActivityList 
+										activities={activityType} 
+										index={key}
+										selectedCoords={this.props.selectedCoords}
+										setActivity={this.setActivityHandler}
+									/>
 									<ActivityView/>
 								</div>
 							</div>
