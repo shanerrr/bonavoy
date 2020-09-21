@@ -1,0 +1,24 @@
+.browse-activity-list-item {
+  background-color: rgb(255, 255, 255);
+  margin:7px; 
+  list-style: none;
+  border: 1px solid rgb(255, 255, 255);
+  border-radius:5px;
+  box-shadow:0 0 5px 1px rgb(87, 87, 87);
+  cursor: pointer;
+  display: flex;
+  flex-direction:row;
+}
+
+.activity-list-photo {
+  background-color:rgb(192, 192, 192);
+  border: 1px solid none;
+  border-radius: 5px;
+  height:150px;
+  width:150px;
+  margin:-1px;
+}
+
+.activity-list-name {
+  margin-left: 30px;
+}

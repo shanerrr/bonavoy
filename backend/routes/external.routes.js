@@ -7,6 +7,8 @@ const path = require('path');
 require('dotenv').config({ path: path.resolve(__dirname, '../../.env') });
 const OPENTRIPMAPS_API_KEY = process.env.OPENTRIPMAPS_API_KEY;
 
+
+// helper function
 function scheduleRequests(axiosInstance, intervalMs) {
     let lastInvocationTime = undefined;
 

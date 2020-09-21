@@ -25,6 +25,7 @@ class Map extends React.Component{
       stops:[],
       duration:0,
       distance:0,
+      selectedCoords:[],
       showModal:false,
     };
     this.map = null;
@@ -36,6 +37,30 @@ class Map extends React.Component{
     this.redrawMarkers = this.redrawMarkers.bind(this);
     this.hideModal = this.hideModal.bind(this);
     this.showModal = this.showModal.bind(this);
+
+    // DUMMY DATA
+    this.state.stops.push({
+      "bbox":[
+         -113.713801689886,
+         53.3956031350886,
+         -113.271643300914,
+         53.7159858649816
+      ],
+      "center":[
+         -113.5065,
+         53.5344
+      ],
+      "geometry":{
+         "coordinates":[
+            -113.5065,
+            53.5344
+         ]
+      },
+      "id":"place.9080100702660390",
+      "language":"en",
+      "place_name":"Edmonton, Alberta, Canada",
+      "place_name_en-GB":"Edmonton, Alberta, Canada"
+    })
   }
 
   componentDidMount() {
@@ -80,7 +105,7 @@ class Map extends React.Component{
     // add stop by clicking on map
     map.on('click', (e) => {
       const coords = e.lngLat;
-      fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${coords.lng},${coords.lat}.json?access_token=${TOKEN}&types=address`)
+      fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${coords.lng},${coords.lat}.json?access_token=${TOKEN}&types=place`)
         .then((response) => response.json())
         .then((data) => {
           if(data.features.length > 0){
@@ -130,6 +155,7 @@ class Map extends React.Component{
   }
 
   addStopHandler(stop){
+    console.log(stop);
     // update markers
     const marker = new mapboxgl.Marker().setLngLat(stop.center);
 
@@ -271,10 +297,16 @@ class Map extends React.Component{
     }
   }
 
-  showModal(){
+  showModal(index){
+    const selectedStop = this.state.stops[index]; 
+    const lat = selectedStop.center[1]; 
+    const lng = selectedStop.center[0];
+    const selectedCoords = [lat, lng];
+
     this.setState(prevState => ({
       ...prevState,
-      showModal:true
+      selectedCoords:selectedCoords,
+      showModal:true,
     }));
   }
 
@@ -302,7 +334,7 @@ class Map extends React.Component{
             handleClose={this.hideModal}
             className='browse-modal'
           >
-            <BrowseActivities hideModal={this.hideModal}></BrowseActivities>
+            <BrowseActivities hideModal={this.hideModal} selectedCoords={this.state.selectedCoords}></BrowseActivities>
           </Modal>
         </div>
     )

@@ -1,12 +1,11 @@
-
 .modal-menu {
   position: relative;
   background: white;
   height: 50%;
   width: 50%;
   z-index: 1000;
-
 }
+
 .modal-background {
   position: fixed;
   width:100%;
