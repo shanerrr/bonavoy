@@ -32,7 +32,7 @@ function SignupRegister(props) {
             <img src={props.ifLogin ? "images/airplane.svg" : "images/map-connected.svg"}/>
           </div>
           <div className="user-modal-login">
-            <form className="user-modal-form"action="index.html">
+            <form className="user-modal-form" action=" ">
               {/* <img src="images/login.png"/> */}
               <h2 className="user-modal-title">{props.ifLogin ? "Login" : "Sign Up"}</h2>
 

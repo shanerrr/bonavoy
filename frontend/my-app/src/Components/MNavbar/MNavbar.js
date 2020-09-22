@@ -84,23 +84,21 @@ function MNavbar() {
             </li>
             <div className="flexbox">
               <li className='nav-item'>
-                <Link
-                  to='/login'
+                <div
                   className='nav-links-mobile'
-                  onClick={closeMobileMenu && handleClick}
+                  onClick={closeMobileMenu && handleClick && modalClick}
                 >
                   LOG IN
-                </Link>
+                </div>
               </li>
 
               <li>
-                <Link
-                  to='/signup'
+                <div
                   className='nav-links-mobile nooutline'
-                  onClick={closeMobileMenu && handleClick}
+                  onClick={closeMobileMenu && handleClick && modalClickS}
                 >
                   SIGN UP
-                </Link>
+                </div>
               </li>
             </div>
           </ul>
