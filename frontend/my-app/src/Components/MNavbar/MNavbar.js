@@ -55,6 +55,7 @@ function MNavbar(props) {
     }
   }
   window.addEventListener('scroll', transNav)
+  console.log(props.logoutfunction);
   return (
     <>
       <nav className={click ? navbar ? 'navbar active' : 'navbar active': navbar ? 'navbar active' : 'navbar' }>
@@ -118,6 +119,14 @@ function MNavbar(props) {
                   <a className="user-dropdown" href="/trips">My Trips</a>
                   <a className="user-dropdown" href="/account">Account</a>
                   {/* <a href="#">Link 3</a> */}
+                  <div className="lastelement-dropdown">
+                    <div className="logout-dropdown">
+                      <i class="fas fa-sign-out-alt logout-dropdown-icon" onClick={props.logoutfunction}></i>
+                    </div>
+                    <div className="help-dropdown">
+                      <i class="fas fa-question-circle help-dropdown-icon"></i>
+                    </div>
+                  </div>
                 </div>
               </div>
             </span>

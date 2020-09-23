@@ -69,7 +69,7 @@ function App() {
       <Switch>
 
         <Route exact path="/">
-          <Navbar username={UserStore.username}/>
+          <Navbar username={UserStore.username} logoutfunction={doLogout}/>
           <Home/>
         </Route>
 
