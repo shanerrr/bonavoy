@@ -20,7 +20,7 @@ function FrontPage() {
       {/* <p>What are you waiting for?</p> */}
 
       <div className='hero-btns'>
-        <Link to="secondpage" smooth={true} duration>
+        <Link to="secondpage" smooth={true} duration={500}>
           <Button
             className='btns'
             buttonStyle='btn--outline'

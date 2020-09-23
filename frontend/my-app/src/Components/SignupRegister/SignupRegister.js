@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import './SignupRegister.css';
 
 function SignupRegister(props) {
@@ -12,7 +12,7 @@ function SignupRegister(props) {
 
   function remcl(){
     let parent = this.parentNode.parentNode;
-    if(this.value == ""){
+    if(this.value === ""){
       parent.classList.remove("focus");
     }
   }

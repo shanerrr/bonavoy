@@ -6,7 +6,7 @@ import Modal from '../Modal/Modal';
 import SignupRegister from '../SignupRegister/SignupRegister';
 import './MNavbar.css';
 
-function MNavbar() {
+function MNavbar(props) {
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
   const [navbar, setNavbar] = useState(false);
@@ -83,7 +83,7 @@ function MNavbar() {
               </Link>
             </li>
             <div className="flexbox">
-              <li className='nav-item'>
+              <li className={!props.username ? 'nav-item' : 'nav-item display-none'}>
                 <div
                   className='nav-links-mobile'
                   onClick={closeMobileMenu && handleClick && modalClick}
@@ -92,7 +92,7 @@ function MNavbar() {
                 </div>
               </li>
 
-              <li>
+              <li className={!props.username ? ' ': 'display-none'}>
                 <div
                   className='nav-links-mobile nooutline'
                   onClick={closeMobileMenu && handleClick && modalClickS}
@@ -100,14 +100,26 @@ function MNavbar() {
                   SIGN UP
                 </div>
               </li>
+              
             </div>
           </ul>
           <div className="btns">
-            <span className="btn-span">
+            <span className={!props.username ? "btn-span" : "btn-span display-none"}>
               {button && <Button buttonStyle='btn--outline' onClick={modalClick}>LOG IN</Button>}
             </span>
-            <span className="btn-span">
+            <span className={!props.username ? "btn-span" : "btn-span display-none"}>
               {button && <Button buttonStyle='btn--primary' onClick={modalClickS}>SIGN UP</Button>}
+            </span>
+            <span className={props.username ? "navbar-user-icon" : "navbar-user-icon display-none"}>
+              <div class="dropdown">
+                {button && <i class="fas fa-user-circle"></i>}
+                <div class="dropdown-content">
+                  <h1 className="navbar-username-dropdown">Hello, {props.username}</h1>
+                  <a className="user-dropdown" href="/trips">My Trips</a>
+                  <a className="user-dropdown" href="/account">Account</a>
+                  {/* <a href="#">Link 3</a> */}
+                </div>
+              </div>
             </span>
           </div>
         </div>

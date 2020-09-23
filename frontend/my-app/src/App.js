@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -12,15 +12,64 @@ import Account from './Components/Account/Account';
 import Navbar from './Components/MNavbar/MNavbar'
 // import PlannerNav from './Components/PlannerNav/PlannerNav'
 import Home from './Components/pages/Home';
+import UserStore from './stores/UserStore';
 
 function App() {
 
-  return (
+  useEffect(() => {
+    try{
+      let res = fetch('/isLoggedIn', {
+        method: 'post',
+        header: {
+          'Accept': 'application/json',
+          'Content-type': 'application/json'
+        }
+      });
+      let result = res.json();
+      if (result && result.success) {
+        UserStore.loading = false;
+        UserStore.isLoggedIn = true;
+        UserStore.username = result.username;
+
+      } else{
+        UserStore.loading = false;
+        UserStore.isLoggedIn = false;
+      }
+    } catch(e){
+      UserStore.loading = false;
+      UserStore.isLoggedIn = false;
+    } 
+  }, []);
+
+  async function doLogout() {
+
+    try{
+      let res = await fetch('/logout', {
+        method: 'post',
+        header: {
+          'Accept': 'application/json',
+          'Content-type': 'application/json'
+        }
+      });
+      let result = await res.json();
+      if (result && result.success) {
+        UserStore.isLoggedIn = false;
+        UserStore.username = '';
+
+      }
+    } catch(e){
+      console.log(e);
+    } 
+
+  }
+
+  
+  return (    
     <Router>
       <Switch>
 
         <Route exact path="/">
-          <Navbar/>
+          <Navbar username={UserStore.username}/>
           <Home/>
         </Route>
 
@@ -34,7 +83,7 @@ function App() {
         </Route>
 
         <Route exact path="/trips">
-          <Navbar/>
+          {/* <Navbar/> */}
           <TripList/>
         </Route>
 
