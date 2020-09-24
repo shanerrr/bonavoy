@@ -8,7 +8,7 @@ const pathToPubKey = path.join(__dirname, '..', 'id_rsa_pub.pem');
 const PUB_KEY = fs.readFileSync(pathToPubKey, 'utf8');
 
 const options = {
-    jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+    jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('JWT'),
     secretOrKey: PUB_KEY,
     algorithms: ['RS256']
   };
@@ -16,6 +16,7 @@ const options = {
 module.exports = function(passport){
     passport.use('local-strategy', 
         new JwtStrategy(options, (jwt_payload, done) => {
+            console.log(jwt_payload)
 
             const userQuery = 'SELECT * FROM Users WHERE user_id = ?;';
             

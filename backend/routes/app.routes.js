@@ -10,8 +10,10 @@ const db = require('../utils/db.utils');
 
 // login
 router.post('/login', (req, res) => {
+
+	console.log(req.body.email)
 	
-	const userEmailQuery = 'SELECT hash FROM Users WHERE email = ?;'
+	const userEmailQuery = 'SELECT hash FROM Users WHERE email = ? LIMIT 1;'
 	
 	db.query(userEmailQuery, [req.body.email], (err, results, field) => {
 		if(err){

@@ -55,7 +55,6 @@ function MNavbar(props) {
     }
   }
   window.addEventListener('scroll', transNav)
-  console.log(props.logoutfunction);
   return (
     <>
       <nav className={click ? navbar ? 'navbar active' : 'navbar active': navbar ? 'navbar active' : 'navbar' }>
@@ -112,19 +111,19 @@ function MNavbar(props) {
               {button && <Button buttonStyle='btn--primary' onClick={modalClickS}>SIGN UP</Button>}
             </span>
             <span className={props.username ? "navbar-user-icon" : "navbar-user-icon display-none"}>
-              <div class="dropdown">
-                {button && <i class="fas fa-user-circle"></i>}
-                <div class="dropdown-content">
+              <div className="dropdown">
+                {button && <i className="fas fa-user-circle"></i>}
+                <div className="dropdown-content">
                   <h1 className="navbar-username-dropdown">Hello, {props.username}</h1>
                   <a className="user-dropdown" href="/trips">My Trips</a>
                   <a className="user-dropdown" href="/account">Account</a>
                   {/* <a href="#">Link 3</a> */}
                   <div className="lastelement-dropdown">
                     <div className="logout-dropdown">
-                      <i class="fas fa-sign-out-alt logout-dropdown-icon" onClick={props.logoutfunction}></i>
+                      <i className="fas fa-sign-out-alt logout-dropdown-icon" onClick={props.logoutfunction}></i>
                     </div>
                     <div className="help-dropdown">
-                      <i class="fas fa-question-circle help-dropdown-icon"></i>
+                      <i className="fas fa-question-circle help-dropdown-icon"></i>
                     </div>
                   </div>
                 </div>
@@ -133,7 +132,7 @@ function MNavbar(props) {
           </div>
         </div>
       </nav>
-      <Modal show={modal} className="user-modal"><SignupRegister ifLogin={login} handleClose={modalClick}/></Modal>
+      <Modal show={modal} className="user-modal"><SignupRegister ifLogin={login} handleClose={modalClick} signupFunc={modalClickS} loginFunc={modalClick}/></Modal>
     </>
   );
 }

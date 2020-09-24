@@ -4,7 +4,7 @@ import {
   Switch,
   Route
 } from "react-router-dom";
-
+import {observer} from 'mobx-react'
 import './App.css';
 import Map from './Components/Map/Map';
 import TripList from './Components/TripList/TripList';
@@ -22,7 +22,7 @@ function App() {
         method: 'post',
         header: {
           'Accept': 'application/json',
-          'Content-type': 'application/json'
+          'Content-Type': 'application/json'
         }
       });
       let result = res.json();
@@ -48,7 +48,7 @@ function App() {
         method: 'post',
         header: {
           'Accept': 'application/json',
-          'Content-type': 'application/json'
+          'Content-Type': 'application/json'
         }
       });
       let result = await res.json();
@@ -95,4 +95,4 @@ function App() {
   );
 }
 
-export default App;
+export default observer(App);
