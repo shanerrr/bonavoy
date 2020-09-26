@@ -4,6 +4,7 @@ import { Button } from '../Button/Button';
 import './FrontPage.css';
 import Typical from 'react-typical'
 import {Link} from 'react-scroll'
+import {animated, useSpring} from 'react-spring'
 require('dotenv').config()
 
 function FrontPage() {
@@ -14,13 +15,13 @@ function FrontPage() {
       <h1>
           <Typical loop={1} wrapper="p" steps={[
                     'Plan your next adventure.', 20000,
-                    'Now, where to?', 20000,
+                    `Now, where to?`, 20000,
                 ]}/> 
         </h1>
       {/* <p>What are you waiting for?</p> */}
 
       <div className='hero-btns'>
-        <Link to="secondpage" smooth={true} duration>
+        <Link to="secondpage" smooth={true} duration={500}>
           <Button
             className='btns'
             buttonStyle='btn--outline'

@@ -1,30 +1,100 @@
-const express = require('express');
+const path = require('path');
+require('dotenv').config({ path: path.resolve(__dirname, './.env') })
+const mongoose = require("mongoose");
+const express = require("express");
+const cors = require("cors");
+const passport = require("passport");
+// const passportLocal = require("passport-local").Strategy;
+const cookieParser = require("cookie-parser");
+const bcrypt = require("bcryptjs");
+const session = require("express-session");
+const bodyParser = require("body-parser");
 const app = express();
-const cors = require('cors');
-const passport = require('passport');
+const User = require("./user");
+//----------------------------------------- END OF IMPORTS---------------------------------------------------
+mongoose.connect(
+  process.env.DB_MONG,
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  }, () => {
+    console.log("Mongoose Is Connected");
+  }
+);
 
-const db = require('./utils/db.utils');
-
-db.connect();
-
-// test conection
-db.query('SELECT 1;', function (error, results, fields) {
-    if (error) throw error;
-    // connected!
-  });
-
-require('./config/passport.config')(passport);
-
-// middleware
+// Middleware
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(
+  cors({
+    origin: "http://localhost:3000", // <-- location of the react app were connecting to
+    credentials: true,
+  })
+);
+app.use(
+  session({
+    secret: "secretcode",
+    resave: true,
+    saveUninitialized: true,
+  })
+);
+app.use(cookieParser("secretcode"));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(cors());
-app.use(express.json());
+require("./config/passport.config")(passport);
 
-// move routes from this file for cleanliness
-app.use('/api', require('./routes/app.routes')); 
-// for making external calls to pass to client
-app.use('/api/external', require('./routes/external.routes')); 
+
+// Routes
+app.post("/api/login", (req, res, next) => {
+  passport.authenticate("local", (err, user, info) => {
+    if (err) throw err;
+    if (!user) res.send("No User Exists");
+    else {
+      req.logIn(user, (err) => {
+        if (err) throw err;
+        res.json({
+          success: true
+        });
+        console.log(req.user);
+      });
+    }
+  })(req, res, next);
+});
+app.post("/api/register", (req, res, next) => {
+  User.findOne({ username: req.body.username }, async (err, doc) => {
+    if (err) throw err;
+    if (doc) res.send("User Already Exists");
+    if (!doc) {
+      const hash = await bcrypt.hash(req.body.password, 10);
+
+      const newUser = new User({
+        username: req.body.username,
+        password: hash,
+      });
+      await newUser.save();
+      passport.authenticate("local", (err, user, info) => {
+        if (err) throw err;
+        if (!user) res.send("No User Exists");
+        else {
+          req.logIn(user, (err) => {
+            if (err) throw err;
+            res.json({
+              success: true
+            });
+            console.log(req.user);
+          });
+        }
+      })(req, res, next);
+    }
+  });
+});
+app.get("/api/getUser", (req, res) => {
+  res.send(req.user); // The req.user stores the entire user that has been authenticated inside of it.
+});
+
+app.get('/api/logout', function (req, res){
+  req.session.destroy();
+});
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
