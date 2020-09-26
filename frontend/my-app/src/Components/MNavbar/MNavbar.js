@@ -3,24 +3,36 @@ import { Button } from '../Button/Button';
 import { Link } from 'react-router-dom';
 //import UserModal from '../UserModal/UserModal'
 import Modal from '../Modal/Modal';
-import SignupRegister from '../SignupRegister/SignupRegister';
+import Login from '../Login/Login';
+import Register from '../Register/Register';
 import './MNavbar.css';
 
 function MNavbar(props) {
+  console.log(props.username)
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
   const [navbar, setNavbar] = useState(false);
+
   const [modal, setModal] = useState(false);
-  const [login, setLogin] = useState(false);
+  const [modalReg, setModalReg] = useState(false);
 
   const modalClick = () => {
-    setLogin(true);
-    setModal(!modal);
+    setModal(true);
   }
   const modalClickS = () => {
-    setLogin(false);
-    setModal(!modal);
+    setModalReg(true);
   }
+  const handleClose = () => {
+    setModal(false);
+  }
+  const handleCloseReg = () => {
+    setModalReg(false);
+  }
+  const switchModal = () => {
+    setModal(!modal);
+    setModalReg(!modalReg);
+  }
+
   const handleClick = () => {
     setClick(!click);
     if (!click){
@@ -59,7 +71,7 @@ function MNavbar(props) {
     <>
       <nav className={click ? navbar ? 'navbar active' : 'navbar active': navbar ? 'navbar active' : 'navbar' }>
         <div className='navbar-container'>
-          <Link to='/' className='navbar-logo' onClick={closeMobileMenu && handleClick}>
+          <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
           <i className = 'fas fa-route'/>
             traveller
           </Link>
@@ -132,7 +144,10 @@ function MNavbar(props) {
           </div>
         </div>
       </nav>
-      <Modal show={modal} className="user-modal"><SignupRegister ifLogin={login} handleClose={modalClick} signupFunc={modalClickS} loginFunc={modalClick}/></Modal>
+      {modal?
+        <Modal show={modal} className="user-modal"><Login switch={switchModal} handleClose={handleClose}/></Modal>:
+        <Modal show={modalReg} className="user-modal"><Register switch={switchModal} handleClose={handleCloseReg}/></Modal>
+      }
     </>
   );
 }
