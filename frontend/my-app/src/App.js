@@ -1,75 +1,47 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   BrowserRouter as Router,
   Switch,
   Route
 } from "react-router-dom";
-
 import './App.css';
 import Map from './Components/Map/Map';
 import TripList from './Components/TripList/TripList';
 import Account from './Components/Account/Account';
-import Navbar from './Components/MNavbar/MNavbar'
+import Navbar from './Components/MNavbar/MNavbar';
 // import PlannerNav from './Components/PlannerNav/PlannerNav'
+import {useSpring} from 'react-spring';
+import axios from 'axios'
 import Home from './Components/pages/Home';
-import UserStore from './stores/UserStore';
 
 function App() {
+  const [data, setData] = useState(null);
 
   useEffect(() => {
-    try{
-      let res = fetch('/isLoggedIn', {
-        method: 'post',
-        header: {
-          'Accept': 'application/json',
-          'Content-type': 'application/json'
-        }
-      });
-      let result = res.json();
-      if (result && result.success) {
-        UserStore.loading = false;
-        UserStore.isLoggedIn = true;
-        UserStore.username = result.username;
-
-      } else{
-        UserStore.loading = false;
-        UserStore.isLoggedIn = false;
-      }
-    } catch(e){
-      UserStore.loading = false;
-      UserStore.isLoggedIn = false;
-    } 
+    getUser();
   }, []);
+  const doLogout = () => {
+    axios({
+      method: 'GET',
+      withCredentials: true,
+      url: "http://localhost:4000/api/logout",
+    }).then(window.location.reload());
+  };
 
-  async function doLogout() {
-
-    try{
-      let res = await fetch('/logout', {
-        method: 'post',
-        header: {
-          'Accept': 'application/json',
-          'Content-type': 'application/json'
-        }
-      });
-      let result = await res.json();
-      if (result && result.success) {
-        UserStore.isLoggedIn = false;
-        UserStore.username = '';
-
-      }
-    } catch(e){
-      console.log(e);
-    } 
-
-  }
-
-  
+  async function getUser() {
+    axios({
+      method: 'GET',
+      withCredentials: true,
+      url: "http://localhost:4000/api/getUser",
+    }).then(async (res) => await setData(res.data.username));
+  };
+ 
   return (    
     <Router>
       <Switch>
 
         <Route exact path="/">
-          <Navbar username={UserStore.username} logoutfunction={doLogout}/>
+          <Navbar username={data} logoutfunction={doLogout} />
           <Home/>
         </Route>
 

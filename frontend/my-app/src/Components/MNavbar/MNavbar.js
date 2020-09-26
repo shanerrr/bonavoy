@@ -3,24 +3,36 @@ import { Button } from '../Button/Button';
 import { Link } from 'react-router-dom';
 //import UserModal from '../UserModal/UserModal'
 import Modal from '../Modal/Modal';
-import SignupRegister from '../SignupRegister/SignupRegister';
+import Login from '../Login/Login';
+import Register from '../Register/Register';
 import './MNavbar.css';
 
 function MNavbar(props) {
+  console.log(props.username)
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
   const [navbar, setNavbar] = useState(false);
+
   const [modal, setModal] = useState(false);
-  const [login, setLogin] = useState(false);
+  const [modalReg, setModalReg] = useState(false);
 
   const modalClick = () => {
-    setLogin(true);
-    setModal(!modal);
+    setModal(true);
   }
   const modalClickS = () => {
-    setLogin(false);
-    setModal(!modal);
+    setModalReg(true);
   }
+  const handleClose = () => {
+    setModal(false);
+  }
+  const handleCloseReg = () => {
+    setModalReg(false);
+  }
+  const switchModal = () => {
+    setModal(!modal);
+    setModalReg(!modalReg);
+  }
+
   const handleClick = () => {
     setClick(!click);
     if (!click){
@@ -55,12 +67,11 @@ function MNavbar(props) {
     }
   }
   window.addEventListener('scroll', transNav)
-  console.log(props.logoutfunction);
   return (
     <>
       <nav className={click ? navbar ? 'navbar active' : 'navbar active': navbar ? 'navbar active' : 'navbar' }>
         <div className='navbar-container'>
-          <Link to='/' className='navbar-logo' onClick={closeMobileMenu && handleClick}>
+          <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
           <i className = 'fas fa-route'/>
             traveller
           </Link>
@@ -112,19 +123,19 @@ function MNavbar(props) {
               {button && <Button buttonStyle='btn--primary' onClick={modalClickS}>SIGN UP</Button>}
             </span>
             <span className={props.username ? "navbar-user-icon" : "navbar-user-icon display-none"}>
-              <div class="dropdown">
-                {button && <i class="fas fa-user-circle"></i>}
-                <div class="dropdown-content">
+              <div className="dropdown">
+                {button && <i className="fas fa-user-circle"></i>}
+                <div className="dropdown-content">
                   <h1 className="navbar-username-dropdown">Hello, {props.username}</h1>
                   <a className="user-dropdown" href="/trips">My Trips</a>
                   <a className="user-dropdown" href="/account">Account</a>
                   {/* <a href="#">Link 3</a> */}
                   <div className="lastelement-dropdown">
                     <div className="logout-dropdown">
-                      <i class="fas fa-sign-out-alt logout-dropdown-icon" onClick={props.logoutfunction}></i>
+                      <i className="fas fa-sign-out-alt logout-dropdown-icon" onClick={props.logoutfunction}></i>
                     </div>
                     <div className="help-dropdown">
-                      <i class="fas fa-question-circle help-dropdown-icon"></i>
+                      <i className="fas fa-question-circle help-dropdown-icon"></i>
                     </div>
                   </div>
                 </div>
@@ -133,7 +144,10 @@ function MNavbar(props) {
           </div>
         </div>
       </nav>
-      <Modal show={modal} className="user-modal"><SignupRegister ifLogin={login} handleClose={modalClick}/></Modal>
+      {modal?
+        <Modal show={modal} className="user-modal"><Login switch={switchModal} handleClose={handleClose}/></Modal>:
+        <Modal show={modalReg} className="user-modal"><Register switch={switchModal} handleClose={handleCloseReg}/></Modal>
+      }
     </>
   );
 }
