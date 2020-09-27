@@ -6,10 +6,11 @@ import SecondPage from '../SecondPage/SecondPage'
 // import Footer from '../Footer';
 
 function Home() {
+
   return (
     <>
-      <FrontPage />
-      <SecondPage/>
+      <FrontPage/>
+      {/* <SecondPage/> */}
       {/* <Footer /> */}
     </>
   );

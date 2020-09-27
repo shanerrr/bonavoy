@@ -15,7 +15,7 @@ const Modal = ({
   if(show){
     return ReactDom.createPortal(
       <>
-        <div className={`${showHideClassName}`}>
+        <div className={`${showHideClassName}`} onClick={handleClose}>
           <div className={`${className}`}>
             {children}
           </div>

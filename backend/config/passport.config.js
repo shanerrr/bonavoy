@@ -1,46 +1,34 @@
-const JwtStrategy = require('passport-jwt').Strategy;
-const ExtractJwt = require('passport-jwt').ExtractJwt;
-const fs = require('fs');
-const path = require('path');
+const User = require("../user");
+const bcrypt = require("bcryptjs");
+const localStrategy = require("passport-local").Strategy;
 
-const db = require('../utils/db.utils');
-const pathToPubKey = path.join(__dirname, '..', 'id_rsa_pub.pem');
-const PUB_KEY = fs.readFileSync(pathToPubKey, 'utf8');
-
-const options = {
-    jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-    secretOrKey: PUB_KEY,
-    algorithms: ['RS256']
-  };
-
-module.exports = function(passport){
-    passport.use('local-strategy', 
-        new JwtStrategy(options, (jwt_payload, done) => {
-
-            const userQuery = 'SELECT * FROM Users WHERE user_id = ?;';
-            
-            db.query(userQuery, [jwt_payload.sub], (err, result, fields) => {
-
-                const data = result[0];
-
-                if(err){
-                    return done(err, false);
-                }
-                if(data){
-                    return done(null, data);
-                } else {
-                    return done(null, false);
-                }
-            });
-        })
-    )
-    passport.serializeUser(function(user, done) {
-        done(null, user.id);
-    });
-    
-    passport.deserializeUser(function(id, done) {
-        User.findById(id, function(err, user) {
-            done(err, user);
+module.exports = function (passport) {
+  passport.use(
+    new localStrategy((username, password, done) => {
+      User.findOne({ username: username }, (err, user) => {
+        if (err) throw err;
+        if (!user) return done(null, false);
+        bcrypt.compare(password, user.password, (err, result) => {
+          if (err) throw err;
+          if (result === true) {
+            return done(null, user);
+          } else {
+            return done(null, false);
+          }
         });
+      });
+    })
+  );
+
+  passport.serializeUser((user, cb) => {
+    cb(null, user.id);
+  });
+  passport.deserializeUser((id, cb) => {
+    User.findOne({ _id: id }, (err, user) => {
+      const userInformation = {
+        username: user.username,
+      };
+      cb(err, userInformation);
     });
-}
+  });
+};

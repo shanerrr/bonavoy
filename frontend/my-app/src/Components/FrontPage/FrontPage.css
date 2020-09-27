@@ -9,7 +9,7 @@ video {
 
 .hero-container {
   /* height:  calc(100vh - 160px); */
-  height:  99vh;
+  height:  90vh;
   width: 100%;
   display: flex;
   flex-direction: column;
