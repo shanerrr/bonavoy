@@ -7,7 +7,8 @@ import './Modal.css';
 const Modal = ({
   show, 
   children,
-  className
+  className,
+  handleClose
 }) => {
 
   className = show ? className : className + "display-none";

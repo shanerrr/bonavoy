@@ -95,6 +95,8 @@ app.get("/api/getUser", (req, res) => {
 app.get('/api/logout', function (req, res){
   req.session.destroy();
 });
+app.use('/api', require('./routes/app.routes')); 
+app.use('/api/external', require('./routes/external.routes')); 
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
