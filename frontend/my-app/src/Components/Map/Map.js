@@ -38,7 +38,7 @@ class Map extends React.Component{
     this.hideModal = this.hideModal.bind(this);
     this.showModal = this.showModal.bind(this);
 
-    // DUMMY DATA
+    // ********DUMMY DATA***********
     this.state.stops.push({
       "bbox":[
          -113.713801689886,

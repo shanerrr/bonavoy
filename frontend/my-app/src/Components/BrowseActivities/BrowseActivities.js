@@ -18,7 +18,6 @@ class BrowseActivities extends React.Component {
 					className:'accomodation',
 					color:'red',
 					subTypes:[], //TODO: specify sub types for filtering
-					activities:[],
 				},
 				{
 					label:'Food and Drinks',
@@ -26,15 +25,13 @@ class BrowseActivities extends React.Component {
 					className:'foods',
 					color:'yellow',
 					subTypes:[],
-					activities:[],
 				},
 				{
 					label:'Interesting Places',
 					type:'interesting_places',
-					className:'interesting-places',
+					className:'interesting-places,natural,cultural,architectural',
 					color:'orange',
 					subTypes:[],
-					activities:[],
 				},
 				{
 					label:'Shops',
@@ -42,7 +39,6 @@ class BrowseActivities extends React.Component {
 					className:'shops',
 					color:'aqua',
 					subTypes:[],
-					activities:[],
 				},
 				{
 					label:'Services',
@@ -50,20 +46,10 @@ class BrowseActivities extends React.Component {
 					className:'services',
 					color:'grey',
 					subTypes:[],
-					activities:[],
 				}
 			]
 		};
-		this.setActivityHandler = this.setActivityHandler.bind(this);
-	}
 
-	setActivityHandler(key, data){
-		this.setState(prevState => {
-			prevState.activityTypes[key].activities = data;
-			return {
-				...prevState
-			}
-		})
 	}
 	
 	render(){
@@ -75,10 +61,10 @@ class BrowseActivities extends React.Component {
 							<div label={activityType.label} className={activityType.className}> 
 								<div className="browse-activity-container">
 									<ActivityList 
-										activities={activityType} 
+										activityType={activityType.type} 
 										index={key}
 										selectedCoords={this.props.selectedCoords}
-										setActivity={this.setActivityHandler}
+										addActivities={this.addActivitiesHandler}
 									/>
 									<ActivityView/>
 								</div>
