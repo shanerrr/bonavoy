@@ -1,4 +1,4 @@
-# Travel Planner App
+# Bonavoy (Travel Planner App)
 A little app for creating and sharing trip plans. Created with MySQL, ExpressJS and ReactJS.
 
 Below is a rough look at what we have so far, however **we aren't done yet!**
