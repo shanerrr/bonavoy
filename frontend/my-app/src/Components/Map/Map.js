@@ -38,7 +38,7 @@ class Map extends React.Component{
     this.hideModal = this.hideModal.bind(this);
     this.showModal = this.showModal.bind(this);
 
-    // DUMMY DATA
+    // ********DUMMY DATA***********
     this.state.stops.push({
       "bbox":[
          -113.713801689886,
@@ -331,7 +331,6 @@ class Map extends React.Component{
           />
           <Modal            
             show={this.state.showModal}
-            handleClose={this.hideModal}
             className='browse-modal'
           >
             <BrowseActivities hideModal={this.hideModal} selectedCoords={this.state.selectedCoords}></BrowseActivities>
