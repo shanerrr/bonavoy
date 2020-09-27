@@ -61,7 +61,6 @@ router.get('/places', (req,res) => {
                     .get(`/0.1/en/places/xid/${place.properties.xid}?apikey=${OPENTRIPMAPS_API_KEY}`)
                     .then((placeInfo) => placeInfo.data);
             })
-
             return axios.all(placesInfoRequests)
                 .then((response) => {
                     res.status(200);

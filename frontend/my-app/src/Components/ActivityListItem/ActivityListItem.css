@@ -2,7 +2,6 @@
   background-color: rgb(255, 255, 255);
   margin:7px; 
   list-style: none;
-  border: 1px solid rgb(255, 255, 255);
   border-radius:5px;
   box-shadow:0 0 5px 1px rgb(87, 87, 87);
   cursor: pointer;
@@ -16,9 +15,14 @@
   border-radius: 5px;
   height:150px;
   width:150px;
-  margin:-1px;
+  min-width: 150px;
 }
 
 .activity-list-name {
   margin-left: 30px;
+}
+
+.selected {
+  background-color:rgb(221, 221, 221);
+  transition:ease 0.15s;
 }

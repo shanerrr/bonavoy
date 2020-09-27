@@ -11,6 +11,7 @@ class BrowseActivities extends React.Component {
 	constructor(props){
 		super(props);
 		this.state = {
+			activityBeingViewed:null,
 			activityTypes:[
 				{
 					label:'Accomodation',
@@ -22,7 +23,7 @@ class BrowseActivities extends React.Component {
 				{
 					label:'Food and Drinks',
 					type:'foods',
-					className:'foods',
+					className:'foods,bakeries',
 					color:'yellow',
 					subTypes:[],
 				},
@@ -36,20 +37,27 @@ class BrowseActivities extends React.Component {
 				{
 					label:'Shops',
 					type:'shops',
-					className:'shops',
+					className:'supermarkets,conveniences,malls,marketplaces,outdoor',
 					color:'aqua',
 					subTypes:[],
 				},
 				{
 					label:'Services',
-					type:'fuel,charging_station,atm,bank,bureau_de_change,bicycle_rental',
+					type:'fuel,charging_station,atm,bank,bureau_de_change,bicycle_rental,boat_sharing,car_rental',
 					className:'services',
 					color:'grey',
 					subTypes:[],
 				}
 			]
 		};
+		this.setActivityBeingViewedHandler = this.setActivityBeingViewedHandler.bind(this);	
+	}
 
+	setActivityBeingViewedHandler(activity){
+		this.setState(prevState => ({
+			...prevState,
+			activityBeingViewed:activity,
+		}));
 	}
 	
 	render(){
@@ -65,8 +73,9 @@ class BrowseActivities extends React.Component {
 										index={key}
 										selectedCoords={this.props.selectedCoords}
 										addActivities={this.addActivitiesHandler}
+										setActivityBeingViewed={this.setActivityBeingViewedHandler}
 									/>
-									<ActivityView/>
+									<ActivityView activityBeingViewed={this.state.activityBeingViewed}/>
 								</div>
 							</div>
 						)
