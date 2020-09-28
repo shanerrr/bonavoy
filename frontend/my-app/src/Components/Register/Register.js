@@ -44,13 +44,13 @@ function Register(props) {
   }
   const errorHelper = () => {
     if(emailError){
-      return "Email already exists";
+      return "Email Already Exists";
     }
     if(emailInvalidError){
-      return "Invalid email format";
+      return "Invalid Email Format";
     }
     if(usernameError){
-      return "Username already exists";
+      return "Username Already Exists";
     }
     if(passwordLengthError){
       return "Password must be atleast 8 characters long";

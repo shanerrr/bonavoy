@@ -76,7 +76,7 @@ function Login(props) {
                     <i className="fas fa-user"></i>
                   </div>
                   <div>
-                    <h5>{!usernameError ? "Username" : "Username (Invalid Credentials)"}</h5>
+                    <h5>Username</h5>
                     <input type="text" autoComplete="off" id="username" name="username" className="user-modal-input" maxLength="15" onChange={(val) => {setLoginUsername(val.target.value); countInput(val.target.value, "login")}}/>
                     <label className="user-modal-username-label" ></label>
                   </div>
@@ -90,12 +90,15 @@ function Login(props) {
                     <h5>Password</h5>
                     <input type="password" id="password" name="password" className="user-modal-input" maxLength="25" onChange={(val) => {setLoginPassword(val.target.value); countInput(val.target.value, "password")}}/>
                     <label className="user-modal-password-label" ></label>
-          
                   </div>
                 </div>
-
                   <a className="user-modal-a" href="#">Forgot Password?</a>
                   <input type="submit" className="user-modal-btn" disabled={submitBtn || usernameError ? true: false} onClick={doLogin} value="Login"/>
+                  <div>
+                    <p className="user-modal-error-message">
+                      {!usernameError ? "" : "Invalid Credentials"}      
+                    </p>
+                  </div>
                   <div className="user-modal-account-checker">
                     <p>Don't have an account?</p>
                     <a className="user-modal-othermodallink" onClick={toRegisterChange}>Sign up</a>
