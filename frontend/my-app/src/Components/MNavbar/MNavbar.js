@@ -8,7 +8,7 @@ import Register from '../Register/Register';
 import './MNavbar.css';
 
 function MNavbar(props) {
-  console.log(props.username)
+  
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
   const [navbar, setNavbar] = useState(false);
@@ -72,8 +72,8 @@ function MNavbar(props) {
       <nav className={click ? navbar ? 'navbar active' : 'navbar active': navbar ? 'navbar active' : 'navbar' }>
         <div className='navbar-container'>
           <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
-          <i className = 'fas fa-route'/>
-            traveller
+          {/* <i className = 'fas fa-route'/> */}
+            bonavoy
           </Link>
           <div className='menu-icon' onClick={handleClick}>
             <i className={click ? 'navbar-x fas fa-times' : 'navbar-bars fas fa-bars'} />

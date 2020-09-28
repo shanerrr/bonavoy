@@ -5,12 +5,12 @@ import FrontPage from '../FrontPage/FrontPage';
 import SecondPage from '../SecondPage/SecondPage'
 // import Footer from '../Footer';
 
-function Home() {
+function Home(props) {
 
   return (
     <>
-      <FrontPage/>
-      {/* <SecondPage/> */}
+      <FrontPage username={props.username}/>
+      <SecondPage username={props.username}/>
       {/* <Footer /> */}
     </>
   );

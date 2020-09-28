@@ -1,22 +1,26 @@
-import React, { useState } from 'react';
+import React from 'react';
 import '../../App.css';
 import { Button } from '../Button/Button';
 import './FrontPage.css';
 import Typical from 'react-typical'
 import {Link} from 'react-scroll'
-import {animated, useSpring} from 'react-spring'
-require('dotenv').config()
 
-function FrontPage() {
+function FrontPage(props) {
 
   return (
     <div className='hero-container'>
-      <video src='/videos/video-1.mp4' autoPlay loop muted />
+      <video src='/videos/video-2.mp4' autoPlay loop muted />
       <h1>
+        {props.username ? 
+          <Typical loop={1} wrapper="p" steps={[
+          'Plan your next adventure.', 20000,
+          `Now, where to, ${props.username}?`, 20000,
+          ]}/> :
           <Typical loop={1} wrapper="p" steps={[
                     'Plan your next adventure.', 20000,
                     `Now, where to?`, 20000,
-                ]}/> 
+          ]}/> 
+        }
         </h1>
       {/* <p>What are you waiting for?</p> */}
 

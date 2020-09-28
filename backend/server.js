@@ -61,15 +61,30 @@ app.post("/api/login", (req, res, next) => {
   })(req, res, next);
 });
 app.post("/api/register", (req, res, next) => {
-  User.findOne({ username: req.body.username }, async (err, doc) => {
+  User.findOne({ $or: [{username: req.body.username}, {email: req.body.email}]}, async (err, doc) => {
     if (err) throw err;
-    if (doc) res.send("User Already Exists");
+    if (doc && doc.username === req.body.username){
+      return res.json({
+        success: false,
+        reason: 'usernameexists'
+      });
+    }
+    if (doc && doc.email === req.body.email){
+      return res.json({
+        success: false,
+        reason: 'emailexists'
+      });
+    }
     if (!doc) {
       const hash = await bcrypt.hash(req.body.password, 10);
 
       const newUser = new User({
+        fullname: "<placeholder>",
         username: req.body.username,
         password: hash,
+        email: req.body.email,
+        DateCreated: new Date(),
+        verified: false
       });
       await newUser.save();
       passport.authenticate("local", (err, user, info) => {

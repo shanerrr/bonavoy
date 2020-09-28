@@ -1,0 +1,8 @@
+/* this file still uses css classes from login.css, but this is dedicated to errors like username exists in database and stuff for both login.cs and register.cs */
+.user-modal-inputdiv.error:before, .user-modal-inputdiv.error:after{
+	background-color:#ff0000;
+
+}
+.user-modal-inputdiv.focus.error > .user-modal-i > i{
+	color: #ff0000;
+}

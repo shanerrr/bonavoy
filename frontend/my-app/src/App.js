@@ -10,7 +10,6 @@ import TripList from './Components/TripList/TripList';
 import Account from './Components/Account/Account';
 import Navbar from './Components/MNavbar/MNavbar';
 // import PlannerNav from './Components/PlannerNav/PlannerNav'
-import {useSpring} from 'react-spring';
 import axios from 'axios'
 import Home from './Components/pages/Home';
 
@@ -42,7 +41,7 @@ function App() {
 
         <Route exact path="/">
           <Navbar username={data} logoutfunction={doLogout} />
-          <Home/>
+          <Home username={data}/>
         </Route>
 
         <Route exact path="/account">
