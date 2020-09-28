@@ -1,9 +1,10 @@
 import React, {useState } from 'react';
 import axios from 'axios';
 import './Register.css'
+import { Spring } from 'react-spring/renderprops'
 
 function Register(props) {
-
+  
   const [registerUsername, setRegisterUsername] = useState('');
   const [registerPassword, setRegisterPassword] = useState('');
   const [registerEmail, setRegisterEmail] = useState('');
@@ -81,19 +82,19 @@ function Register(props) {
         props.handleClose();
         window.location.reload();
       } else{
-          if (res.data.reason == "emailexists"){
+          if (res.data.reason === "emailexists"){
             setEmailError(true);
           }
-          if (res.data.reason == "invalidemail"){
+          if (res.data.reason === "invalidemail"){
             setEmailInvalidError(true);
           }
-          if (res.data.reason == "usernameexists"){
+          if (res.data.reason === "usernameexists"){
             setUsernameError(true);
           }
-          if (res.data.reason == "usernamelength"){
+          if (res.data.reason === "usernamelength"){
             setUsernameLengthError(true);
           }
-          if (res.data.reason == "passwordlength"){
+          if (res.data.reason === "passwordlength"){
             setPasswordLengthError(true);
           }
         }
@@ -101,68 +102,72 @@ function Register(props) {
       });
   };
   return (
-    <>
-      <i className="user-modal-splash-image fas fa-times" onClick={props.handleClose}></i>
-      {/* <img className="user-modal-splash-image" src="img/wave.png"/> */}
-      <div className="user-modal-main-container">
-        <div className="user-modal-container">
-          <div className="user-modal-img">
-            <img src="images/map-connected.svg"/>
+    <Spring from={{opacity: 0}} to={{opacity:1}} config={{delay:100, duration:1000}}>
+      {propsAnis => (
+      <div style={propsAnis}>
+        <i className="user-modal-splash-image fas fa-times" onClick={props.handleClose}></i>
+        {/* <img className="user-modal-splash-image" src="img/wave.png"/> */}
+        <div className="user-modal-main-container">
+          <div className="user-modal-container">
+            <div className="user-modal-img">
+              <img src="images/map-connected.svg"/>
+            </div>
+            <div className="user-modal-login">
+            {/* <form className="user-modal-form" action={props.ifLogin ? "/login":"/register"} method="POST"> */}
+              <div className="user-modal-form">
+                {/* <img src="images/login.png"/> */}
+                <h2 className="user-modal-title">Plan your next trip.</h2>
+
+                  <div className={inputEmailCount ? emailError || emailInvalidError ? "user-modal-inputdiv email focus error" : "user-modal-inputdiv email focus" : "user-modal-inputdiv email"}>
+                    <div className="user-modal-i">
+                      <i className="fas fa-envelope"></i>
+                    </div>
+                    <div>
+                      {/* <h5>{emailError || emailInvalidError ? emailInvalidError ? "Email (Invalid email)" : "Email (Already exists)":"Email"}</h5> */}
+                      <h5>Email</h5>
+                      <input type="email" className="user-modal-input" onChange={(val) => {setRegisterEmail(val.target.value); countInput(val.target.value, "email") }}/>
+                    </div>
+                  </div>
+
+                  <div className={inputUserCount ? usernameError || usernameLengthError ? "user-modal-inputdiv username focus error" :"user-modal-inputdiv username focus" : "user-modal-inputdiv username"}>
+                    <div className="user-modal-i">
+                      <i className="fas fa-user"></i>
+                    </div>
+                    <div>
+                      <h5>Username</h5>
+                      {/* <h5>{usernameLengthError ? "Username (Username must be atleast 5 characters)" : "Username"}</h5> */}
+                        <input type="text" className="user-modal-input" maxLength="15" onChange={(val) => {setRegisterUsername(val.target.value); countInput(val.target.value, "login")}}/>
+                    </div>
+                  </div>
+
+                  <div className={inputPassCount ? passwordLengthError ? "user-modal-inputdiv pass focus error" : "user-modal-inputdiv pass focus" : "user-modal-inputdiv pass"}>
+                    <div className="user-modal-i"> 
+                      <i className="fas fa-lock"></i>
+                    </div>
+                    <div>
+                      <h5>Password</h5>
+                      {/* <h5>{passwordLengthError ? "Password (Password must be atleast 8 characters)" : "Password"}</h5> */}
+                      <input type="password" className="user-modal-input" maxLength="25" onChange={(val) => {setRegisterPassword(val.target.value); countInput(val.target.value, "password")}}/>
+                    </div>
+                  </div>
+                    <input type="submit" className="user-modal-btn" disabled={emailInvalidError || passwordLengthError || usernameLengthError || emailError || usernameError || submitBtn ? true: false} onClick={doRegister} value="Sign Up"/>
+                    <div>
+                      <p className="user-modal-error-message">
+                        {errorHelper()}      
+                      </p>
+                    </div>
+                    <div className="user-modal-account-checker">
+                      <p>Already have an account?</p>
+                      <a className="user-modal-othermodallink" onClick={toLoginChange}>Log in</a>
+                    </div>
+                </div>
+                
+            </div>
           </div>
-          <div className="user-modal-login">
-          {/* <form className="user-modal-form" action={props.ifLogin ? "/login":"/register"} method="POST"> */}
-            <div className="user-modal-form">
-              {/* <img src="images/login.png"/> */}
-              <h2 className="user-modal-title">Plan your next trip.</h2>
-
-                <div className={inputEmailCount ? emailError || emailInvalidError ? "user-modal-inputdiv email focus error" : "user-modal-inputdiv email focus" : "user-modal-inputdiv email"}>
-                  <div className="user-modal-i">
-                    <i className="fas fa-envelope"></i>
-                  </div>
-                  <div>
-                    {/* <h5>{emailError || emailInvalidError ? emailInvalidError ? "Email (Invalid email)" : "Email (Already exists)":"Email"}</h5> */}
-                    <h5>Email</h5>
-                    <input type="email" className="user-modal-input" onChange={(val) => {setRegisterEmail(val.target.value); countInput(val.target.value, "email") }}/>
-                  </div>
-                </div>
-
-                <div className={inputUserCount ? usernameError || usernameLengthError ? "user-modal-inputdiv username focus error" :"user-modal-inputdiv username focus" : "user-modal-inputdiv username"}>
-                  <div className="user-modal-i">
-                    <i className="fas fa-user"></i>
-                  </div>
-                  <div>
-                    <h5>Username</h5>
-                    {/* <h5>{usernameLengthError ? "Username (Username must be atleast 5 characters)" : "Username"}</h5> */}
-                      <input type="text" className="user-modal-input" maxLength="15" onChange={(val) => {setRegisterUsername(val.target.value); countInput(val.target.value, "login")}}/>
-                  </div>
-                </div>
-
-                <div className={inputPassCount ? passwordLengthError ? "user-modal-inputdiv pass focus error" : "user-modal-inputdiv pass focus" : "user-modal-inputdiv pass"}>
-                  <div className="user-modal-i"> 
-                    <i className="fas fa-lock"></i>
-                  </div>
-                  <div>
-                    <h5>Password</h5>
-                    {/* <h5>{passwordLengthError ? "Password (Password must be atleast 8 characters)" : "Password"}</h5> */}
-                    <input type="password" className="user-modal-input" maxLength="25" onChange={(val) => {setRegisterPassword(val.target.value); countInput(val.target.value, "password")}}/>
-                  </div>
-                </div>
-                  <input type="submit" className="user-modal-btn" disabled={emailInvalidError || passwordLengthError || usernameLengthError || emailError || usernameError || submitBtn ? true: false} onClick={doRegister} value="Sign Up"/>
-                  <div>
-                    <p className="user-modal-error-message">
-                      {errorHelper()}      
-                    </p>
-                  </div>
-                  <div className="user-modal-account-checker">
-                    <p>Already have an account?</p>
-                    <a className="user-modal-othermodallink" onClick={toLoginChange}>Log in</a>
-                  </div>
-              </div>
-              
-          </div>
-        </div>
+        </div>        
       </div>
-    </>    
+      )}  
+    </Spring>    
   );
 }
 

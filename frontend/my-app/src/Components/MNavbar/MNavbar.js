@@ -144,7 +144,7 @@ function MNavbar(props) {
           </div>
         </div>
       </nav>
-      {modal?
+      {modal ?
         <Modal show={modal} className="user-modal"><Login switch={switchModal} handleClose={handleClose}/></Modal>:
         <Modal show={modalReg} className="user-modal"><Register switch={switchModal} handleClose={handleCloseReg}/></Modal>
       }

@@ -1,6 +1,7 @@
 import React, {useState } from 'react';
 import axios from 'axios';
 import './Login.css';
+import { Spring } from 'react-spring/renderprops';
 
 function Login(props) {
 
@@ -9,7 +10,6 @@ function Login(props) {
   const [submitBtn, setSubmitBtn] = useState(false);
 
   const [usernameError, setUsernameError] = useState(false);
-
   const [inputUserCount, setinputUserCount] = useState(false);
   const [inputPassCount, setinputPassCount] = useState(false);
 
@@ -57,59 +57,61 @@ function Login(props) {
       );
   };  
   return (
-    <>
-      <i className="user-modal-splash-image fas fa-times" onClick={props.handleClose}></i>
-      {/* <img className="user-modal-splash-image" src="img/wave.png"/> */}
-      <div className="user-modal-main-container">
-        <div className="user-modal-container">
-          <div className="user-modal-img">
-            <img src="images/airplane.svg"/>
-          </div>
-          <div className="user-modal-login">
-          {/* <form className="user-modal-form" action={props.ifLogin ? "/login":"/register"} method="POST"> */}
-            <div className="user-modal-form">
-              {/* <img src="images/login.png"/> */}
-              <h2 className="user-modal-title">Continue your adventure.</h2>
+    <Spring from={{opacity: 0}} to={{opacity:1}} config={{delay:100, duration:1000}}>
+      {propsAni => (
+        <div style={propsAni}>
+          <i className="user-modal-splash-image fas fa-times" onClick={props.handleClose}></i>
+          {/* <img className="user-modal-splash-image" src="img/wave.png"/> */}
+          <div className="user-modal-main-container">
+            <div className="user-modal-container">
+              <div className="user-modal-img">
+                <img src="images/airplane.svg"/>
+              </div>
+              <div className="user-modal-login">
+              {/* <form className="user-modal-form" action={props.ifLogin ? "/login":"/register"} method="POST"> */}
+                <div className="user-modal-form">
+                  {/* <img src="images/login.png"/> */}
+                  <h2 className="user-modal-title">Continue your adventure.</h2>
 
-                <div className={inputUserCount ? usernameError ? "user-modal-inputdiv username focus error" : "user-modal-inputdiv username focus" : "user-modal-inputdiv username"}>
-                  <div className="user-modal-i">
-                    <i className="fas fa-user"></i>
-                  </div>
-                  <div>
-                    <h5>Username</h5>
-                    <input type="text" autoComplete="off" id="username" name="username" className="user-modal-input" maxLength="15" onChange={(val) => {setLoginUsername(val.target.value); countInput(val.target.value, "login")}}/>
-                    <label className="user-modal-username-label" ></label>
-                  </div>
-                </div>
+                    <div className={inputUserCount ? usernameError ? "user-modal-inputdiv username focus error" : "user-modal-inputdiv username focus" : "user-modal-inputdiv username"}>
+                      <div className="user-modal-i">
+                        <i className="fas fa-user"></i>
+                      </div>
+                      <div>
+                        <h5>Username</h5>
+                        <input type="text" autoComplete="off" id="username" name="username" className="user-modal-input" maxLength="15" onChange={(val) => {setLoginUsername(val.target.value); countInput(val.target.value, "login")}}/>
+                        <label className="user-modal-username-label" ></label>
+                      </div>
+                    </div>
 
-                <div className={inputPassCount ? usernameError ? "user-modal-inputdiv pass focus error" : "user-modal-inputdiv pass focus" : "user-modal-inputdiv pass" }>
-                  <div className="user-modal-i"> 
-                    <i className="fas fa-lock"></i>
-                  </div>
-                  <div>
-                    <h5>Password</h5>
-                    <input type="password" id="password" name="password" className="user-modal-input" maxLength="25" onChange={(val) => {setLoginPassword(val.target.value); countInput(val.target.value, "password")}}/>
-                    <label className="user-modal-password-label" ></label>
-                  </div>
-                </div>
-                  <a className="user-modal-a" href="#">Forgot Password?</a>
-                  <input type="submit" className="user-modal-btn" disabled={submitBtn || usernameError ? true: false} onClick={doLogin} value="Login"/>
-                  <div>
-                    <p className="user-modal-error-message">
-                      {!usernameError ? "" : "Invalid Credentials"}      
-                    </p>
-                  </div>
-                  <div className="user-modal-account-checker">
-                    <p>Don't have an account?</p>
-                    <a className="user-modal-othermodallink" onClick={toRegisterChange}>Sign up</a>
-                  </div>
-              </div>              
+                    <div className={inputPassCount ? usernameError ? "user-modal-inputdiv pass focus error" : "user-modal-inputdiv pass focus" : "user-modal-inputdiv pass" }>
+                      <div className="user-modal-i"> 
+                        <i className="fas fa-lock"></i>
+                      </div>
+                      <div>
+                        <h5>Password</h5>
+                        <input type="password" id="password" name="password" className="user-modal-input" maxLength="25" onChange={(val) => {setLoginPassword(val.target.value); countInput(val.target.value, "password")}}/>
+                        <label className="user-modal-password-label" ></label>
+                      </div>
+                    </div>
+                      <a className="user-modal-a" href="#">Forgot Password?</a>
+                      <input type="submit" className="user-modal-btn" disabled={submitBtn || usernameError ? true: false} onClick={doLogin} value="Login"/>
+                      <div>
+                        <p className="user-modal-error-message">
+                          {!usernameError ? "" : "Invalid Credentials"}      
+                        </p>
+                      </div>
+                      <div className="user-modal-account-checker">
+                        <p>Don't have an account?</p>
+                        <a className="user-modal-othermodallink" onClick={toRegisterChange}>Sign up</a>
+                      </div>
+                  </div>              
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-      {
-      }
-    </>    
+      )}
+    </Spring>    
   );
 }
 
