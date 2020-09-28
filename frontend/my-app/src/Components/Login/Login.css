@@ -1,7 +1,7 @@
 .user-modal-splash-image{
 	position: absolute;
-	top: 25%;
-	left: 0;
+	top: 23%;
+	left: 4.5%;
 	font-size: 2.5rem;
 	margin-left: 2rem;
 	margin-top: .5rem;
@@ -28,13 +28,13 @@
 }
 .user-modal-main-container{
 	position: fixed; /* or absolute */
-	  top: 25%;
-	  left: 1%;
+	  top: 22.5%;
+	  left: 5%;
 	background-color: transparent;
     /* font-family: 'Poppins', sans-serif; */
 }
 .user-modal-container{
-	width: 98vw;
+	width: 90vw;
 	border-radius: 8px;
 	height: 55vh;
     display: grid;
@@ -213,7 +213,7 @@
 	}
 }
 
-@media screen and (max-width: 1000px){
+@media screen and (max-width: 1200px){
 	.user-modal-form{
 		width: 290px;
 	}
@@ -261,6 +261,10 @@
 @media screen and (min-height: 873px){
 	.user-modal-account-checker{
 		margin-top: 15px;
+	}
+	.user-modal-container{
+		top: 25%;
+		height: 60vh;
 	}
 }
 

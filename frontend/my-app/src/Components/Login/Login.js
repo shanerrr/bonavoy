@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, {useState } from 'react';
 import axios from 'axios';
 import './Login.css';
-import Modal from '../Modal/Modal';
-import Register from '../Register/Register';
 
 function Login(props) {
 
@@ -10,17 +8,21 @@ function Login(props) {
   const [loginPassword, setLoginPassword] = useState('');
   const [submitBtn, setSubmitBtn] = useState(false);
 
+  const [usernameError, setUsernameError] = useState(false);
+
   const [inputUserCount, setinputUserCount] = useState(false);
   const [inputPassCount, setinputPassCount] = useState(false);
 
   const countInput = (val, logpass) => {
     if (logpass === "login" && val.length >=1){
       setinputUserCount(true);
+      if (usernameError) setUsernameError(false);
     } else if (logpass === "login" && val.length < 1){
       setinputUserCount(false);
     }
     if (logpass === "password" && val.length >=1){
       setinputPassCount(true);
+      if (usernameError) setUsernameError(false);
     } else if (logpass === "password" && val.length < 1){
       setinputPassCount(false);
     }
@@ -31,6 +33,8 @@ function Login(props) {
   }
 
   const doLogin = () => {
+    console.log("hehe")
+    setSubmitBtn(true);
     axios({
       method: 'POST',
       data: {
@@ -43,8 +47,14 @@ function Login(props) {
       if (res.data.success) {
         props.handleClose();
         window.location.reload();
+      } else{
+        if (!res.data.success) {
+          setUsernameError(true);
+        }
       }
-      });
+      setSubmitBtn(false);
+      }
+      );
   };  
   return (
     <>
@@ -61,18 +71,18 @@ function Login(props) {
               {/* <img src="images/login.png"/> */}
               <h2 className="user-modal-title">Continue your adventure.</h2>
 
-                <div className={inputUserCount ? "user-modal-inputdiv username focus" : "user-modal-inputdiv username"}>
+                <div className={inputUserCount ? usernameError ? "user-modal-inputdiv username focus error" : "user-modal-inputdiv username focus" : "user-modal-inputdiv username"}>
                   <div className="user-modal-i">
                     <i className="fas fa-user"></i>
                   </div>
                   <div>
-                    <h5>Username</h5>
+                    <h5>{!usernameError ? "Username" : "Username (Invalid Credentials)"}</h5>
                     <input type="text" autoComplete="off" id="username" name="username" className="user-modal-input" maxLength="15" onChange={(val) => {setLoginUsername(val.target.value); countInput(val.target.value, "login")}}/>
                     <label className="user-modal-username-label" ></label>
                   </div>
                 </div>
 
-                <div className={inputPassCount ? "user-modal-inputdiv pass focus" : "user-modal-inputdiv pass" }>
+                <div className={inputPassCount ? usernameError ? "user-modal-inputdiv pass focus error" : "user-modal-inputdiv pass focus" : "user-modal-inputdiv pass" }>
                   <div className="user-modal-i"> 
                     <i className="fas fa-lock"></i>
                   </div>
@@ -85,7 +95,7 @@ function Login(props) {
                 </div>
 
                   <a className="user-modal-a" href="#">Forgot Password?</a>
-                  <input type="submit" className="user-modal-btn" onClick={doLogin} value="Login"/>
+                  <input type="submit" className="user-modal-btn" disabled={submitBtn || usernameError ? true: false} onClick={doLogin} value="Login"/>
                   <div className="user-modal-account-checker">
                     <p>Don't have an account?</p>
                     <a className="user-modal-othermodallink" onClick={toRegisterChange}>Sign up</a>

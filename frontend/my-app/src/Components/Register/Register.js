@@ -11,7 +11,10 @@ function Register(props) {
 
   //if username and email exists in database already
   const [emailError, setEmailError] = useState(false);
+  const [emailInvalidError, setEmailInvalidError] = useState(false);
   const [usernameError, setUsernameError] = useState(false);
+  const [passwordLengthError, setPasswordLengthError] = useState(false);
+  const [usernameLengthError, setUsernameLengthError] = useState(false);
 
   const [inputUserCount, setinputUserCount] = useState(false);
   const [inputPassCount, setinputPassCount] = useState(false);
@@ -21,19 +24,40 @@ function Register(props) {
     if (logpass === "login" && val.length >=1){
       setinputUserCount(true);
       if (usernameError) setUsernameError(false);
+      if (usernameLengthError) setUsernameLengthError(false);
     } else if (logpass === "login" && val.length < 1){
       setinputUserCount(false);
-    }
+    } 
     if (logpass === "password" && val.length >=1){
       setinputPassCount(true);
+      if (passwordLengthError) setPasswordLengthError(false);
     } else if (logpass === "password" && val.length < 1){
       setinputPassCount(false);
     }
     if (logpass === "email" && val.length >=1){
       setinputEmailCount(true);
       if (emailError) setEmailError(false);
+      if (emailInvalidError) setEmailInvalidError(false);
     } else if (logpass === "email" && val.length < 1){
       setinputEmailCount(false);
+    }
+  }
+  const errorHelper = () => {
+    if(emailError){
+      return "Email already exists";
+    }
+    if(emailInvalidError){
+      return "Invalid email format";
+    }
+    if(usernameError){
+      return "Username already exists";
+    }
+    if(passwordLengthError){
+      return "Password must be atleast 8 characters long";
+    }
+    if(usernameLengthError){
+      return "Username must be atleast 5 characters long and less than 15 characters";
+      
     }
   }
 
@@ -42,7 +66,6 @@ function Register(props) {
   }
     
   const doRegister = () => {
-    console.log("SDasdasdas")
     setSubmitBtn(true);
     axios({
       method: 'POST',
@@ -58,11 +81,20 @@ function Register(props) {
         props.handleClose();
         window.location.reload();
       } else{
+          if (res.data.reason == "emailexists"){
+            setEmailError(true);
+          }
+          if (res.data.reason == "invalidemail"){
+            setEmailInvalidError(true);
+          }
           if (res.data.reason == "usernameexists"){
             setUsernameError(true);
           }
-          if (res.data.reason == "emailexists"){
-            setEmailError(true);
+          if (res.data.reason == "usernamelength"){
+            setUsernameLengthError(true);
+          }
+          if (res.data.reason == "passwordlength"){
+            setPasswordLengthError(true);
           }
         }
       setSubmitBtn(false);
@@ -83,36 +115,44 @@ function Register(props) {
               {/* <img src="images/login.png"/> */}
               <h2 className="user-modal-title">Plan your next trip.</h2>
 
-                <div className={inputEmailCount ? emailError ? "user-modal-inputdiv email focus error" : "user-modal-inputdiv email focus" : "user-modal-inputdiv email"}>
+                <div className={inputEmailCount ? emailError || emailInvalidError ? "user-modal-inputdiv email focus error" : "user-modal-inputdiv email focus" : "user-modal-inputdiv email"}>
                   <div className="user-modal-i">
                     <i className="fas fa-envelope"></i>
                   </div>
                   <div>
-                    <h5>{emailError ? "Email (Already exists)":"Email"}</h5>
+                    {/* <h5>{emailError || emailInvalidError ? emailInvalidError ? "Email (Invalid email)" : "Email (Already exists)":"Email"}</h5> */}
+                    <h5>Email</h5>
                     <input type="email" className="user-modal-input" onChange={(val) => {setRegisterEmail(val.target.value); countInput(val.target.value, "email") }}/>
                   </div>
                 </div>
 
-                <div className={inputUserCount ? usernameError ? "user-modal-inputdiv username focus error" :"user-modal-inputdiv username focus" : "user-modal-inputdiv username"}>
+                <div className={inputUserCount ? usernameError || usernameLengthError ? "user-modal-inputdiv username focus error" :"user-modal-inputdiv username focus" : "user-modal-inputdiv username"}>
                   <div className="user-modal-i">
                     <i className="fas fa-user"></i>
                   </div>
                   <div>
                     <h5>Username</h5>
+                    {/* <h5>{usernameLengthError ? "Username (Username must be atleast 5 characters)" : "Username"}</h5> */}
                       <input type="text" className="user-modal-input" maxLength="15" onChange={(val) => {setRegisterUsername(val.target.value); countInput(val.target.value, "login")}}/>
                   </div>
                 </div>
 
-                <div className={inputPassCount ? "user-modal-inputdiv pass focus" : "user-modal-inputdiv pass"}>
+                <div className={inputPassCount ? passwordLengthError ? "user-modal-inputdiv pass focus error" : "user-modal-inputdiv pass focus" : "user-modal-inputdiv pass"}>
                   <div className="user-modal-i"> 
                     <i className="fas fa-lock"></i>
                   </div>
                   <div>
                     <h5>Password</h5>
-                    <input type="password" className="user-modal-input" maxLength="15" onChange={(val) => {setRegisterPassword(val.target.value); countInput(val.target.value, "password")}}/>
+                    {/* <h5>{passwordLengthError ? "Password (Password must be atleast 8 characters)" : "Password"}</h5> */}
+                    <input type="password" className="user-modal-input" maxLength="25" onChange={(val) => {setRegisterPassword(val.target.value); countInput(val.target.value, "password")}}/>
                   </div>
                 </div>
-                  <input type="submit" className="user-modal-btn" disabled={emailError || usernameError || submitBtn ? true: false} onClick={doRegister} value="Sign Up"/>
+                  <input type="submit" className="user-modal-btn" disabled={emailInvalidError || passwordLengthError || usernameLengthError || emailError || usernameError || submitBtn ? true: false} onClick={doRegister} value="Sign Up"/>
+                  <div>
+                    <p className="user-modal-error-message">
+                      {errorHelper()}      
+                    </p>
+                  </div>
                   <div className="user-modal-account-checker">
                     <p>Already have an account?</p>
                     <a className="user-modal-othermodallink" onClick={toLoginChange}>Log in</a>
