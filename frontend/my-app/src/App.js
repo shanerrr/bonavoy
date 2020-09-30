@@ -8,18 +8,18 @@ import './App.css';
 import Map from './Components/Map/Map';
 import TripList from './Components/TripList/TripList';
 import Account from './Components/Account/Account';
-import Navbar from './Components/MNavbar/MNavbar';
+import MNavbar from './Components/MNavbar/MNavbar';
 // import PlannerNav from './Components/PlannerNav/PlannerNav'
-import {useSpring} from 'react-spring';
 import axios from 'axios'
 import Home from './Components/pages/Home';
 
 function App() {
   const [data, setData] = useState(null);
 
-  useEffect(() => {
+  useEffect( () => {
     getUser();
   }, []);
+
   const doLogout = () => {
     axios({
       method: 'GET',
@@ -28,21 +28,21 @@ function App() {
     }).then(window.location.reload());
   };
 
-  async function getUser() {
+  const getUser = () => {
     axios({
       method: 'GET',
       withCredentials: true,
       url: "http://localhost:4000/api/getUser",
-    }).then(async (res) => await setData(res.data.username));
+    }).then((res) => setData(res.data));
   };
- 
+
   return (    
     <Router>
       <Switch>
 
         <Route exact path="/">
-          <Navbar username={data} logoutfunction={doLogout} />
-          <Home/>
+          <MNavbar data={data} logoutfunction={doLogout} />
+          <Home data={data}/>
         </Route>
 
         <Route exact path="/account">
@@ -50,7 +50,7 @@ function App() {
         </Route>
 
         <Route exact path="/planner">
-          <Navbar/>
+          <MNavbar/>
           <Map/>
         </Route>
 
@@ -60,8 +60,6 @@ function App() {
         </Route>
 
       </Switch>
-
-
     </Router>
 
   );
