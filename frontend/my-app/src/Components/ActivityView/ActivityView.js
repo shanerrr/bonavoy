@@ -9,21 +9,20 @@ class ActivityView extends React.Component {
     this.openLink = this.openLink.bind(this);
   }
 
-  addActivity(e){
-    console.log(this.props.activityBeingViewed)
+  addActivity(){
+    this.props.addToStop(this.props.activityBeingViewed,this.props.selectedStop);
   }
 
-  openLink(e){
+  openLink(){
     const url = this.props.activityBeingViewed.url;
     window.open(url, '_blank');
   }
 
   render(){
-    // TODO: set variables for name, address and cost here 
+    // TODO: set variables for name, address and cost here;
     const activityBeingViewed = this.props.activityBeingViewed;
-    console.log(activityBeingViewed);
     let websiteButtonClass = 'open-website';
-    let websiteButtonText = 'Go to website';
+    let websiteButtonText = 'Visit website';
     if(activityBeingViewed !== null && activityBeingViewed.kinds.includes('accomodations')){
       websiteButtonClass = 'book-accomodation';
       websiteButtonText = 'Book on booking.com'
@@ -39,7 +38,7 @@ class ActivityView extends React.Component {
                 <h2 className="acitivity-name">{activityBeingViewed.name}</h2>
                 <h3 className="activity-address">{activityBeingViewed.address.road}, {activityBeingViewed.address.postcode}</h3>
                 <button className="btn add-activity" onClick={this.addActivity}><i class="fas fa-plus"></i> Add to trip</button>
-      {activityBeingViewed.url ? <button className={`btn ${websiteButtonClass}`} onClick={this.openLink}>{websiteButtonText}</button> : null}
+                {activityBeingViewed.url ? <button className={`btn ${websiteButtonClass}`} onClick={this.openLink}>{websiteButtonText}</button> : null}
               </div>
             </div>
           </div>
@@ -49,7 +48,7 @@ class ActivityView extends React.Component {
         </div>
         : 
         <div className="activity-view-placeholder">
-          <h2>click on an activity to get an overview!</h2>
+          <h2 style={{'color':'grey'}}>click on an activity to get an overview!</h2>
         </div>
       } 
       </div>

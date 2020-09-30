@@ -42,14 +42,9 @@
   margin-top: 20px;
 }
 
-.activity-cost {
-  text-align: center;
-  margin-top: 20px;
-}
-
 .add-activity {
   width: calc(100% - 20px);
-  margin-top:10px;
+  margin-top: 20px;
   margin-left:10px;
   box-shadow:0 0 5px 1px rgb(87, 87, 87);
   background-color: #7dff99;
@@ -85,7 +80,7 @@
   background-color: #F76A48;
 }
 
-.book-accomodation:hover {
+.open-website:hover {
   background-color: #f05129;
   transition:ease 0.2s;
 }

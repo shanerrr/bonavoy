@@ -13,7 +13,6 @@ class Plan extends React.Component {
 		this.state = {
 			showPlan:true,
 		}
-
 		this.togglePlan = this.togglePlan.bind(this);
 	}
 
@@ -46,7 +45,7 @@ class Plan extends React.Component {
 							<PlanOverview
 								duration={this.props.duration}
 								distance={this.props.distance}
-								stopCount={this.props.stops.length}	
+								stopCount={this.props.stops.length}
 							/>
 						</div>
 					</div>

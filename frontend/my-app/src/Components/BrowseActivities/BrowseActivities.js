@@ -75,7 +75,12 @@ class BrowseActivities extends React.Component {
 										addActivities={this.addActivitiesHandler}
 										setActivityBeingViewed={this.setActivityBeingViewedHandler}
 									/>
-									<ActivityView activityBeingViewed={this.state.activityBeingViewed}/>
+									<ActivityView 
+										activityType={'a'}
+										activityBeingViewed={this.state.activityBeingViewed}
+										addToStop={activityType.type === 'accomodations' ? this.props.setAccomodation : this.props.addActivity}
+										selectedStop={this.props.selectedStop}
+									/>
 								</div>
 							</div>
 						)

@@ -2,6 +2,14 @@ import React from 'react';
 
 import './style.css';
 
+const activityIcon = {
+	accomodations:<i class="fas fa-bed"></i>,
+	foods:<i class="fas fa-utensils"></i>,
+	interesting_places:<i class="fas fa-binoculars"></i>,
+	shops:<i class="fas fa-shopping-bag"></i>,
+	services:<i class="fas fa-concierge-bell"></i>,
+	natural:<i class="fas fa-mountain"/>,
+}
 
 class StopInfo extends React.Component {
 	constructor(props){
@@ -18,27 +26,30 @@ class StopInfo extends React.Component {
 	}
 	
 	render(){
+		const activities = this.props.stop.activities;
 		return (
 			<div className='expanded'>
-				<p><i class="fas fa-bed"></i> {this.state.accomodation}</p>
+				<p><i class='fas fa-bed'></i> {this.props.stop.accomodation ? this.props.stop.accomodation.name : 'none'}</p>
 				<ul className='activity-list'>
-					{this.state.activityList.map((item, key) => { //TODO: switch icons based on activity type
+					{activities ? activities.map((activity, key) => { //TODO: switch icons based on activity type
 						return (
 							<li 
 								className='activity-list-item' 
 								key={key}
 							>
-								<p><i class="fas fa-mountain"/> {item}</p>
+								<p>{activityIcon[activity.type]} {activity.name}</p>
 							</li>
 						)
-					})}
-					<button onClick={this.showModal}>browse</button>
+					})
+						: null
+					}
 				</ul>
+
+				<button className='browse-activities' onClick={this.showModal}>browse</button>
 			</div>
-				
 		)
-			}
-		}
+	}
+}
 		
 		export default StopInfo;
 		

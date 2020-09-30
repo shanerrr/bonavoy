@@ -19,6 +19,7 @@ class ActivityList extends React.Component {
   }
 
   componentDidMount(){
+    // prevent another fetch after mounting and rendering after first fetch
     if(!this.fetched){
       this.fetchPlaces();
       this.fetched = true; 

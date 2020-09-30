@@ -12,3 +12,7 @@
     cursor: default;
     list-style:none;
 }
+
+.browse-activities {
+    padding:2px 5px 2px 5px;
+}
