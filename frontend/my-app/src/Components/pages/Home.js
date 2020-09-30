@@ -9,8 +9,8 @@ function Home(props) {
 
   return (
     <>
-      <FrontPage username={props.username}/>
-      <SecondPage username={props.username}/>
+      <FrontPage data={props.data}/>
+      <SecondPage data={props.data}/>
       {/* <Footer /> */}
     </>
   );

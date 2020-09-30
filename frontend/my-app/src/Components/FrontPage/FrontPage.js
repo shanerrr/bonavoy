@@ -8,13 +8,14 @@ import {Link} from 'react-scroll'
 function FrontPage(props) {
 
   return (
+    
     <div className='hero-container'>
       <video src='/videos/video-2.mp4' autoPlay loop muted />
       <h1>
-        {props.username ? 
+        {props.data ? 
           <Typical loop={1} wrapper="p" steps={[
-          'Plan your next adventure.', 20000,
-          `Now, where to, ${props.username}?`, 20000,
+                    'Plan your next adventure.', 10000,
+                    `Now, where to, ${props.data.firstname}?`, 20000,
           ]}/> :
           <Typical loop={1} wrapper="p" steps={[
                     'Plan your next adventure.', 20000,

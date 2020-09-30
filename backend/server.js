@@ -60,7 +60,7 @@ app.post("/api/login", (req, res, next) => {
     }
   })(req, res, next);
 });
-app.post("/api/register", (req, res, next) => {
+app.post("/api/preregister", (req, res, next) => {
   
   const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   if (!re.test(req.body.email)) {
@@ -96,10 +96,33 @@ app.post("/api/register", (req, res, next) => {
       });
     }
     if (!doc) {
-
+      return res.json({
+        success: true
+      });
+    }
+  });
+});
+app.post("/api/register", (req, res, next) => {
+  
+  if ((req.body.firstname.length < 1) || (req.body.firstname.length > 30)) {
+    return res.json({
+      success: false,
+      reason: 'firstnamelength'
+    });
+  }
+  if (req.body.lastname.length < 1 || req.body.lastname.length > 35) {
+    return res.json({
+      success: false,
+      reason: 'lastnamelength'
+    });
+  }
+  User.findOne({ $or: [{username: req.body.username}, {email: req.body.email}]}, async (err, doc) => {
+    if (err) throw err;
+    if (!doc) {
       const hash = await bcrypt.hash(req.body.password, 10);
       const newUser = new User({
-        fullname: "<placeholder>",
+        firstname: req.body.firstname,
+        lastname:req.body.lastname,
         username: req.body.username,
         password: hash,
         email: req.body.email,
@@ -123,6 +146,7 @@ app.post("/api/register", (req, res, next) => {
     }
   });
 });
+
 app.get("/api/getUser", (req, res) => {
   res.send(req.user); // The req.user stores the entire user that has been authenticated inside of it.
 });

@@ -16,10 +16,21 @@ function Register(props) {
   const [usernameError, setUsernameError] = useState(false);
   const [passwordLengthError, setPasswordLengthError] = useState(false);
   const [usernameLengthError, setUsernameLengthError] = useState(false);
+  const [firstnameError, setFirstnameError] = useState(false);
+  const [lastnameError, setLastnameError] = useState(false);
 
+
+  //hooks for next part of registration
+  const [nextPartCheck, setNextPartCheck] = useState(false);
+  const [firstname, setFirstname] = useState('');
+  const [lastname, setLastname] = useState('');
+
+  //hooks for checking input values
   const [inputUserCount, setinputUserCount] = useState(false);
   const [inputPassCount, setinputPassCount] = useState(false);
   const [inputEmailCount, setinputEmailCount] = useState(false);
+  const [inputFnameCount, setinputFnameCount] = useState(false);
+  const [inputLnameCount, setinputLnameCount] = useState(false);
 
   const countInput = (val, logpass) => {
     if (logpass === "login" && val.length >=1){
@@ -42,30 +53,44 @@ function Register(props) {
     } else if (logpass === "email" && val.length < 1){
       setinputEmailCount(false);
     }
+    if (logpass === "fname" && val.length >=1){
+      setinputFnameCount(true);
+      if (firstnameError) setFirstnameError(false);
+    } else if (logpass === "fname" && val.length < 1){
+      setinputFnameCount(false);
+    }
+    if (logpass === "lname" && val.length >=1){
+      setinputLnameCount(true);
+      if (lastnameError) setLastnameError(false);
+    } else if (logpass === "lname" && val.length < 1){
+      setinputLnameCount(false);
+    }
   }
   const errorHelper = () => {
     if(emailError){
-      return "Email Already Exists";
+      return "This email already exists. Are you sure you don't have an account with us already?";
     }
     if(emailInvalidError){
-      return "Invalid Email Format";
+      return "This email appears to be invalid.";
     }
     if(usernameError){
-      return "Username Already Exists";
+      return "This username already exists.";
     }
     if(passwordLengthError){
-      return "Password must be atleast 8 characters long";
+      return "Your password must be eight characters or longer.";
     }
     if(usernameLengthError){
-      return "Username must be atleast 5 characters long and less than 15 characters";
-      
+      return "Your username must be between 5 and 15 characters in length.";
     }
   }
 
   const toLoginChange = () => {
     props.switch()
   }
-    
+  const backButton = () => {
+    setNextPartCheck(false);
+  }
+
   const doRegister = () => {
     setSubmitBtn(true);
     axios({
@@ -76,11 +101,12 @@ function Register(props) {
         email: registerEmail,
       },
       withCredentials: true,
-      url: "http://localhost:4000/api/register",
+      url: "http://localhost:4000/api/preregister",
     }).then((res) => {
       if (res.data.success) {
-        props.handleClose();
-        window.location.reload();
+        setNextPartCheck(true);
+        // props.handleClose();
+        // window.location.reload();
       } else{
           if (res.data.reason === "emailexists"){
             setEmailError(true);
@@ -101,11 +127,41 @@ function Register(props) {
       setSubmitBtn(false);
       });
   };
+
+  const nowRegister = () => {
+    setSubmitBtn(true);
+    axios({
+      method: 'POST',
+      data: {
+        username: registerUsername,
+        password: registerPassword,
+        email: registerEmail,
+        firstname: firstname,
+        lastname: lastname
+      },
+      withCredentials: true,
+      url: "http://localhost:4000/api/register",
+    }).then((res) => {
+      if (res.data.success) {
+        props.handleClose();
+        window.location.reload();
+      } else{
+        if (res.data.reason === "firstnamelength"){
+          setFirstnameError(true);
+          console.log("fname error")
+        }
+        if (res.data.reason === "lastnamelength"){
+          setLastnameError(true);
+          console.log("lname error")
+        }
+      }
+      setSubmitBtn(false);
+      });
+  };
   return (
-    <Spring from={{opacity: 0}} to={{opacity:1}} config={{delay:100, duration:1000}}>
-      {propsAnis => (
-      <div style={propsAnis}>
-        <i className="user-modal-splash-image fas fa-times" onClick={props.handleClose}></i>
+    <>
+        <i className={!nextPartCheck ? "user-modal-splash-image user-modal-x fas fa-times" : "user-modal-x display-none"} onClick={props.handleClose}></i>
+        <i className={nextPartCheck ? "user-modal-splash-image backarrow fas fa-arrow-left" : "backarrow display-none"} onClick={backButton}></i>
         {/* <img className="user-modal-splash-image" src="img/wave.png"/> */}
         <div className="user-modal-main-container">
           <div className="user-modal-container">
@@ -118,39 +174,63 @@ function Register(props) {
                 {/* <img src="images/login.png"/> */}
                 <h2 className="user-modal-title">Plan your next trip.</h2>
 
-                  <div className={inputEmailCount ? emailError || emailInvalidError ? "user-modal-inputdiv email focus error" : "user-modal-inputdiv email focus" : "user-modal-inputdiv email"}>
+
+                  
+                <div className={!nextPartCheck ? "display-none" : inputFnameCount ? firstnameError ? "user-modal-inputdiv fname focus error" : "user-modal-inputdiv fname focus" : "user-modal-inputdiv fname"}>
+                    <div className="user-modal-i">
+                      <i className="fas fa-user-tag"></i>
+                    </div>
+                    <div>
+                      <h5>First Name</h5>
+                      <input type="text" className="user-modal-input" maxLength="30" onChange={(val) => {setFirstname(val.target.value); countInput(val.target.value, "fname") }}/>
+                    </div>
+                  </div>
+                  
+                  <div className={nextPartCheck ? inputLnameCount ? "user-modal-inputdiv lname focus" : "user-modal-inputdiv lname active" : "display-none lname hidden"}>
+                    <div className="user-modal-i">
+                      <i className="fas fa-user-tag"></i>
+                    </div>
+                    <div>
+                      <h5>Last Name</h5>
+                      <input type="text" className="user-modal-input" maxLength="35" onChange={(val) => {setLastname(val.target.value); countInput(val.target.value, "lname") }}/>
+                    </div>
+                  </div>
+
+
+                  <div className={nextPartCheck ? "display-none" : inputEmailCount ? emailError || emailInvalidError ? "user-modal-inputdiv email focus error" : "user-modal-inputdiv email focus" : "user-modal-inputdiv email"}>
                     <div className="user-modal-i">
                       <i className="fas fa-envelope"></i>
                     </div>
                     <div>
-                      {/* <h5>{emailError || emailInvalidError ? emailInvalidError ? "Email (Invalid email)" : "Email (Already exists)":"Email"}</h5> */}
                       <h5>Email</h5>
-                      <input type="email" className="user-modal-input" onChange={(val) => {setRegisterEmail(val.target.value); countInput(val.target.value, "email") }}/>
+                      <input type="email" autoComplete="off" className="user-modal-input" onChange={(val) => {setRegisterEmail(val.target.value); countInput(val.target.value, "email") }}/>
                     </div>
                   </div>
 
-                  <div className={inputUserCount ? usernameError || usernameLengthError ? "user-modal-inputdiv username focus error" :"user-modal-inputdiv username focus" : "user-modal-inputdiv username"}>
+                  <div className={nextPartCheck ? "display-none" : inputUserCount ? usernameError || usernameLengthError ? "user-modal-inputdiv username focus error" :"user-modal-inputdiv username focus" : "user-modal-inputdiv username"}>
                     <div className="user-modal-i">
                       <i className="fas fa-user"></i>
                     </div>
                     <div>
                       <h5>Username</h5>
-                      {/* <h5>{usernameLengthError ? "Username (Username must be atleast 5 characters)" : "Username"}</h5> */}
                         <input type="text" className="user-modal-input" maxLength="15" onChange={(val) => {setRegisterUsername(val.target.value); countInput(val.target.value, "login")}}/>
                     </div>
                   </div>
 
-                  <div className={inputPassCount ? passwordLengthError ? "user-modal-inputdiv pass focus error" : "user-modal-inputdiv pass focus" : "user-modal-inputdiv pass"}>
+                  <div className={nextPartCheck ? "display-none" : inputPassCount ? passwordLengthError ? "user-modal-inputdiv pass focus error" : "user-modal-inputdiv pass focus" : "user-modal-inputdiv pass"}>
                     <div className="user-modal-i"> 
                       <i className="fas fa-lock"></i>
                     </div>
                     <div>
                       <h5>Password</h5>
-                      {/* <h5>{passwordLengthError ? "Password (Password must be atleast 8 characters)" : "Password"}</h5> */}
                       <input type="password" className="user-modal-input" maxLength="25" onChange={(val) => {setRegisterPassword(val.target.value); countInput(val.target.value, "password")}}/>
                     </div>
                   </div>
-                    <input type="submit" className="user-modal-btn" disabled={emailInvalidError || passwordLengthError || usernameLengthError || emailError || usernameError || submitBtn ? true: false} onClick={doRegister} value="Sign Up"/>
+                    <button className="user-modal-btn" disabled={emailInvalidError || passwordLengthError || usernameLengthError || emailError || usernameError || submitBtn ? true: false} onClick={nextPartCheck ? nowRegister : doRegister}> 
+                      {
+                        submitBtn ? <i class="fas fa-circle-notch fa-spin"></i> : "Sign UP"
+                      }
+                    </button>
                     <div>
                       <p className="user-modal-error-message">
                         {errorHelper()}      
@@ -161,13 +241,10 @@ function Register(props) {
                       <a className="user-modal-othermodallink" onClick={toLoginChange}>Log in</a>
                     </div>
                 </div>
-                
             </div>
           </div>
-        </div>        
-      </div>
-      )}  
-    </Spring>    
+        </div>         
+    </>    
   );
 }
 

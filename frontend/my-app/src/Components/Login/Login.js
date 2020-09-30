@@ -95,7 +95,11 @@ function Login(props) {
                       </div>
                     </div>
                       <a className="user-modal-a" href="#">Forgot Password?</a>
-                      <input type="submit" className="user-modal-btn" disabled={submitBtn || usernameError ? true: false} onClick={doLogin} value="Login"/>
+                      <button className="user-modal-btn" disabled={submitBtn || usernameError ? true: false} onClick={doLogin}>
+                        {
+                          submitBtn ? <i class="fas fa-circle-notch fa-spin"></i> : "Login"
+                        }
+                      </button>
                       <div>
                         <p className="user-modal-error-message">
                           {!usernameError ? "" : "Invalid Credentials"}      

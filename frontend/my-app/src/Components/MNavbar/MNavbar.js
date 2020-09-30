@@ -8,7 +8,7 @@ import Register from '../Register/Register';
 import './MNavbar.css';
 
 function MNavbar(props) {
-  
+
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
   const [navbar, setNavbar] = useState(false);
@@ -95,7 +95,7 @@ function MNavbar(props) {
               </Link>
             </li>
             <div className="flexbox">
-              <li className={!props.username ? 'nav-item' : 'nav-item display-none'}>
+              <li className={!props.data ? 'nav-item' : 'nav-item display-none'}>
                 <div
                   className='nav-links-mobile'
                   onClick={closeMobileMenu && handleClick && modalClick}
@@ -104,7 +104,7 @@ function MNavbar(props) {
                 </div>
               </li>
 
-              <li className={!props.username ? ' ': 'display-none'}>
+              <li className={!props.data ? ' ': 'display-none'}>
                 <div
                   className='nav-links-mobile nooutline'
                   onClick={closeMobileMenu && handleClick && modalClickS}
@@ -116,17 +116,17 @@ function MNavbar(props) {
             </div>
           </ul>
           <div className="btns">
-            <span className={!props.username ? "btn-span" : "btn-span display-none"}>
+            <span className={!props.data ? "btn-span" : "btn-span display-none"}>
               {button && <Button buttonStyle='btn--outline' onClick={modalClick}>LOG IN</Button>}
             </span>
-            <span className={!props.username ? "btn-span" : "btn-span display-none"}>
+            <span className={!props.data ? "btn-span" : "btn-span display-none"}>
               {button && <Button buttonStyle='btn--primary' onClick={modalClickS}>SIGN UP</Button>}
             </span>
-            <span className={props.username ? "navbar-user-icon" : "navbar-user-icon display-none"}>
+            <span className={props.data ? "navbar-user-icon" : "navbar-user-icon display-none"}>
               <div className="dropdown">
                 {button && <i className="fas fa-user-circle"></i>}
                 <div className="dropdown-content">
-                  <h1 className="navbar-username-dropdown">Hello, {props.username}</h1>
+                  <h1 className="navbar-username-dropdown">Hello, {props.data ? props.data.firstname : ""}</h1>
                   <a className="user-dropdown" href="/trips">My Trips</a>
                   <a className="user-dropdown" href="/account">Account</a>
                   {/* <a href="#">Link 3</a> */}
