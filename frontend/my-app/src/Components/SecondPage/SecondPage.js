@@ -1,19 +1,20 @@
 import React, { useState } from 'react';
-import '../../App.css';
+// import '../../App.css';
 import './SecondPage.css';
 import AutoComplete from '../Autocomplete/Autocomplete';
 function SecondPage() {
 
-  const [click, setClick] = useState(true);
-  const handleClick1 = () => {
-    if (!click) setClick(true)
-  }
-  const handleClick = () => {
-    if (click) setClick(false)
-  }
+  // const [click, setClick] = useState(true);
+  // const handleClick1 = () => {
+  //   if (!click) setClick(true)
+  // }
+  // const handleClick = () => {
+  //   if (click) setClick(false)
+  // }
     return (
       <>
-        <div className={click ? 'secondpage-container' :'secondpage-container diff'} id="secondpage">
+        <div className="secondpage-container" id="secondpage">
+        {/* <div className={click ? 'secondpage-container' :'secondpage-container diff'} id="secondpage">
           <div className="sortitems">
           <div className="explore-nav">
               <ul className="explore-menu">
@@ -28,7 +29,9 @@ function SecondPage() {
             </div>
           </div>
           </div>
-      </div>
+      </div> */}
+
+        </div>
       </>
     );
   }

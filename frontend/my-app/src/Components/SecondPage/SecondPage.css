@@ -1,6 +1,5 @@
-  .secondpage-container {
+  /* .secondpage-container {
     display: flex;
-    /* background: #fff; */
     background: #151a23;
     height: 27vh;
     transition: all 0.5s ease;
@@ -12,9 +11,6 @@
     transition: all 0.5s ease;
   }
   .explore-nav{
-    /* display: flex; */
-    /* justify-content: center;
-    align-items: center; */
     font-size: 1.2rem;
 }
   .explore-plan-navlink {
@@ -22,8 +18,6 @@
     justify-content: left;
     display: block;
     color: white;
-    /* margin-top: 1rem; */
-    /* margin: 3rem; */
     border-radius: 4px;
     text-decoration: none;
     font-size: 1.5rem;
@@ -41,11 +35,6 @@
     grid-template-columns: repeat(2, auto);
     grid-gap: 10px;
   }
-  /* .explore-plan-navlink:hover {
-    background: #fff;
-    color: #242424;
-    transition: 250ms;
-  } */
 
   .explorebtn{
     background: white;
@@ -65,4 +54,12 @@
   }
   .sortitems{
     display: block;
+  } */
+.secondpage-container {
+  display: flex;
+  background: #fff;
+  height: 27vh;
+  transition: all 0.5s ease;
+  align-items: center;
+  justify-content: center;
   }
