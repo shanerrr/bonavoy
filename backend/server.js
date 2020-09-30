@@ -104,13 +104,13 @@ app.post("/api/preregister", (req, res, next) => {
 });
 app.post("/api/register", (req, res, next) => {
   
-  if ((req.body.firstname.length < 1) || (req.body.firstname.length > 30)) {
+  if ((req.body.firstname.length <= 1) || (req.body.firstname.length > 30)) {
     return res.json({
       success: false,
       reason: 'firstnamelength'
     });
   }
-  if (req.body.lastname.length < 1 || req.body.lastname.length > 35) {
+  if (req.body.lastname.length <= 1 || req.body.lastname.length > 35) {
     return res.json({
       success: false,
       reason: 'lastnamelength'
