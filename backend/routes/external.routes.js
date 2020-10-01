@@ -35,7 +35,6 @@ function scheduleRequests(axiosInstance, intervalMs) {
 
 // get hotel info near coords
 router.get('/places', (req,res) => {
-    console.log('skljdfsdkjflsa');
     // query string
     const lat = req.query.lat;
     const lng = req.query.lng;
