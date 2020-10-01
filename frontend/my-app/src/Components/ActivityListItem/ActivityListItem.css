@@ -1,4 +1,5 @@
 .browse-activity-list-item {
+  height:20vh;
   background-color: rgb(255, 255, 255);
   margin:7px; 
   list-style: none;
@@ -13,9 +14,9 @@
   background-color:rgb(192, 192, 192);
   border: 1px solid none;
   border-radius: 5px;
-  height:150px;
-  width:150px;
-  min-width: 150px;
+  height:20vh;
+  width:20vh;
+  min-width: 20vh;
 }
 
 .activity-list-name {
@@ -25,4 +26,15 @@
 .selected {
   background-color:rgb(221, 221, 221);
   transition:ease 0.15s;
+}
+
+.spinner-container {
+  height:20vh;
+  width: 20vh;
+  margin: auto;
+}
+
+.loader {
+  height: inherit;
+  width: inherit;
 }

@@ -10,6 +10,8 @@ class ActivityListItem extends React.Component {
 
   selectActivity(e){
     this.props.selectActivity(this.props.index);
+    fetch('https://maps.googleapis.com/maps/api/place/photo?key=AIzaSyADmNaqiMxBc5EhbkJCZOaWAAkVEvUQsOk&photoreference=CkQ0AAAAeEiOhbVE-DsGW4e7rYhAZTYbtp5tIhsSeZx7kCOGgQAy7ZsMvBOUYyVw9k9_1PiYliQUtqkrnDBATF2yTzX6yRIQYcidZdTNAk5CzVnxlBba1RoUZgTQcRiKCjy81QKLP7xKH-xEceU&maxheight=800&maxwidth=800')
+      .then((response) => console.log(response));
   }
 
   render(){

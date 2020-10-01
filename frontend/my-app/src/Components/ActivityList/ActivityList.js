@@ -11,6 +11,7 @@ class ActivityList extends React.Component {
       offset:0,
       activityList:[],
       selected:null,
+      placesLeft:true
     }
     this.fetched = false;
     this.handleScroll = this.handleScroll.bind(this);
@@ -22,7 +23,7 @@ class ActivityList extends React.Component {
     // prevent another fetch after mounting and rendering after first fetch
     if(!this.fetched){
       this.fetchPlaces();
-      this.fetched = true; 
+      this.fetched = true;
     }
   }
 
@@ -44,6 +45,12 @@ class ActivityList extends React.Component {
 			.then((data) => {
         console.log(data);
         if(data.length === 0){
+          this.setState(prevState => (
+            {
+              ...prevState,
+              placesLeft:false
+            }
+          ))
           console.log('no more places within this radius')
           return;
         }
@@ -78,9 +85,18 @@ class ActivityList extends React.Component {
                 activity={activity} 
                 selected={selected}
                 selectActivity={this.selectActivityHandler}
-              /> 
+              />
             )
           })}
+          {this.state.placesLeft ? (
+            <div className='spinner-container'>
+              <div className='loader'>
+                <img src={'./images/spinner.svg'}/>
+              </div>
+            </div>
+          )
+          : null          
+          }
         </ul>
       </div>
     )

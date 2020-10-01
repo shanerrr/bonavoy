@@ -3,21 +3,17 @@ import React from 'react';
 import './style.css';
 
 const activityIcon = {
-	accomodations:<i class="fas fa-bed"></i>,
-	foods:<i class="fas fa-utensils"></i>,
-	interesting_places:<i class="fas fa-binoculars"></i>,
-	shops:<i class="fas fa-shopping-bag"></i>,
-	services:<i class="fas fa-concierge-bell"></i>,
-	natural:<i class="fas fa-mountain"/>,
+	'accomodations':<i class="fas fa-bed"></i>,
+	'foods':<i class="fas fa-utensils"></i>,
+	'interesting_places':<i class="fas fa-binoculars"></i>,
+	'shops':<i class="fas fa-shopping-bag"></i>,
+	'fuel,charging_station,atm,bank,bureau_de_change,bicycle_rental,boat_sharing,car_rental':<i class="fas fa-concierge-bell"></i>,
+	'natural':<i class="fas fa-mountain"/>,
 }
 
 class StopInfo extends React.Component {
 	constructor(props){
 		super(props);
-		this.state ={
-			accomodation: 'Banff Beaver Lodge',
-			activityList: ['Sulpher Mountain', 'Skating', 'Scenic'],
-		}
 		this.showModal = this.showModal.bind(this);
 	}
 	
@@ -37,7 +33,7 @@ class StopInfo extends React.Component {
 								className='activity-list-item' 
 								key={key}
 							>
-								<p>{activityIcon[activity.type]} {activity.name}</p>
+								<p>{activityIcon[activity.icon]} {activity.name}</p>
 							</li>
 						)
 					})

@@ -10,6 +10,7 @@ class ActivityView extends React.Component {
   }
 
   addActivity(){
+    this.props.activityBeingViewed.icon = this.props.activityType
     this.props.addToStop(this.props.activityBeingViewed,this.props.selectedStop);
   }
 
