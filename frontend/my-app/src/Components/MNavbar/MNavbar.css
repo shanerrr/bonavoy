@@ -12,12 +12,11 @@
   z-index: 999;
   transition: background-color 0.5s ease-out;
 }
-.navbar:hover{
-  /* background-color:rgb(21,26,35) */
-  background-color: #1e232c
-}
+
 .navbar.active{
-  background-color: #1e232c
+  /* background-color: #1e232c */
+  /* background-color: rgba(30,35,44,0.9); */
+  background-color: rgb(65,78, 69, 0.85);
   /* background-color:rgb(21,26,35); */
   /* background: linear-gradient(90deg, rgb(28, 27, 27) 0%, rgb(21,26,35) 100%); */
 }
@@ -176,7 +175,8 @@
   }
 
   .nav-menu {
-    background-color: #1e232c;
+    /* background-color: #1e232c; */
+    background-color: rgb(65,78, 69);
     /* background: linear-gradient(90deg, rgb(28, 27, 27) 0%, rgb(21,26,35) 100%); */
     display: flex;
     flex-direction: column;
@@ -190,7 +190,8 @@
   }
 
   .nav-menu.active {
-    background-color: #1e232c;
+    /* background-color: #1e232c; */
+    background-color: rgb(65,78, 69);
     /* background: linear-gradient(90deg, rgb(28, 27, 27) 0%, rgb(21,26,35) 100%); */
     left: 0;
     opacity: 1;
