@@ -42,30 +42,30 @@ class Map extends React.Component{
     this.setAccomodationHandler = this.setAccomodationHandler.bind(this);
 
     // ********DUMMY DATA***********
-    this.state.stops.push({
-      "bbox":[
-         -113.713801689886,
-         53.3956031350886,
-         -113.271643300914,
-         53.7159858649816
-      ],
-      "center":[
-         -113.5065,
-         53.5344
-      ],
-      "geometry":{
-         "coordinates":[
-            -113.5065,
-            53.5344
-         ]
-      },
-      "id":"place.9080100702660390",
-      "language":"en",
-      "place_name":"Edmonton, Alberta, Canada",
-      "place_name_en-GB":"Edmonton, Alberta, Canada",
-      "accomodation":null,
-      "activities":[]
-    })
+    // this.state.stops.push({
+    //   "bbox":[
+    //      -113.713801689886,
+    //      53.3956031350886,
+    //      -113.271643300914,
+    //      53.7159858649816
+    //   ],
+    //   "center":[
+    //      -113.5065,
+    //      53.5344
+    //   ],
+    //   "geometry":{
+    //      "coordinates":[
+    //         -113.5065,
+    //         53.5344
+    //      ]
+    //   },
+    //   "id":"place.9080100702660390",
+    //   "language":"en",
+    //   "place_name":"Edmonton, Alberta, Canada",
+    //   "place_name_en-GB":"Edmonton, Alberta, Canada",
+    //   "accomodation":null,
+    //   "activities":[]
+    // })
   }
 
   componentDidMount() {
@@ -166,8 +166,6 @@ class Map extends React.Component{
     // add field to store activities
     stop.accomodation = null;
     stop.activities = [];
-
-    console.log(stop);
 
     const markers = [...this.state.markers, marker];
     const stops = [...this.state.stops, stop];

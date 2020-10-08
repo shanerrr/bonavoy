@@ -4,9 +4,9 @@ import './style.css';
 
 const activityIcon = {
 	'accomodations':<i class="fas fa-bed"></i>,
-	'foods':<i class="fas fa-utensils"></i>,
-	'interesting_places':<i class="fas fa-binoculars"></i>,
-	'shops':<i class="fas fa-shopping-bag"></i>,
+	'foods,bakeries':<i class="fas fa-utensils"></i>,
+	'cultural,historic,architecture,abandoned_mineshafts,abandoned_railway_stations,dams':<i class="fas fa-binoculars"></i>,
+	'supermarkets,conveniences,malls,marketplaces,outdoor':<i class="fas fa-shopping-bag"></i>,
 	'fuel,charging_station,atm,bank,bureau_de_change,bicycle_rental,boat_sharing,car_rental':<i class="fas fa-concierge-bell"></i>,
 	'natural':<i class="fas fa-mountain"/>,
 }

@@ -9,16 +9,16 @@ class ActivityListItem extends React.Component {
   }
 
   selectActivity(e){
-    this.props.selectActivity(this.props.index);
-    fetch('https://maps.googleapis.com/maps/api/place/photo?key=AIzaSyADmNaqiMxBc5EhbkJCZOaWAAkVEvUQsOk&photoreference=CkQ0AAAAeEiOhbVE-DsGW4e7rYhAZTYbtp5tIhsSeZx7kCOGgQAy7ZsMvBOUYyVw9k9_1PiYliQUtqkrnDBATF2yTzX6yRIQYcidZdTNAk5CzVnxlBba1RoUZgTQcRiKCjy81QKLP7xKH-xEceU&maxheight=800&maxwidth=800')
-      .then((response) => console.log(response));
+    this.props.selectActivityBeingViewed(this.props.activityTypeIndex, this.props.activityIndex);
   }
 
   render(){
     if(!this.props.activity.name) return null // don't render activities without a name
     return (
       <div className={`browse-activity-list-item ${this.props.selected ? 'selected' : null}`} onClick={this.selectActivity}>
-        <img className="activity-list-photo"/>
+        <div className="activity-list-photo-container">  
+          <img className='activity-list-photo' src={'https://fastly.4sqi.net/img/general/300x300/55785718_7IdPDiz7QMxSV-l_i40dwgTplfs1pHu6UkiMfLJplP0.jpg'/* this.props.imgSrc*/}/>
+        </div>
         <h2 className="activity-list-name">
           {this.props.activity.name}
         </h2>
