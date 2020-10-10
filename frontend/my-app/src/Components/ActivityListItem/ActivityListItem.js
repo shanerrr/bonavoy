@@ -17,7 +17,7 @@ class ActivityListItem extends React.Component {
     return (
       <div className={`browse-activity-list-item ${this.props.selected ? 'selected' : null}`} onClick={this.selectActivity}>
         <div className="activity-list-photo-container">  
-          <img className='activity-list-photo' src={'https://fastly.4sqi.net/img/general/300x300/55785718_7IdPDiz7QMxSV-l_i40dwgTplfs1pHu6UkiMfLJplP0.jpg'/* this.props.imgSrc*/}/>
+          <img className='activity-list-photo' src={ this.props.activity.imgSrc}/>
         </div>
         <h2 className="activity-list-name">
           {this.props.activity.name}

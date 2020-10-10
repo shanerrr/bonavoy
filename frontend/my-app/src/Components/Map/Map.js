@@ -159,13 +159,22 @@ class Map extends React.Component{
     return bbox;
   }
 
-  addStopHandler(stop){
+  addStopHandler(stopData){
     // update markers
-    const marker = new mapboxgl.Marker().setLngLat(stop.center);
+    const marker = new mapboxgl.Marker().setLngLat(stopData.center);
+
+    // grab needed fields
+    let stop = {};
+    stop.bbox = stopData.bbox;
+    stop.center = stopData.center;
+    stop.id = stopData.id;
+    stop.place_name = stopData.place_name;
 
     // add field to store activities
     stop.accomodation = null;
     stop.activities = [];
+
+    console.log(stop);
 
     const markers = [...this.state.markers, marker];
     const stops = [...this.state.stops, stop];
@@ -326,13 +335,33 @@ class Map extends React.Component{
     }));
   }
 
-  setAccomodationHandler(accomodation, stopIndex){
+  setAccomodationHandler(accomodationData, stopIndex){
+    // grab needed fields
+    let accomodation = {};
+    accomodation.address = accomodationData.address;
+    accomodation.icon = accomodationData.icon;
+    accomodation.imgSrc = accomodationData.imgSrc;
+    accomodation.kinds = accomodationData.kinds;
+    accomodation.name = accomodationData.name;
+    accomodation.point = accomodationData.point;
+    accomodation.url = accomodationData.url;
+
+    console.log(accomodation)
     let newState = this.state;
     newState.stops[stopIndex].accomodation = accomodation; 
     this.setState(newState);
   }
 
-  addActivityHandler(activity, stopIndex){
+  addActivityHandler(activityData, stopIndex){
+    let activity = {};
+    activity.address = activityData.address;
+    activity.icon = activityData.icon;
+    activity.imgSrc = activityData.imgSrc;
+    activity.kinds = activityData.kinds;
+    activity.name = activityData.name;
+    activity.point = activityData.point;
+    activity.url = activityData.url;
+    console.log(activity);
     let newState = this.state;
     newState.stops[stopIndex].activities = [...newState.stops[stopIndex].activities, activity];
     this.setState(newState);

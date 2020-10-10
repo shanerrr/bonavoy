@@ -33,7 +33,9 @@ class ActivityView extends React.Component {
       { activityBeingViewed ? 
         <div>
           <div className="activity-overview-container">
-            <div className="activity-info-container activity-view-photo"></div>
+            <div className="activity-info-container">
+              <img className="activity-view-photo" src={this.props.activityBeingViewed.imgSrc}/>
+            </div>
             <div className="activity-info-container activity-view-info">
               <div className="text-containter">
                 <h2 className="acitivity-name">{activityBeingViewed.name}</h2>

@@ -2,7 +2,7 @@ import React from 'react';
 
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
-import './style.css';
+import './AddStop.css';
 
 
 const TOKEN = process.env.REACT_APP_MAPS_API_KEY;

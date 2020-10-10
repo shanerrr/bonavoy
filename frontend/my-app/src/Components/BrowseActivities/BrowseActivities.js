@@ -3,7 +3,7 @@ import React from 'react';
 import Tabs from '../Tabs/Tabs'
 import ActivityList from '../ActivityList/ActivityList';
 import ActivityView from '../ActivityView/ActivityView';
-import './style.css';
+import './BrowseActivities.css';
 
 const pageSize = 5;
 const clientId = '2SFWGSRXUHFAFQJZQLHLSXSHGJJBI0YJPFPK0BOQUXDR0G3K';
@@ -78,7 +78,6 @@ class BrowseActivities extends React.Component {
 		 * @param int: index of activity currently being viewed 
 		 */
 		const activity = this.state.activityTypes[activityTypeIndex].activities[index];
-		console.log(activity);
 		this.setState(prevState => ({
 			...prevState,
 			activityBeingViewed:activity,
@@ -118,16 +117,34 @@ class BrowseActivities extends React.Component {
 			return fetch(`https://api.foursquare.com/v2/venues/search?client_id=${clientId}&client_secret=${clientSecret}&v=${today}&ll=${activity.point.lat},${activity.point.lon}&radius=200&query=${activity.name}`)
 				.then(response => response.json())
 				.then((data) => {
-					const id = data.response.venues ? data.response.venues[0].id : null;
+					const id = data.response.venues && data.response.venues[0] ? data.response.venues[0].id : null;
 					return fetch(`https://api.foursquare.com/v2/venues/${id}/photos?v=${today}&client_id=${clientId}&client_secret=${clientSecret}`)
 						.then(response => response.json())
 				})
 		})
 		Promise.all(imageRequests)
-			.then((imageData) => {
-				console.log(imageData);
-				activities = activities.map((activity, key) => {
-					return activity.imgSrc = imageData[key];
+			.then((imageRes) => {
+				const activitiesWithImg = activities.map((activity, key) => {
+					const imageData = imageRes[key].meta.code === 200 
+						&& imageRes[key].response.photos.items !== undefined
+						&& imageRes[key].response.photos.items.length > 0
+						? imageRes[key].response.photos.items[0]
+						: null;
+					const imgSrc = imageData ? imageData.prefix + "500x500" + imageData.suffix : '/images/camera.svg';
+					activity.imgSrc = imgSrc;
+					return activity;
+				});
+
+				const newState = this.state;
+
+				// replace old activities with new actitivities that have image url's
+				let newActivities = newState.activityTypes[activityTypeIndex].activities;
+				newActivities.splice(lowerRange, upperRange-lowerRange);
+				newActivities = [...newActivities, ...activitiesWithImg];
+				newState.activityTypes[activityTypeIndex].activities = newActivities;
+
+				this.setState({
+					...newState
 				})
 			});
 	}		
