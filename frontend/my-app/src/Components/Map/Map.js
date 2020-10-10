@@ -71,7 +71,7 @@ class Map extends React.Component{
   componentDidMount() {
     const map = new mapboxgl.Map({
       container: 'map',
-      style: 'mapbox://styles/mapbox/streets-v11',
+      style: 'mapbox://styles/neilzon/cke91jthf5lz119tiodwrmohe/draft',
       center: [ -113.41777, 53.48538], // TODO: implement ask and get location of person
       zoom: 10,
     });
