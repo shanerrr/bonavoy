@@ -2,7 +2,7 @@ import React from 'react';
 import { DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd';
 
 import StopListItem from '../StopListItem/StopListItem';
-import './style.css';
+import './StopList.css';
 
 const itemDraggingStyle = {
 	backgroundColor:'#C4DDE9',
@@ -14,7 +14,7 @@ const itemStyle = {
 }
 
 const getListStyle = isDraggingOver => ({
-	background: isDraggingOver ? '#afafaf' : '#939393',
+	background: isDraggingOver ? '#88938b' : 'white',
 })
 class StopList extends React.Component {
 	

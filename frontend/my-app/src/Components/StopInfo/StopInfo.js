@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './style.css';
+import './StopInfo.css';
 
 const activityIcon = {
 	'accomodations':<i class="fas fa-bed"></i>,

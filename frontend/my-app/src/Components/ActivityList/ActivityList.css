@@ -4,6 +4,12 @@
   background-color:transparent;
 }
 
+.activity-search {
+  width: inherit;
+  height: 150px;
+  background-color:white;
+}
+
 .browse-activity-list-item:hover {
   background-color: rgb(221, 221, 221);
   transition:ease 0.2s;

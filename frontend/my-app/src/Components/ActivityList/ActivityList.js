@@ -1,7 +1,7 @@
 import React from 'react';
 
 import ActivityListItem from '../ActivityListItem/ActivityListItem';
-import './style.css';
+import './ActivityList.css';
 
 
 class ActivityList extends React.Component {
@@ -73,6 +73,9 @@ class ActivityList extends React.Component {
   render(){
     return (
       <div className='browse-activity-list' onScroll={this.handleScroll}>
+        <div className='activity-search'>
+
+        </div>
         <ul>
           {this.props.activities.map((activity, key) => {
             const selected = key === this.state.selected ? true: false;

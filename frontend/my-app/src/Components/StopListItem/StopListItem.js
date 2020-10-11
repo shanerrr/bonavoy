@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './style.css';
+import './StopListItem.css';
 import StopInfo from '../StopInfo/StopInfo';
 
 
@@ -33,16 +33,10 @@ class StopListItem extends React.Component {
 				>
 					<div>
 						<p className="place-name">{this.props.stop.place_name}</p>
-						<button className='stoplist-deletebtn' onClick={this.removeStop}>remove</button>
+						<button className='stoplist-delete-btn' onClick={this.removeStop}>remove</button>
 					</div>
+					{this.state.open ? (<StopInfo stop={this.props.stop} showModal={this.props.showModal} index={this.props.index}/>) : null}
 				</div>
-				{/* TODO: implement to change height to allow for animation */}
-				{/* <StopInfo
-					stop={this.props.stop}
-					showModal={this.props.showModal}
-					// style={{height:	this.state.open ? 'min-content': '0px !important'}}
-				/> */}
-				{this.state.open ? (<StopInfo stop={this.props.stop} showModal={this.props.showModal} index={this.props.index}/>) : null}
 			</div>
 		);
 	}
