@@ -25,7 +25,7 @@ class StopInfo extends React.Component {
 		const activities = this.props.stop.activities;
 		return (
 			<div className='expanded'>
-				<p><i class='fas fa-bed'></i> {this.props.stop.accomodation ? this.props.stop.accomodation.name : 'none'}</p>
+				{this.props.stop.accomodation ? (<div><i class='fas fa-bed'></i> {this.props.stop.accomodation.name}</div>) : null}
 				<ul className='activity-list'>
 					{activities ? activities.map((activity, key) => { //TODO: switch icons based on activity type
 						return (
@@ -41,7 +41,9 @@ class StopInfo extends React.Component {
 					}
 				</ul>
 
-				<button className='browse-activities' onClick={this.showModal}>browse</button>
+				<button className='browse-activities' onClick={this.showModal}>
+					<i class="fas fa-plus"></i> Add Activities
+				</button>
 			</div>
 		)
 	}

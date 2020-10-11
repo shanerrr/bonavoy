@@ -34,6 +34,7 @@
     justify-content: center;
 
 } */
+
 .stoplist-delete-btn {
     padding:3px !important;
     background-color:rgb(226, 226, 226);
@@ -46,8 +47,10 @@
     border: 1px solid #fff;
     transition: all 0.3s ease-out;
     cursor: pointer;
-  }
-  .stoplist-delete-btn:hover {
+    outline: none;
+}
+
+.stoplist-delete-btn:hover {
     background-color:#F8655E;
     transition: 0.2s;
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './style.css';
+import './Plan.css';
 import StopList from '../StopList/StopList';
 import PlanOverview from '../PlanOverview/PlanOverview';
 import AddStop from '../AddStop/AddStop';

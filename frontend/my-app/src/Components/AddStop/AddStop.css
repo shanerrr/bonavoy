@@ -1,9 +1,8 @@
-#geocoder> .mapboxgl-ctrl-geocoder {
-
+#geocoder > .mapboxgl-ctrl-geocoder {
     min-width: 100%;
     font:inherit !important;
     font-size: medium !important;
-    box-shadow: 0 0 5px 0px black;
-    border-radius: 5px;
-    outline:none;
+    box-shadow: 0 2px 5px -1px gray !important;
+    border-radius: 0 0 5px 5px;
+    outline:none !important;
 }
