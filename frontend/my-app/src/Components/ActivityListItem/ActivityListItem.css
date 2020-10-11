@@ -25,7 +25,7 @@
 
 .selected {
   background-color:rgb(221, 221, 221);
-  transition:ease 0.15s;
+  /* transition:ease 0.15s; */
 }
 
 .spinner-container {

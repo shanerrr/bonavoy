@@ -1,7 +1,6 @@
 .collapsed {
     display: block;
     cursor: pointer;
-    padding:30px 0 0 20px;
     background-color:white;
     color: rgb(70, 70, 70);
     font-family: verdana;
@@ -16,9 +15,8 @@
     transition: 0.15s ease;
 }
 
-.collapsed:hover {
-    background-color:rgb(241, 241, 241) !important;
-    transition: 0.15s ease;
+.stop-list-item-container {
+    padding:30px 20px 30px 20px;
 }
 
 .place-name {
@@ -35,22 +33,19 @@
 
 } */
 
-.stoplist-delete-btn {
-    padding:3px !important;
-    background-color:rgb(226, 226, 226);
-    background: rgb(226, 226, 226);
-    color: white;
-    border-radius: 4px;
-    text-decoration: none;
-    font-size: 1rem;
-    padding: 14px 20px;
-    border: 1px solid #fff;
-    transition: all 0.3s ease-out;
-    cursor: pointer;
-    outline: none;
+.stoplist-delete-btn-container {
+    position: relative;
 }
 
-.stoplist-delete-btn:hover {
-    background-color:#F8655E;
-    transition: 0.2s;
+.delete-stop-btn {
+    font-size: 20px;
+    position: absolute;
+    margin-right:20px;
+    top: 0px;
+    right: 0px;
+}
+
+.delete-stop-btn:hover {
+    transition: ease 0.2s;
+    color:#F8655E;
 }

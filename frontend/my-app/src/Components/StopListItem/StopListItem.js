@@ -31,9 +31,13 @@ class StopListItem extends React.Component {
 					className='collapsed'
 					style={this.props.style}
 				>
-					<div>
+					<div className='stop-list-item-container'>
+						<div className='stoplist-delete-btn-container'>
+							<div className='delete-stop-btn' onClick={this.removeStop}>
+								<i class="fas fa-times"></i>
+							</div>
+						</div>
 						<p className="place-name">{this.props.stop.place_name}</p>
-						<button className='stoplist-delete-btn' onClick={this.removeStop}>remove</button>
 					</div>
 					{this.state.open ? (<StopInfo stop={this.props.stop} showModal={this.props.showModal} index={this.props.index}/>) : null}
 				</div>
