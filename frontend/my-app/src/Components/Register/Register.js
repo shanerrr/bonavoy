@@ -161,7 +161,9 @@ function Register(props) {
       });
   };
   return (
-    <>
+    <Spring from={{opacity: 0}} to={{opacity:1}} config={{delay:100, duration:1000}}>
+    {propsAni => (
+      <div style={propsAni}>
         <i className={!nextPartCheck ? "user-modal-splash-image user-modal-x fas fa-times" : "user-modal-x display-none"} onClick={props.handleClose}></i>
         <i className={nextPartCheck ? "user-modal-splash-image backarrow fas fa-arrow-left" : "backarrow display-none"} onClick={backButton}></i>
         {/* <img className="user-modal-splash-image" src="img/wave.png"/> */}
@@ -243,8 +245,10 @@ function Register(props) {
                 </div>
             </div>
           </div>
-        </div>         
-    </>    
+        </div>
+      </div>
+        )}         
+    </Spring>    
   );
 }
 
