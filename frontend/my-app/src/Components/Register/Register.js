@@ -205,7 +205,7 @@ function Register(props) {
                     </div>
                     <div>
                       <h5>Email</h5>
-                      <input type="email" autoComplete="off" className="user-modal-input" onChange={(val) => {setRegisterEmail(val.target.value); countInput(val.target.value, "email") }}/>
+                      <input type="email" className="user-modal-input" onChange={(val) => {setRegisterEmail(val.target.value); countInput(val.target.value, "email") }}/>
                     </div>
                   </div>
 
