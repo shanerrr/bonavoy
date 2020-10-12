@@ -8,7 +8,7 @@ require('dotenv').config({ path: path.resolve(__dirname, '../../.env') });
 const OPENTRIPMAPS_API_KEY = process.env.OPENTRIPMAPS_API_KEY;
 
 
-// helper function
+// helper function to throttle external calls
 function scheduleRequests(axiosInstance, intervalMs) {
     let lastInvocationTime = undefined;
 
@@ -35,21 +35,27 @@ function scheduleRequests(axiosInstance, intervalMs) {
 
 // get hotel info near coords
 router.get('/places', (req,res) => {
+    console.log('skljdfsdkjflsa');
     // query string
     const lat = req.query.lat;
     const lng = req.query.lng;
     const radius = req.query.radius; 
     const kind = req.query.kind;
+    const offset = parseInt(req.query.offset);
+    const page_size = parseInt(req.query.page_size);
+    
+    // determine limit to get next page
+    const limit = page_size*(offset+1);
 
     const placesService = axios.create({baseURL:'https://api.opentripmap.com'});
     scheduleRequests(placesService, 100); // TODO: not consistent, sometimes gets error 429
 
     //todo: ask for all accomodation in area with a set max radius and return 5 best places or return by category
-    placesService.get(`/0.1/en/places/radius?apikey=${OPENTRIPMAPS_API_KEY}&lon=${lng}&lat=${lat}&radius=${radius}&kinds=${kind}&limit=5`)
+    placesService.get(`/0.1/en/places/radius?apikey=${OPENTRIPMAPS_API_KEY}&lon=${lng}&lat=${lat}&radius=${radius}&kinds=${kind}&limit=${limit}`)
         .then((places) => {
-            console.log(places.data.features);
-
-            const placesInfoRequests = places.data.features.map((place) => {
+            const last = Math.min(limit, places.data.features.length);
+            const placesPage = places.data.features.slice(page_size*offset, last);
+            const placesInfoRequests = placesPage.map((place) => {
                 //TODO: use google places api for info and pictures
                 return placesService
                     .get(`/0.1/en/places/xid/${place.properties.xid}?apikey=${OPENTRIPMAPS_API_KEY}`)
@@ -57,10 +63,17 @@ router.get('/places', (req,res) => {
             })
 
             return axios.all(placesInfoRequests)
-                .then((response) => res.send(response))
-                .catch((error) => res.send(error));
+                .then((response) => {
+                    res.status(200);
+                    return res.send(response);
+                })
+                .catch((error) => { 
+                    res.status(500);
+                    return res.send(error);
+                });
         })
         .catch((error) => {
+            res.status(500);
             return res.send(error);
         });
 

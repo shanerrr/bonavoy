@@ -20,6 +20,6 @@
 
 .tab-list-active {
   background-color: rgb(204, 204, 204);
-  border: solid rgb(255, 0, 0);
+  border: solid rgb(0, 0, 0);
   border-width: 1px 1px 0 1px;
 }

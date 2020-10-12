@@ -38,29 +38,29 @@ class Map extends React.Component{
     this.hideModal = this.hideModal.bind(this);
     this.showModal = this.showModal.bind(this);
 
-    // DUMMY DATA
-    this.state.stops.push({
-      "bbox":[
-         -113.713801689886,
-         53.3956031350886,
-         -113.271643300914,
-         53.7159858649816
-      ],
-      "center":[
-         -113.5065,
-         53.5344
-      ],
-      "geometry":{
-         "coordinates":[
-            -113.5065,
-            53.5344
-         ]
-      },
-      "id":"place.9080100702660390",
-      "language":"en",
-      "place_name":"Edmonton, Alberta, Canada",
-      "place_name_en-GB":"Edmonton, Alberta, Canada"
-    })
+    // ********DUMMY DATA***********
+    // this.state.stops.push({
+    //   "bbox":[
+    //      -113.713801689886,
+    //      53.3956031350886,
+    //      -113.271643300914,
+    //      53.7159858649816
+    //   ],
+    //   "center":[
+    //      -113.5065,
+    //      53.5344
+    //   ],
+    //   "geometry":{
+    //      "coordinates":[
+    //         -113.5065,
+    //         53.5344
+    //      ]
+    //   },
+    //   "id":"place.9080100702660390",
+    //   "language":"en",
+    //   "place_name":"Edmonton, Alberta, Canada",
+    //   "place_name_en-GB":"Edmonton, Alberta, Canada"
+    // })
   }
 
   componentDidMount() {
@@ -331,7 +331,6 @@ class Map extends React.Component{
           />
           <Modal            
             show={this.state.showModal}
-            handleClose={this.hideModal}
             className='browse-modal'
           >
             <BrowseActivities hideModal={this.hideModal} selectedCoords={this.state.selectedCoords}></BrowseActivities>
