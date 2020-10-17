@@ -16,12 +16,24 @@ class BrowseActivities extends React.Component {
 		super(props);
 		this.state = {
 			activityBeingViewed:null,
+			activityBeingViewedIcon:null,
 			activityTypes:[
 				{
 					label:'Accomodation',
 					type:'accomodations',
 					className:'accomodation',
-					subTypes:[], //TODO: specify sub types for filtering
+					filters:[
+						'other_hotels',
+						'campsites',
+						'resorts',
+						'motels',
+						'hostel',
+						'love_hotels',
+						'villas_and_chalets',
+						'guest_houses',
+						'apartments', 
+						'alphine_hut', 
+					],
 					offset:0,
 					activities:[]
 				},
@@ -29,7 +41,13 @@ class BrowseActivities extends React.Component {
 					label:'Food and Drinks',
 					type:'foods,bakeries',
 					className:'food-and-drinks',
-					subTypes:[],
+					filters:[
+						'restaurants',
+						'fast_food',
+						'cafes',
+						'pubs',
+
+					],
 					offset:0,
 					activities:[]
 				},
@@ -37,7 +55,7 @@ class BrowseActivities extends React.Component {
 					label:'Nature',
 					type:'natural',
 					className:'natural',
-					subTypes:[],
+					filters:[],
 					offset:0,
 					activities:[]
 				},
@@ -45,7 +63,7 @@ class BrowseActivities extends React.Component {
 					label:'Interesting Places',
 					type:'cultural,historic,architecture,abandoned_mineshafts,abandoned_railway_stations,dams',
 					className:'interesting-places',
-					subTypes:[],	
+					filters:[],	
 					offset:0,
 					activities:[]
 				},
@@ -53,7 +71,7 @@ class BrowseActivities extends React.Component {
 					label:'Shops',
 					type:'supermarkets,conveniences,malls,marketplaces,outdoor',
 					className:'shops',
-					subTypes:[],
+					filters:[],
 					offset:0,
 					activities:[]
 				},
@@ -61,7 +79,7 @@ class BrowseActivities extends React.Component {
 					label:'Services',
 					type:'fuel,charging_station,atm,bank,bureau_de_change,bicycle_rental,boat_sharing,car_rental',
 					className:'services',
-					subTypes:[],
+					filters:[],
 					offset:0,
 					activities:[]
 				}
@@ -77,10 +95,14 @@ class BrowseActivities extends React.Component {
 		 * Sets the activity being viewed in ActivityView pane 
 		 * @param int: index of activity currently being viewed 
 		 */
+		// todo: set icon here to pass through props to activity view
+		const icon = this.state.activityTypes[activityTypeIndex].type;
 		const activity = this.state.activityTypes[activityTypeIndex].activities[index];
+
 		this.setState(prevState => ({
 			...prevState,
 			activityBeingViewed:activity,
+			activityBeingViewedIcon:icon,
 		}));
 	}
 
@@ -106,7 +128,7 @@ class BrowseActivities extends React.Component {
 		date = date.length < 2 ? '0' + date : date;
 		const today = d.getFullYear().toString() + (d.getMonth()+1).toString() + date;
 
-		// get activities to get photos for 
+		// get the activities we need to retrieve photos for
 		const activityType = this.state.activityTypes[activityTypeIndex];
 		const lowerRange = ((activityType.offset-1) * pageSize);
 		const upperRange = Math.min(lowerRange + pageSize, activityType.activities.length);
@@ -114,7 +136,7 @@ class BrowseActivities extends React.Component {
 
 		// get photos of the activities
 		const imageRequests = activities.map((activity) => {
-			return fetch(`https://api.foursquare.com/v2/venues/search?client_id=${clientId}&client_secret=${clientSecret}&v=${today}&ll=${activity.point.lat},${activity.point.lon}&radius=200&query=${activity.name}`)
+			return fetch(`https://api.foursquare.com/v2/venues/search?client_id=${clientId}&client_secret=${clientSecret}&v=${today}&ll=${activity.point.lat},${activity.point.lon}&radius=10000&query=${activity.name}`)
 				.then(response => response.json())
 				.then((data) => {
 					const id = data.response.venues && data.response.venues[0] ? data.response.venues[0].id : null;
@@ -168,6 +190,7 @@ class BrowseActivities extends React.Component {
 									/>
 									<ActivityView 
 										activityType={activityType.type}
+										icon={this.state.activityBeingViewedIcon}
 										activityBeingViewed={this.state.activityBeingViewed}
 										addToStop={activityType.type === 'accomodations' ? this.props.setAccomodation : this.props.addActivity}
 										selectedStop={this.props.selectedStop}

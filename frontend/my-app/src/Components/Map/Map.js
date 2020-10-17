@@ -353,15 +353,15 @@ class Map extends React.Component{
   }
 
   addActivityHandler(activityData, stopIndex){
-    let activity = {};
-    activity.address = activityData.address;
-    activity.icon = activityData.icon;
-    activity.imgSrc = activityData.imgSrc;
-    activity.kinds = activityData.kinds;
-    activity.name = activityData.name;
-    activity.point = activityData.point;
-    activity.url = activityData.url;
-    console.log(activity);
+    let activity = {
+      'address':activityData.address,
+      'icon':activityData.icon,
+      'imgSrc':activityData.imgSrc,
+      'kinds':activityData.kinds,
+      'name':activityData.name,
+      'point':activityData.point,
+      'url':activityData.url,
+    };
     let newState = this.state;
     newState.stops[stopIndex].activities = [...newState.stops[stopIndex].activities, activity];
     this.setState(newState);
