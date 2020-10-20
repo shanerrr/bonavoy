@@ -1,0 +1,8 @@
+.browse-activity-container {
+  display: flex;
+  flex-direction: row;  
+  position: relative;
+  height:91.7vh;
+  width:100%;
+  background-color: #f3f3f3;
+}

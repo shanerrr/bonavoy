@@ -1,0 +1,49 @@
+.stop-info{
+    border-top: 1px solid rgb(177, 177, 177);
+    cursor: pointer;
+    margin: 0 20px 5px 20px;
+    color:rgb(114, 114, 114);
+    font-family: verdana;
+    font-size: 14px;
+    /* margin: 10px 0px 10px 0px; */
+    display:block;
+}
+
+.browse-activities-container {
+    text-align: center;
+}
+
+.activity-list {
+    padding-left: 15px;
+    cursor: default;
+    list-style:none;
+}
+
+.browse-activities {
+    padding:2px 5px 2px 5px;
+    margin: 10px 0 10px 0;
+}
+
+.activity-icon-accomodations {
+    color:#0A7B83
+}
+
+.activity-icon-foods {
+    color:#FFD265
+}
+
+.activity-icon-interesting-places {
+    color:#F19C65;
+}
+.activity-icon-shops {
+    color:#A9216B
+
+}
+
+.activity-icon-natural {
+    color:#2AA876
+}
+
+.activity-icon-services {
+    color:#C9C9BE
+}

@@ -1,0 +1,51 @@
+.collapsed {
+    display: block;
+    cursor: pointer;
+    background-color:white;
+    color: rgb(70, 70, 70);
+    font-family: verdana;
+    /* border: 1px solid rgb(122, 109, 109);  */
+    border-radius: 5px;
+    margin:5px 5px 0px 5px;
+    box-shadow: 0 0 5px 0px black;
+}
+
+.collapsed:hover {
+    background-color:rgb(241, 241, 241) !important;
+    transition: 0.15s ease;
+}
+
+.stop-list-item-container {
+    padding:30px 20px 30px 20px;
+}
+
+.place-name {
+    font-size: medium !important;
+}
+
+.move-stop {
+    display: inline-block;
+}
+/* .stoplist-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+} */
+
+.stoplist-delete-btn-container {
+    position: relative;
+}
+
+.delete-stop-btn {
+    font-size: 20px;
+    position: absolute;
+    margin-right:20px;
+    top: 0px;
+    right: 0px;
+}
+
+.delete-stop-btn:hover {
+    transition: ease 0.2s;
+    color:#F8655E;
+}

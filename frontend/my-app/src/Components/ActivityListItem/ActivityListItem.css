@@ -1,8 +1,8 @@
 .browse-activity-list-item {
+  height:20vh;
   background-color: rgb(255, 255, 255);
   margin:7px; 
   list-style: none;
-  border: 1px solid rgb(255, 255, 255);
   border-radius:5px;
   box-shadow:0 0 5px 1px rgb(87, 87, 87);
   cursor: pointer;
@@ -11,14 +11,30 @@
 }
 
 .activity-list-photo {
-  background-color:rgb(192, 192, 192);
+  background-color:rgb(216, 216, 216);
   border: 1px solid none;
   border-radius: 5px;
-  height:150px;
-  width:150px;
-  margin:-1px;
+  height:20vh;
+  width:20vh;
+  min-width: 20vh;
 }
 
 .activity-list-name {
   margin-left: 30px;
+}
+
+.selected {
+  background-color:rgb(221, 221, 221);
+  /* transition:ease 0.15s; */
+}
+
+.spinner-container {
+  height:20vh;
+  width: 20vh;
+  margin: auto;
+}
+
+.loader {
+  height: inherit;
+  width: inherit;
 }

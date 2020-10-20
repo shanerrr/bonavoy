@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './style.css';
+import './PlanOverview.css';
 
 class PlanOverview extends React.Component{
 

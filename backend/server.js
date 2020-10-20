@@ -6,12 +6,31 @@ const cors = require("cors");
 const passport = require("passport");
 // const passportLocal = require("passport-local").Strategy;
 const cookieParser = require("cookie-parser");
+const WebSocket = require('ws');
 const bcrypt = require("bcryptjs");
 const session = require("express-session");
 const bodyParser = require("body-parser");
 const app = express();
 const User = require("./user");
 //----------------------------------------- END OF IMPORTS---------------------------------------------------
+
+// setup websocket
+const wss = new WebSocket.Server({port:8000}, () => {
+  console.log('WebSocket created');
+});
+
+wss.on('connection', function connection(ws) {
+  ws.on('message', function incoming(message) {
+    console.log('received: %s', message);
+  });
+
+  ws.send('connected');
+});
+
+wss.on('close', function close() {
+  console.log('closed connection');
+});
+
 mongoose.connect(
   process.env.DB_MONG,
   {
