@@ -6,6 +6,8 @@ import './style.css';
 import Plan from '../Plan/Plan';
 import Modal from '../Modal/Modal';
 import BrowseActivities from '../BrowseActivities/BrowseActivities';
+// import { w3cwebsocket as W3CWebSocket } from "websocket";
+
 
 const path = require('path');
 require('dotenv').config({ 
@@ -69,6 +71,17 @@ class Map extends React.Component{
   }
 
   componentDidMount() {
+    // establish websocket connection
+    const ws = new WebSocket('ws://localhost:8000');
+    // Connection opened
+    ws.addEventListener('open', function (event) {
+      ws.send('Hello Server!');
+    });
+
+    // ws.on('open', function open() {
+    //   ws.send('something');
+    // });
+
     const map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/neilzon/cke91jthf5lz119tiodwrmohe/draft',
