@@ -1,10 +1,12 @@
 .browse-activity-list {
   flex:1 1 100%;
   overflow-y:scroll;
+  background-color:transparent;
 }
 
+
 .browse-activity-list-item:hover {
-  background-color: rgb(235, 235, 235);
+  background-color: rgb(221, 221, 221);
   transition:ease 0.2s;
 }
 

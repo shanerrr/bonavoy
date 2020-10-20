@@ -124,6 +124,26 @@ passport.authenticate('local-strategy', {session:false}),
 	});
 });
 
+// CRUD endpoints for trips
+router.get('/trips/get', (req, res) => {
+	res.status(200);
+	res.send('GET request for trips');
+})
+
+router.post('/trips/save', (req, res) => {
+	res.status(200);
+	res.send('POST request for trips');
+})
+
+router.put('/trips/update', (req, res) => {
+	res.status(200);
+	res.send('PUT request for trips');
+})
+
+router.delete('/trips/delete', (req, res) => {
+	res.status(200);
+	res.send('DELET request for trips');
+})
 
 module.exports = router;
 	

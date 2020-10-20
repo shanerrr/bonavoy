@@ -6,6 +6,8 @@ import './style.css';
 import Plan from '../Plan/Plan';
 import Modal from '../Modal/Modal';
 import BrowseActivities from '../BrowseActivities/BrowseActivities';
+// import { w3cwebsocket as W3CWebSocket } from "websocket";
+
 
 const path = require('path');
 require('dotenv').config({ 
@@ -25,6 +27,7 @@ class Map extends React.Component{
       stops:[],
       duration:0,
       distance:0,
+      selectedStop:null, // change to null
       selectedCoords:[],
       showModal:false,
     };
@@ -37,6 +40,8 @@ class Map extends React.Component{
     this.redrawMarkers = this.redrawMarkers.bind(this);
     this.hideModal = this.hideModal.bind(this);
     this.showModal = this.showModal.bind(this);
+    this.addActivityHandler = this.addActivityHandler.bind(this);
+    this.setAccomodationHandler = this.setAccomodationHandler.bind(this);
 
     // ********DUMMY DATA***********
     // this.state.stops.push({
@@ -59,14 +64,27 @@ class Map extends React.Component{
     //   "id":"place.9080100702660390",
     //   "language":"en",
     //   "place_name":"Edmonton, Alberta, Canada",
-    //   "place_name_en-GB":"Edmonton, Alberta, Canada"
+    //   "place_name_en-GB":"Edmonton, Alberta, Canada",
+    //   "accomodation":null,
+    //   "activities":[]
     // })
   }
 
   componentDidMount() {
+    // establish websocket connection
+    const ws = new WebSocket('ws://localhost:8000');
+    // Connection opened
+    ws.addEventListener('open', function (event) {
+      ws.send('Hello Server!');
+    });
+
+    // ws.on('open', function open() {
+    //   ws.send('something');
+    // });
+
     const map = new mapboxgl.Map({
       container: 'map',
-      style: 'mapbox://styles/mapbox/streets-v11',
+      style: 'mapbox://styles/neilzon/cke91jthf5lz119tiodwrmohe/draft',
       center: [ -113.41777, 53.48538], // TODO: implement ask and get location of person
       zoom: 10,
     });
@@ -154,10 +172,22 @@ class Map extends React.Component{
     return bbox;
   }
 
-  addStopHandler(stop){
-    console.log(stop);
+  addStopHandler(stopData){
     // update markers
-    const marker = new mapboxgl.Marker().setLngLat(stop.center);
+    const marker = new mapboxgl.Marker().setLngLat(stopData.center);
+
+    // grab needed fields
+    let stop = {};
+    stop.bbox = stopData.bbox;
+    stop.center = stopData.center;
+    stop.id = stopData.id;
+    stop.place_name = stopData.place_name;
+
+    // add field to store activities
+    stop.accomodation = null;
+    stop.activities = [];
+
+    console.log(stop);
 
     const markers = [...this.state.markers, marker];
     const stops = [...this.state.stops, stop];
@@ -305,6 +335,7 @@ class Map extends React.Component{
 
     this.setState(prevState => ({
       ...prevState,
+      selectedStop:index,
       selectedCoords:selectedCoords,
       showModal:true,
     }));
@@ -315,6 +346,38 @@ class Map extends React.Component{
       ...prevState,
       showModal:false
     }));
+  }
+
+  setAccomodationHandler(accomodationData, stopIndex){
+    // grab needed fields
+    let accomodation = {};
+    accomodation.address = accomodationData.address;
+    accomodation.icon = accomodationData.icon;
+    accomodation.imgSrc = accomodationData.imgSrc;
+    accomodation.kinds = accomodationData.kinds;
+    accomodation.name = accomodationData.name;
+    accomodation.point = accomodationData.point;
+    accomodation.url = accomodationData.url;
+
+    console.log(accomodation)
+    let newState = this.state;
+    newState.stops[stopIndex].accomodation = accomodation; 
+    this.setState(newState);
+  }
+
+  addActivityHandler(activityData, stopIndex){
+    let activity = {
+      'address':activityData.address,
+      'icon':activityData.icon,
+      'imgSrc':activityData.imgSrc,
+      'kinds':activityData.kinds,
+      'name':activityData.name,
+      'point':activityData.point,
+      'url':activityData.url,
+    };
+    let newState = this.state;
+    newState.stops[stopIndex].activities = [...newState.stops[stopIndex].activities, activity];
+    this.setState(newState);
   }
 
   render() {
@@ -333,7 +396,13 @@ class Map extends React.Component{
             show={this.state.showModal}
             className='browse-modal'
           >
-            <BrowseActivities hideModal={this.hideModal} selectedCoords={this.state.selectedCoords}></BrowseActivities>
+            <BrowseActivities 
+              selectedStop={this.state.selectedStop}
+              hideModal={this.hideModal} 
+              selectedCoords={this.state.selectedCoords} 
+              setAccomodation={this.setAccomodationHandler}
+              addActivity={this.addActivityHandler}
+            />
           </Modal>
         </div>
     )
